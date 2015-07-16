@@ -3,10 +3,10 @@ package com.project4398.michael.austinfoodtrucks.fragments;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.project4398.michael.austinfoodtrucks.R;
 
 /**
@@ -38,5 +38,24 @@ public class TruckProfileFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_truck_profile, container, false);
 
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
     }
 }

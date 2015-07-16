@@ -38,4 +38,22 @@ public class TruckListFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_truck_list, container, false);
         return rootView;
     }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+    }
 }
