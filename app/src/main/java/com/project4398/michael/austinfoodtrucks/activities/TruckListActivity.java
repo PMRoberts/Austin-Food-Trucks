@@ -21,7 +21,7 @@ public class TruckListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_truck_list);
-        Fragment newFragment = new TruckProfileFragment().newFragment();
+        Fragment newFragment = new TruckListFragment().newFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.add(R.id.root, newFragment).commit();
     }

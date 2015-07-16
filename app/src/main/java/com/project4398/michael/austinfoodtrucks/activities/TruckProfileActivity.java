@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckListFragment;
+import com.project4398.michael.austinfoodtrucks.fragments.TruckProfileFragment;
 
 /**
  * Created by Michael on 7/15/2015.
@@ -18,7 +19,7 @@ public class TruckProfileActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_truck_list);
-        Fragment newFragment = new TruckListFragment().newFragment();
+        Fragment newFragment = new TruckProfileFragment().newFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.add(R.id.root, newFragment).commit();
     }

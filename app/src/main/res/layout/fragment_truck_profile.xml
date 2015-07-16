@@ -5,18 +5,48 @@
 
     <ImageView
         android:id="@+id/TruckImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:padding="5dp"
         android:src="#dddddd"
-        android:background="#330033"/>
+        android:background="#000000"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_toRightOf="@+id/TruckImage">
+        <TextView
+            android:id="@+id/TruckName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"
+            android:textSize="40sp"
+            android:text="kababalicious"/>
+    </RelativeLayout>
     <TextView
-        android:id="@+id/TruckName"
-        android:layout_width="wrap_content"
+        android:id="@+id/hours"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/TruckImage"
-        android:textSize="40sp"
-        android:text="Truckname"/>
+        android:layout_below="@+id/TruckImage"
+        android:textSize="30sp"
+        android:text="hours"/>
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hours"
+        android:textSize="30sp"
+        android:text="tags"/>
+    <TextView
+        android:id="@+id/About"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info"
+        android:textSize="30sp"
+        android:text="about"/>
+
+
+
 
 
 

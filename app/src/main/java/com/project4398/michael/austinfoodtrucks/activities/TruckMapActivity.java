@@ -9,7 +9,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.project4398.michael.austinfoodtrucks.R;
 
-public class MapsActivity extends FragmentActivity {
+public class TruckMapActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
