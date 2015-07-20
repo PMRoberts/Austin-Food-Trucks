@@ -3,6 +3,7 @@ package com.project4398.michael.austinfoodtrucks.activities;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -11,8 +12,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.project4398.michael.austinfoodtrucks.R;
+import com.project4398.michael.austinfoodtrucks.TruckListInfo;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckListFragment;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckProfileFragment;
+
+import java.util.ArrayList;
 
 /**
  * Created by Michael on 7/15/2015.
@@ -20,13 +24,24 @@ import com.project4398.michael.austinfoodtrucks.fragments.TruckProfileFragment;
 public class TruckProfileActivity extends AppCompatActivity
 {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    public TruckListInfo info;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+
+        info = (TruckListInfo)bundle.getSerializable("info");
+
         setContentView(R.layout.activity_truck_profile);
+
+
         Fragment newFragment = new TruckProfileFragment().newFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
+        newFragment.setArguments(bundle);
         ft.add(R.id.InfoContainer, newFragment).commit();
         setUpMapIfNeeded();
     }

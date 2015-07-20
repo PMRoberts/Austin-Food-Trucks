@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.project4398.michael.austinfoodtrucks.R;
+import com.project4398.michael.austinfoodtrucks.TruckListInfo;
 
 /**
  * Created by Michael on 7/15/2015.
@@ -15,6 +16,8 @@ import com.project4398.michael.austinfoodtrucks.R;
 public class TruckProfileFragment extends Fragment
 {
     private Context mContext;
+    private TruckListInfo mInfo;
+
     public TruckProfileFragment newFragment()
     {
         TruckProfileFragment fragment = new TruckProfileFragment();
@@ -25,6 +28,8 @@ public class TruckProfileFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        mInfo = (TruckListInfo)getArguments().getSerializable("info");
+
         mContext = getActivity();
     }
     @Override

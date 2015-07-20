@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/InfoContainer"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="#ffffffff">
+
+    <ImageView
+        android:id="@+id/TruckInfoImage"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:padding="5dp"
+        android:src="#dddddd"
+        android:background="#000000"/>
+    <TextView
+        android:id="@+id/TruckInfoName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textSize="16dp"
+        android:text="0"
+        android:textColor="#323232"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@+id/TruckInfoImage"/>
+    <TextView
+        android:id="@+id/TruckInfoTypes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textSize="16dp"
+        android:text="0"
+        android:textColor="#323232"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@+id/TruckInfoName"/>
+    <TextView
+        android:id="@+id/TruckInfoDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textSize="16dp"
+        android:text="0"
+        android:textColor="#323232"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@+id/TruckInfoTypes"
+        android:layout_toLeftOf="@+id/TruckInfoFavorite"/>
+    <ImageView
+        android:id="@+id/TruckInfoFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:padding="5dp"
+        android:src="#dddddd"
+        android:background="#000000"/>
+
+
+</RelativeLayout>
