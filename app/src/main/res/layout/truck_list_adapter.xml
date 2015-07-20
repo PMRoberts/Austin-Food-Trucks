@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/TruckInfoImage"
-        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_width="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:padding="5dp"
@@ -19,32 +19,36 @@
         android:id="@+id/TruckInfoName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:textSize="16dp"
         android:text="0"
         android:textColor="#323232"
         android:layout_margin="10dp"
-        android:layout_toRightOf="@+id/TruckInfoImage"/>
+        android:layout_toRightOf="@+id/TruckInfoImage"
+        android:layout_toLeftOf="@+id/TruckInfoFavorite"/>
     <TextView
         android:id="@+id/TruckInfoTypes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:textSize="16dp"
         android:text="0"
         android:textColor="#323232"
         android:layout_margin="10dp"
-        android:layout_toRightOf="@+id/TruckInfoName"/>
+        android:layout_toRightOf="@+id/TruckInfoImage"
+        android:layout_toLeftOf="@+id/TruckInfoFavorite"/>
     <TextView
         android:id="@+id/TruckInfoDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:textSize="16dp"
         android:text="0"
         android:textColor="#323232"
         android:layout_margin="10dp"
-        android:layout_toRightOf="@+id/TruckInfoTypes"
+        android:layout_toRightOf="@+id/TruckInfoImage"
         android:layout_toLeftOf="@+id/TruckInfoFavorite"/>
     <ImageView
         android:id="@+id/TruckInfoFavorite"

@@ -57,7 +57,7 @@ public class TruckProfileFragment extends Fragment
         mTypes = (TextView)rootView.findViewById(R.id.TruckTypes);
 
         mName.setText(mInfo.name);
-        mTypes.setText(mInfo.foodType);
+        mTypes.setText(mInfo.foodType.get(0));
         mAbout.setText(mInfo.about);
 
         mImage.setImageResource(R.drawable.soundcloud_default);

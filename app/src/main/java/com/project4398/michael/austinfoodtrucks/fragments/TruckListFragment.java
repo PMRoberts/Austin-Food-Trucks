@@ -44,50 +44,60 @@ public class TruckListFragment extends Fragment
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "bob";
-        TLITemp.get(TLITemp.size()-1).foodType = "person";
-        TLITemp.get(TLITemp.size()-1).distance = "5000";
-        TLITemp.get(TLITemp.size()-1).favorite = "true";
-        TLITemp.get(TLITemp.size()-1).id = "" + (TLITemp.size()-1);
+        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
+        TLITemp.get(TLITemp.size()-1).foodType.add("person");
+        TLITemp.get(TLITemp.size()-1).distance = 5000.0f;
+        TLITemp.get(TLITemp.size()-1).favorite = true;
+        TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "this is where the about info would go uf i had anything to say about this.";
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "trucin";
-        TLITemp.get(TLITemp.size()-1).foodType = "tacos";
-        TLITemp.get(TLITemp.size()-1).distance = "2.7";
-        TLITemp.get(TLITemp.size()-1).favorite = "false";
-        TLITemp.get(TLITemp.size()-1).id = "" + (TLITemp.size()-1);
+        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
+        TLITemp.get(TLITemp.size()-1).foodType.add("tacos");
+        TLITemp.get(TLITemp.size()-1).foodType.add("tacos");
+        TLITemp.get(TLITemp.size()-1).foodType.add("tacos");
+        TLITemp.get(TLITemp.size()-1).distance = 1.2f;
+        TLITemp.get(TLITemp.size()-1).favorite = true;
+        TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "its so truckin good yo. itle blow yo miiiinnnnd!!!!!";
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "burgs";
-        TLITemp.get(TLITemp.size()-1).foodType = "burgers";
-        TLITemp.get(TLITemp.size()-1).distance = "1";
-        TLITemp.get(TLITemp.size()-1).favorite = "true";
-        TLITemp.get(TLITemp.size()-1).id = "" + (TLITemp.size()-1);
+        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
+        TLITemp.get(TLITemp.size()-1).foodType.add("burgers");
+        TLITemp.get(TLITemp.size()-1).distance = 1.0f;
+        TLITemp.get(TLITemp.size()-1).favorite = false;
+        TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "i sear dead cow flesh on a burning hot mettle slab";
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "dfasf";
-        TLITemp.get(TLITemp.size()-1).foodType = "person";
-        TLITemp.get(TLITemp.size()-1).distance = "5000";
-        TLITemp.get(TLITemp.size()-1).favorite = "g";
-        TLITemp.get(TLITemp.size()-1).id = "" + (TLITemp.size()-1);
+        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
+        TLITemp.get(TLITemp.size()-1).foodType.add("erererf");
+        TLITemp.get(TLITemp.size()-1).foodType.add("cvbcvbcvb");
+        TLITemp.get(TLITemp.size()-1).distance = 5050.5f;
+        TLITemp.get(TLITemp.size()-1).favorite = false;
+        TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = " hkdlfashdflk hs;dfkjsah  reiotwre cb,xmvbxzv euiwqurhysdfhaksl";
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "food and stuff";
-        TLITemp.get(TLITemp.size()-1).foodType = "food";
-        TLITemp.get(TLITemp.size()-1).distance = "2";
-        TLITemp.get(TLITemp.size()-1).favorite = "true";
-        TLITemp.get(TLITemp.size()-1).id = "" + (TLITemp.size()-1);
+        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
+        TLITemp.get(TLITemp.size()-1).foodType.add("food");
+        TLITemp.get(TLITemp.size()-1).foodType.add("stuff");
+        TLITemp.get(TLITemp.size()-1).distance = 2.0f;
+        TLITemp.get(TLITemp.size()-1).favorite = true;
+        TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "we have food and stuff. buy stuff. or dont. we dont care. ";
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "t";
-        TLITemp.get(TLITemp.size()-1).foodType = "thai";
-        TLITemp.get(TLITemp.size()-1).distance = "5";
-        TLITemp.get(TLITemp.size()-1).favorite = "false";
-        TLITemp.get(TLITemp.size()-1).id = "" + (TLITemp.size()-1);
+        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
+        TLITemp.get(TLITemp.size()-1).foodType.add("thai");
+        TLITemp.get(TLITemp.size()-1).distance = 5.0f;
+        TLITemp.get(TLITemp.size()-1).favorite = false;
+        TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "thai breastaurant. get it?";
 
 
@@ -113,6 +123,8 @@ public class TruckListFragment extends Fragment
     }
     public void setList(ArrayList<TruckListInfo> songList)
     {
+        String temp;
+        String temp2;
         MatrixCursor matrixCursor = new MatrixCursor(new String[] {"_id","image", "name", "distance", "foodType", "favorite", "id"});
         if(songList != null)
         {
@@ -122,14 +134,32 @@ public class TruckListFragment extends Fragment
             } else {
                 for (int x = 0; x < songList.size(); x++)
                 {
+                    temp = "";
+                    temp2 = "";
+                    for(int y = 0; y < songList.get(x).foodType.size(); y++)
+                    {
+                        temp += songList.get(x).foodType.get(y);
+                        if(y != songList.get(x).foodType.size()-1)
+                        {
+                            temp += ", ";
+                        }
+                    }
+                    if(songList.get(x).favorite)
+                    {
+                        temp2 = "true";
+                    }
+                    else
+                    {
+                        temp2 = "false";
+                    }
                     Log.i("stuff", "got to creating to cursor");
                     matrixCursor.addRow(new String[]{"" + 1,
                             songList.get(x).image,
                             songList.get(x).name,
-                            songList.get(x).distance,
-                            songList.get(x).foodType,
-                            songList.get(x).favorite,
-                            songList.get(x).id});
+                            "" + songList.get(x).distance,
+                            temp,
+                            temp2,
+                            "" + songList.get(x).id});
                 }
             }
             Cursor TruckListCursor = new MergeCursor(new Cursor[]{matrixCursor, null});
