@@ -13,4 +13,5 @@ public class TruckListInfo implements Serializable
     public String distance;
     public String favorite;
     public String id;
+    public String about;
 }

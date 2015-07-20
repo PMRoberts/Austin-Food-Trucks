@@ -8,7 +8,6 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:padding="5dp"
-        android:src="#dddddd"
         android:background="#000000"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,24 +23,17 @@
             android:text="kababalicious"/>
     </RelativeLayout>
     <TextView
-        android:id="@+id/hours"
+        android:id="@+id/TruckTypes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/TruckImage"
         android:textSize="30sp"
-        android:text="hours"/>
-    <TextView
-        android:id="@+id/info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hours"
-        android:textSize="30sp"
         android:text="tags"/>
     <TextView
-        android:id="@+id/About"
+        android:id="@+id/TruckAbout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/info"
+        android:layout_below="@+id/TruckTypes"
         android:textSize="30sp"
         android:text="about"/>
 

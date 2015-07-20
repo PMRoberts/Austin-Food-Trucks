@@ -14,7 +14,6 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:padding="5dp"
-        android:src="#dddddd"
         android:background="#000000"/>
     <TextView
         android:id="@+id/TruckInfoName"
@@ -54,7 +53,6 @@
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:padding="5dp"
-        android:src="#dddddd"
         android:background="#000000"/>
 
 
