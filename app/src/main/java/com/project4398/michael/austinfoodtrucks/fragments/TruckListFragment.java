@@ -8,6 +8,7 @@ import android.database.MergeCursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.TruckListAdapter;
 import com.project4398.michael.austinfoodtrucks.TruckListInfo;
+import com.project4398.michael.austinfoodtrucks.menuItem;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class TruckListFragment extends Fragment
     TruckListAdapter mAdapter;
     private ListView mTruckList;
     public static ArrayList<TruckListInfo> TLITemp;
+    public static ArrayList<menuItem> menuTemp;
     public TruckListFragment newFragment()
     {
         TruckListFragment fragment = new TruckListFragment();
@@ -41,6 +44,39 @@ public class TruckListFragment extends Fragment
         mAdapter = new TruckListAdapter(mContext, null);
 
         TLITemp = new ArrayList<TruckListInfo>();
+        menuTemp = new ArrayList<menuItem>();
+
+        menuTemp.add(new menuItem());
+        menuTemp.get(menuTemp.size()-1).name = "food";
+        menuTemp.get(menuTemp.size()-1).description = "it is edable";
+        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).inStock = true;
+        menuTemp.get(menuTemp.size()-1).favorite = true;
+
+        menuTemp.add(new menuItem());
+        menuTemp.get(menuTemp.size()-1).name = "food";
+        menuTemp.get(menuTemp.size()-1).description = "it is edable";
+        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).inStock = true;
+        menuTemp.get(menuTemp.size()-1).favorite = true;
+
+        menuTemp.add(new menuItem());
+        menuTemp.get(menuTemp.size()-1).name = "food";
+        menuTemp.get(menuTemp.size()-1).description = "it is edable";
+        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).inStock = true;
+        menuTemp.get(menuTemp.size()-1).favorite = true;
+
+        menuTemp.add(new menuItem());
+        menuTemp.get(menuTemp.size()-1).name = "food";
+        menuTemp.get(menuTemp.size()-1).description = "it is edable";
+        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).inStock = true;
+        menuTemp.get(menuTemp.size()-1).favorite = true;
+
+
+
+
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "bob";
@@ -50,6 +86,8 @@ public class TruckListFragment extends Fragment
         TLITemp.get(TLITemp.size()-1).favorite = true;
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "this is where the about info would go uf i had anything to say about this.";
+        TLITemp.get(TLITemp.size()-1).menu = menuTemp;
+
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "trucin";
@@ -61,6 +99,7 @@ public class TruckListFragment extends Fragment
         TLITemp.get(TLITemp.size()-1).favorite = true;
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "its so truckin good yo. itle blow yo miiiinnnnd!!!!!";
+        TLITemp.get(TLITemp.size()-1).menu = menuTemp;
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "burgs";
@@ -70,6 +109,7 @@ public class TruckListFragment extends Fragment
         TLITemp.get(TLITemp.size()-1).favorite = false;
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "i sear dead cow flesh on a burning hot mettle slab";
+        TLITemp.get(TLITemp.size()-1).menu = menuTemp;
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "dfasf";
@@ -80,6 +120,7 @@ public class TruckListFragment extends Fragment
         TLITemp.get(TLITemp.size()-1).favorite = false;
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = " hkdlfashdflk hs;dfkjsah  reiotwre cb,xmvbxzv euiwqurhysdfhaksl";
+        TLITemp.get(TLITemp.size()-1).menu = menuTemp;
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "food and stuff";
@@ -90,6 +131,7 @@ public class TruckListFragment extends Fragment
         TLITemp.get(TLITemp.size()-1).favorite = true;
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "we have food and stuff. buy stuff. or dont. we dont care. ";
+        TLITemp.get(TLITemp.size()-1).menu = menuTemp;
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "t";
@@ -99,6 +141,7 @@ public class TruckListFragment extends Fragment
         TLITemp.get(TLITemp.size()-1).favorite = false;
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "thai breastaurant. get it?";
+        TLITemp.get(TLITemp.size()-1).menu = menuTemp;
 
 
     }

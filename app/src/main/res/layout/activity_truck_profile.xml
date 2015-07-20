@@ -23,12 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/menu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:text="menu will go here \n and here \n and here"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

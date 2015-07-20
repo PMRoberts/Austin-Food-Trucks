@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.TruckListInfo;
+import com.project4398.michael.austinfoodtrucks.fragments.MenuFragment;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckListFragment;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckProfileFragment;
 
@@ -43,7 +44,16 @@ public class TruckProfileActivity extends AppCompatActivity
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         newFragment.setArguments(bundle);
         ft.add(R.id.InfoContainer, newFragment).commit();
+
         setUpMapIfNeeded();
+
+
+        Fragment newFragment2 = new MenuFragment().newFragment();
+        FragmentTransaction ft2 = getFragmentManager().beginTransaction();
+        Bundle bundle2 = new Bundle();
+        bundle2.putSerializable("menu", info.menu);
+        newFragment2.setArguments(bundle2);
+        ft2.add(R.id.MenuContainer, newFragment2).commit();
     }
 
     @Override
