@@ -4,11 +4,15 @@
     android:layout_height="match_parent"
     android:id="@+id/menuRoot"
     >
-    <TextView
-        android:id="@+id/menu"
-        android:layout_width="match_parent"
+    <com.project4398.michael.austinfoodtrucks.ExpandableHeightGridView
+        android:id="@+id/myId"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="menu will go here \n and here \n and here"/>
+        android:gravity="center"
+        android:horizontalSpacing="2dp"
+        android:isScrollContainer="false"
+        android:numColumns="2"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="2dp"></com.project4398.michael.austinfoodtrucks.ExpandableHeightGridView>
 
 </RelativeLayout>

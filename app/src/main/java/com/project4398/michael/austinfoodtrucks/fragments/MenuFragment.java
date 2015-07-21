@@ -53,7 +53,10 @@ public class MenuFragment extends Fragment
         {
             TextView tv1 = new TextView(mContext);
             tv1.setText("an item");
-            root.addView(tv1);
+            RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            relativeParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            tv1.setId(tv1.generateViewId());
+            root.addView(tv1, relativeParams);
         }
 
 
