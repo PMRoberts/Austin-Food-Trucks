@@ -5,9 +5,9 @@
     android:id="@+id/menuRoot"
     >
     <com.project4398.michael.austinfoodtrucks.ExpandableHeightGridView
-        android:id="@+id/myId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/customGrid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:horizontalSpacing="2dp"
         android:isScrollContainer="false"

@@ -51,7 +51,7 @@ public class ExpandableHeightGridView extends GridView
         }
         else
         {
-            super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         }
     }
 
