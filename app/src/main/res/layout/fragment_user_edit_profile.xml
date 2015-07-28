@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/EditTruckImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:padding="5dp"
+            android:background="#000000"
+            />
+        <RelativeLayout
+        android:id="@+id/EditImageContainer"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_toRightOf="@+id/EditTruckImage">
+        <Button
+            android:id="@+id/ChooseNewImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="new picture"
+            android:layout_centerInParent="true"
+            />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/lableTruckName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/EditTruckImage"
+            android:text="Name: "
+            />
+        <TextView
+            android:id="@+id/lableTruckPhoneNumer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lableTruckName"
+            android:text="Phone Number: "
+            />
+        <TextView
+            android:id="@+id/lableTruckFoodType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lableTruckPhoneNumer"
+            android:text="Food Tags: "
+            />
+        <TextView
+            android:id="@+id/lableTruckDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lableTruckFoodType"
+            android:text="About: "
+            />
+        <EditText
+            android:id="@+id/EditTruckName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/EditTruckImage"
+            android:layout_toRightOf="@+id/lableTruckName"
+            />
+        <EditText
+            android:id="@+id/EditTruckPhoneNumer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lableTruckName"
+            android:layout_toRightOf="@+id/lableTruckPhoneNumer"
+            />
+        <EditText
+            android:id="@+id/EditTruckFoodType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lableTruckPhoneNumer"
+            android:layout_toRightOf="@+id/lableTruckFoodType"
+            />
+        <EditText
+            android:id="@+id/EditTruckDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lableTruckFoodType"
+            android:layout_toRightOf="@+id/lableTruckDescription"
+            />
+
+
+
+
+
+    </RelativeLayout>
+</ScrollView>
