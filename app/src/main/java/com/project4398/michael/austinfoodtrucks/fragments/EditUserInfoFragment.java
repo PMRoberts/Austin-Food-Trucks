@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.project4398.michael.austinfoodtrucks.R;
-import com.project4398.michael.austinfoodtrucks.TruckListInfo;
+import com.project4398.michael.austinfoodtrucks.TruckInfo;
 
 /**
  * Created by Michael on 7/15/2015.
@@ -19,7 +19,7 @@ import com.project4398.michael.austinfoodtrucks.TruckListInfo;
 public class EditUserInfoFragment extends Fragment
 {
     private Context mContext;
-    private TruckListInfo mInfo;
+    private TruckInfo mInfo;
     private EditText mName;
     private EditText mPhoneNumber;
     private EditText mTypes;
@@ -36,7 +36,7 @@ public class EditUserInfoFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        mInfo = (TruckListInfo)getArguments().getSerializable("info");
+        mInfo = (TruckInfo)getArguments().getSerializable("info");
 
         mContext = getActivity();
     }

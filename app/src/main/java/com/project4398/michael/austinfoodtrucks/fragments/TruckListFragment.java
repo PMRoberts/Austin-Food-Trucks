@@ -5,37 +5,40 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.MergeCursor;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.project4398.michael.austinfoodtrucks.R;
+import com.project4398.michael.austinfoodtrucks.AWSInterface;
 import com.project4398.michael.austinfoodtrucks.TruckListAdapter;
-import com.project4398.michael.austinfoodtrucks.TruckListInfo;
-import com.project4398.michael.austinfoodtrucks.menuItem;
+import com.project4398.michael.austinfoodtrucks.TruckInfo;
 
 import java.util.ArrayList;
 
 /**
  * Created by Michael on 7/15/2015.
  */
-public class TruckListFragment extends Fragment
+public class TruckListFragment extends Fragment implements LocationListener
 {
     private Context mContext;
     TruckListAdapter mAdapter;
     private ListView mTruckList;
-    public static ArrayList<TruckListInfo> TLITemp;
-    public static ArrayList<menuItem> menuTemp;
-    public static ArrayList<menuItem> menuTemp2;
+    public static ArrayList<TruckInfo> TLITemp;
     public TruckListFragment newFragment()
     {
         TruckListFragment fragment = new TruckListFragment();
         return fragment;
     }
+
+    LocationManager mLocationManager;
+    AWSInterface s3Interface;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -44,169 +47,20 @@ public class TruckListFragment extends Fragment
         mContext = getActivity();
         mAdapter = new TruckListAdapter(mContext, null);
 
-        TLITemp = new ArrayList<TruckListInfo>();
-        menuTemp = new ArrayList<menuItem>();
 
-        menuTemp.add(new menuItem());
-        menuTemp.get(menuTemp.size()-1).name = "food1";
-        menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
-        menuTemp.get(menuTemp.size()-1).inStock = true;
-        menuTemp.get(menuTemp.size()-1).favorite = true;
+        mLocationManager = (LocationManager)mContext.getSystemService(Context.LOCATION_SERVICE);
 
-        menuTemp.add(new menuItem());
-        menuTemp.get(menuTemp.size()-1).name = "food2";
-        menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
-        menuTemp.get(menuTemp.size()-1).inStock = true;
-        menuTemp.get(menuTemp.size()-1).favorite = true;
+        Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-        menuTemp.add(new menuItem());
-        menuTemp.get(menuTemp.size()-1).name = "food3";
-        menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
-        menuTemp.get(menuTemp.size()-1).inStock = true;
-        menuTemp.get(menuTemp.size()-1).favorite = true;
-
-        menuTemp.add(new menuItem());
-        menuTemp.get(menuTemp.size()-1).name = "food4";
-        menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
-        menuTemp.get(menuTemp.size()-1).inStock = true;
-        menuTemp.get(menuTemp.size()-1).favorite = true;
-
-        menuTemp.add(new menuItem());
-        menuTemp.get(menuTemp.size()-1).name = "food5";
-        menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
-        menuTemp.get(menuTemp.size()-1).inStock = true;
-        menuTemp.get(menuTemp.size()-1).favorite = true;
-
-        menuTemp2 = new ArrayList<menuItem>();
-
-        menuTemp2.add(new menuItem());
-        menuTemp2.get(menuTemp2.size()-1).name = "cow";
-        menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
-        menuTemp2.get(menuTemp2.size()-1).inStock = true;
-        menuTemp2.get(menuTemp2.size()-1).favorite = true;
-
-        menuTemp2.add(new menuItem());
-        menuTemp2.get(menuTemp2.size()-1).name = "chicken";
-        menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
-        menuTemp2.get(menuTemp2.size()-1).inStock = true;
-        menuTemp2.get(menuTemp2.size()-1).favorite = true;
-
-        menuTemp2.add(new menuItem());
-        menuTemp2.get(menuTemp2.size()-1).name = "lamb";
-        menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
-        menuTemp2.get(menuTemp2.size()-1).inStock = true;
-        menuTemp2.get(menuTemp2.size()-1).favorite = true;
-
-        menuTemp2.add(new menuItem());
-        menuTemp2.get(menuTemp2.size()-1).name = "pig";
-        menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
-        menuTemp2.get(menuTemp2.size()-1).inStock = true;
-        menuTemp2.get(menuTemp2.size()-1).favorite = true;
-
-        menuTemp2.add(new menuItem());
-        menuTemp2.get(menuTemp2.size()-1).name = "fish";
-        menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
-        menuTemp2.get(menuTemp2.size()-1).inStock = true;
-        menuTemp2.get(menuTemp2.size()-1).favorite = true;
-
-        menuTemp2.add(new menuItem());
-        menuTemp2.get(menuTemp2.size()-1).name = "rock";
-        menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
-        menuTemp2.get(menuTemp2.size()-1).inStock = true;
-        menuTemp2.get(menuTemp2.size()-1).favorite = true;
-
-        menuTemp2.add(new menuItem());
-        menuTemp2.get(menuTemp2.size()-1).name = "plant";
-        menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
-        menuTemp2.get(menuTemp2.size()-1).inStock = true;
-        menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
 
-
-
-        TLITemp.add(new TruckListInfo());
-        TLITemp.get(TLITemp.size()-1).name = "bob";
-        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
-        TLITemp.get(TLITemp.size()-1).foodType.add("person");
-        TLITemp.get(TLITemp.size()-1).distance = 5000.0f;
-        TLITemp.get(TLITemp.size()-1).favorite = true;
-        TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
-        TLITemp.get(TLITemp.size()-1).about = "this is where the about info would go uf i had anything to say about this.";
-        TLITemp.get(TLITemp.size()-1).menu = menuTemp;
-        TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
-
-
-        TLITemp.add(new TruckListInfo());
-        TLITemp.get(TLITemp.size()-1).name = "trucin";
-        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
-        TLITemp.get(TLITemp.size()-1).foodType.add("tacos");
-        TLITemp.get(TLITemp.size()-1).foodType.add("tacos");
-        TLITemp.get(TLITemp.size()-1).foodType.add("tacos");
-        TLITemp.get(TLITemp.size()-1).distance = 1.2f;
-        TLITemp.get(TLITemp.size()-1).favorite = true;
-        TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
-        TLITemp.get(TLITemp.size()-1).about = "its so truckin good yo. itle blow yo miiiinnnnd!!!!!";
-        TLITemp.get(TLITemp.size()-1).menu = menuTemp2;
-        TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
-
-        TLITemp.add(new TruckListInfo());
-        TLITemp.get(TLITemp.size()-1).name = "burgs";
-        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
-        TLITemp.get(TLITemp.size()-1).foodType.add("burgers");
-        TLITemp.get(TLITemp.size()-1).distance = 1.0f;
-        TLITemp.get(TLITemp.size()-1).favorite = false;
-        TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
-        TLITemp.get(TLITemp.size()-1).about = "i sear dead cow flesh on a burning hot mettle slab";
-        TLITemp.get(TLITemp.size()-1).menu = menuTemp;
-        TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
-
-        TLITemp.add(new TruckListInfo());
-        TLITemp.get(TLITemp.size()-1).name = "dfasf";
-        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
-        TLITemp.get(TLITemp.size()-1).foodType.add("erererf");
-        TLITemp.get(TLITemp.size()-1).foodType.add("cvbcvbcvb");
-        TLITemp.get(TLITemp.size()-1).distance = 5050.5f;
-        TLITemp.get(TLITemp.size()-1).favorite = false;
-        TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
-        TLITemp.get(TLITemp.size()-1).about = " hkdlfashdflk hs;dfkjsah  reiotwre cb,xmvbxzv euiwqurhysdfhaksl";
-        TLITemp.get(TLITemp.size()-1).menu = menuTemp;
-        TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
-
-        TLITemp.add(new TruckListInfo());
-        TLITemp.get(TLITemp.size()-1).name = "food and stuff";
-        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
-        TLITemp.get(TLITemp.size()-1).foodType.add("food");
-        TLITemp.get(TLITemp.size()-1).foodType.add("stuff");
-        TLITemp.get(TLITemp.size()-1).distance = 2.0f;
-        TLITemp.get(TLITemp.size()-1).favorite = true;
-        TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
-        TLITemp.get(TLITemp.size()-1).about = "we have food and stuff. buy stuff. or dont. we dont care. ";
-        TLITemp.get(TLITemp.size()-1).menu = menuTemp2;
-        TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
-
-        TLITemp.add(new TruckListInfo());
-        TLITemp.get(TLITemp.size()-1).name = "t";
-        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
-        TLITemp.get(TLITemp.size()-1).foodType.add("thai");
-        TLITemp.get(TLITemp.size()-1).distance = 5.0f;
-        TLITemp.get(TLITemp.size()-1).favorite = false;
-        TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
-        TLITemp.get(TLITemp.size()-1).about = "thai breastaurant. get it?";
-        TLITemp.get(TLITemp.size()-1).menu = menuTemp;
-        TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
-
+        if(AWSInterface.getPlayer() == null)
+        {
+            AWSInterface.setPlayer(new AWSInterface(mContext));
+        }
+        s3Interface = AWSInterface.getPlayer();
+        TLITemp = s3Interface.DownloadItem();
 
     }
     @Override
@@ -228,7 +82,7 @@ public class TruckListFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
     }
-    public void setList(ArrayList<TruckListInfo> songList)
+    public void setList(ArrayList<TruckInfo> songList)
     {
         String temp;
         String temp2;
@@ -259,7 +113,7 @@ public class TruckListFragment extends Fragment
                     {
                         temp2 = "false";
                     }
-                    Log.i("stuff", "got to creating to cursor");
+                    //Log.i("stuff", "got to creating to cursor");
                     matrixCursor.addRow(new String[]{"" + 1,
                             songList.get(x).image,
                             songList.get(x).name,
@@ -286,4 +140,18 @@ public class TruckListFragment extends Fragment
     {
         super.onDestroy();
     }
+
+
+    public void onLocationChanged(Location location) {
+        if (location != null) {
+            Log.v("Location Changed", location.getLatitude() + " and " + location.getLongitude());
+            mLocationManager.removeUpdates(this);
+        }
+    }
+
+    // Required functions
+    public void onProviderDisabled(String arg0) {}
+    public void onProviderEnabled(String arg0) {}
+    public void onStatusChanged(String arg0, int arg1, Bundle arg2) {}
+
 }

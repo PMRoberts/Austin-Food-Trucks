@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.project4398.michael.austinfoodtrucks.R;
-import com.project4398.michael.austinfoodtrucks.TruckListInfo;
+import com.project4398.michael.austinfoodtrucks.TruckInfo;
 import com.project4398.michael.austinfoodtrucks.fragments.EditUserInfoFragment;
 
 /**
@@ -17,7 +17,7 @@ import com.project4398.michael.austinfoodtrucks.fragments.EditUserInfoFragment;
 public class EditUserInfoActivity extends AppCompatActivity
 {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    public TruckListInfo info;
+    public TruckInfo info;
 
 
     @Override
@@ -27,7 +27,7 @@ public class EditUserInfoActivity extends AppCompatActivity
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
 
-        info = (TruckListInfo)bundle.getSerializable("info");
+        info = (TruckInfo)bundle.getSerializable("info");
 
         setContentView(R.layout.activity_edit_user_info);
 

@@ -13,6 +13,6 @@ public class TruckListInfoHolder
     public TextView foodType;
     public TextView distance;
     public ImageView favorite;
-    public TruckListInfo truckInfo;
+    public TruckInfo truckInfo;
 
 }

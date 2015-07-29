@@ -11,7 +11,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.project4398.michael.austinfoodtrucks.R;
-import com.project4398.michael.austinfoodtrucks.TruckListInfo;
+import com.project4398.michael.austinfoodtrucks.TruckInfo;
 import com.project4398.michael.austinfoodtrucks.fragments.MenuFragment;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckProfileFragment;
 
@@ -21,7 +21,7 @@ import com.project4398.michael.austinfoodtrucks.fragments.TruckProfileFragment;
 public class UserProfileActivity extends AppCompatActivity
 {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    public TruckListInfo info;
+    public TruckInfo info;
 
 
     @Override
@@ -31,7 +31,7 @@ public class UserProfileActivity extends AppCompatActivity
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
 
-        info = (TruckListInfo)bundle.getSerializable("info");
+        info = (TruckInfo)bundle.getSerializable("info");
 
         setContentView(R.layout.activity_user_profile);
 

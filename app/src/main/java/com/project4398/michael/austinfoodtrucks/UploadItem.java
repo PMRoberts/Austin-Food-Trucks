@@ -7,12 +7,8 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.project4398.michael.austinfoodtrucks.TruckListInfo;
-
-import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 
 
 /**
@@ -27,7 +23,7 @@ public class UploadItem {
      * Creates a new credetials provider..
      * @param item which is a TruckListInfo
      */
-    public UploadItem(TruckListInfo item, Context context) {
+    public UploadItem(TruckInfo item, Context context) {
         String bucket_name = "grp3.tsstate.edu.test";
         // Initialize the Amazon Cognito credentials provider
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
@@ -46,7 +42,7 @@ public class UploadItem {
      * @param item
      * @return File containing the item that was passed as a parameter.
      */
-    public File createFile(TruckListInfo item){
+    public File createFile(TruckInfo item){
         File file = createFile(item);
         return file;
     }

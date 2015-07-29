@@ -1,25 +1,22 @@
 package com.project4398.michael.austinfoodtrucks.activities;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.project4398.michael.austinfoodtrucks.R;
-import com.project4398.michael.austinfoodtrucks.TruckListInfo;
+import com.project4398.michael.austinfoodtrucks.TruckInfo;
 import com.project4398.michael.austinfoodtrucks.fragments.MenuFragment;
-import com.project4398.michael.austinfoodtrucks.fragments.TruckListFragment;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckProfileFragment;
-
-import java.util.ArrayList;
 
 /**
  * Created by Michael on 7/15/2015.
@@ -27,7 +24,7 @@ import java.util.ArrayList;
 public class TruckProfileActivity extends AppCompatActivity
 {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    public TruckListInfo info;
+    public TruckInfo info;
 
 
     @Override
@@ -37,7 +34,8 @@ public class TruckProfileActivity extends AppCompatActivity
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
 
-        info = (TruckListInfo)bundle.getSerializable("info");
+
+        info = (TruckInfo)bundle.getSerializable("info");
 
         setContentView(R.layout.activity_truck_profile);
 
@@ -87,6 +85,7 @@ public class TruckProfileActivity extends AppCompatActivity
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
+            mMap.setMyLocationEnabled(true);
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();
@@ -101,7 +100,20 @@ public class TruckProfileActivity extends AppCompatActivity
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        
-        mMap.addMarker(new MarkerOptions().position(new LatLng(40, 90)).title("Marker"));
+
+        //mMap.setMyLocationEnabled(true);
+        mMap.addMarker(new MarkerOptions().position(new LatLng(info.latitude, info.longitude)).title("Marker"));
+
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(info.latitude, info.longitude))      // Sets the center of the map to Mountain View
+                .zoom(17)                   // Sets the zoom
+                .bearing(0)                // Sets the orientation of the camera to east
+                .tilt(0)                   // Sets the tilt of the camera to 30 degrees
+                .build();                   // Creates a CameraPosition from the builder
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(mMap.getMyLocation().getLatitude(), mMap.getMyLocation().getLongitude())).title("Marker"));
+        //Log.i("stuff", "" + mMap.isMyLocationEnabled());
+
     }
 }

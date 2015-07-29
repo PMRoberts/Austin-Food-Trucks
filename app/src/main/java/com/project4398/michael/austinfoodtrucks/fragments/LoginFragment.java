@@ -3,32 +3,34 @@ package com.project4398.michael.austinfoodtrucks.fragments;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.TruckInfo;
+import com.project4398.michael.austinfoodtrucks.activities.TruckProfileActivity;
 
 /**
- * Created by Michael on 7/15/2015.
+ * Created by PRoberts on 7/29/15.
  */
-public class TruckProfileFragment extends Fragment
+public class LoginFragment extends Fragment
 {
     private Context mContext;
-    private TruckInfo mInfo;
-    private TextView mName;
-    private TextView mTypes;
-    private TextView mAbout;
-    private TextView mPhoneNumber;
-    private ImageView mImage;
+    private EditText mUserID;
+    private EditText mPassword;
+    private Button mLogIn;
+    private Button mNewUser;
 
-    public TruckProfileFragment newFragment()
+    public LoginFragment newFragment()
     {
-        TruckProfileFragment fragment = new TruckProfileFragment();
+        LoginFragment fragment = new LoginFragment();
         return fragment;
     }
 
@@ -36,8 +38,6 @@ public class TruckProfileFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        mInfo = (TruckInfo)getArguments().getSerializable("info");
-
         mContext = getActivity();
     }
     @Override
@@ -49,20 +49,24 @@ public class TruckProfileFragment extends Fragment
     @Override @SuppressLint("NewApi")
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.fragment_truck_profile, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_login, container, false);
 
-        mImage = (ImageView)rootView.findViewById(R.id.TruckImage);
-        mName = (TextView)rootView.findViewById(R.id.TruckName);
-        mAbout = (TextView)rootView.findViewById(R.id.TruckAbout);
-        mTypes = (TextView)rootView.findViewById(R.id.TruckTypes);
-        mPhoneNumber = (TextView)rootView.findViewById(R.id.TruckPhoneNumber);
+        mUserID = (EditText)rootView.findViewById(R.id.EditUserID);
+        mPassword = (EditText)rootView.findViewById(R.id.EditPassword);
+        mLogIn = (Button)rootView.findViewById(R.id.Login);
+        mNewUser = (Button)rootView.findViewById(R.id.newUser);
 
-        mName.setText(mInfo.name);
-        mTypes.setText(mInfo.foodType.get(0));
-        mAbout.setText(mInfo.about);
-        mPhoneNumber.setText(mInfo.phoneNumber);
+        mNewUser.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                    Intent profileIntent = new Intent(mContext, TruckProfileActivity.class);
+                    mContext.startActivity(profileIntent);
+            }
+        });
 
-        mImage.setImageResource(R.drawable.soundcloud_default);
+
 
         return rootView;
     }

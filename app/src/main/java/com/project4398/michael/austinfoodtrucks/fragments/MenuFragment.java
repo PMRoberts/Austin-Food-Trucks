@@ -3,22 +3,15 @@ package com.project4398.michael.austinfoodtrucks.fragments;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.MatrixCursor;
-import android.database.MergeCursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.project4398.michael.austinfoodtrucks.ExpandableHeightGridView;
 import com.project4398.michael.austinfoodtrucks.MenuAdapter;
 import com.project4398.michael.austinfoodtrucks.R;
-import com.project4398.michael.austinfoodtrucks.TruckListInfo;
 import com.project4398.michael.austinfoodtrucks.menuItem;
 
 import java.util.ArrayList;

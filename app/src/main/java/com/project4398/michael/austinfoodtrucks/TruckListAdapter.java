@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
@@ -38,7 +36,7 @@ public class TruckListAdapter extends CursorAdapter
         holder.foodType.setText(cursor.getString(cursor.getColumnIndex("foodType")));
         holder.distance.setText(cursor.getString(cursor.getColumnIndex("distance")));
         holder.truckInfo = TruckListFragment.TLITemp.get(Integer.parseInt(cursor.getString(cursor.getColumnIndex("id"))));
-        final TruckListInfo temp = holder.truckInfo;
+        final TruckInfo temp = holder.truckInfo;
 
         holder.image.setImageResource(R.drawable.soundcloud_default);
         if(cursor.getString(cursor.getColumnIndex("favorite")).equals("true"))
@@ -58,7 +56,7 @@ public class TruckListAdapter extends CursorAdapter
                 if(temp != null)
                 {
 
-                    Intent profileIntent = new Intent(mContext, UserProfileActivity.class);
+                    Intent profileIntent = new Intent(mContext, TruckProfileActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("info", temp);
                     profileIntent.putExtras(bundle);

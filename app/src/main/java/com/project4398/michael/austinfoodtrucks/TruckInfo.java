@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by PRoberts on 7/16/15.
  */
-public class TruckListInfo implements Serializable
+public class TruckInfo implements Serializable
 {
     public String image;
     public String name;
@@ -19,6 +19,7 @@ public class TruckListInfo implements Serializable
     public float distance;
     public int id;
     public boolean favorite;
-    public Location location;
+    public double latitude = 0.0;
+    public double longitude = 0.0;
     public ArrayList<menuItem> menu;
 }
