@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.project4398.michael.austinfoodtrucks.activities.TruckProfileActivity;
+import com.project4398.michael.austinfoodtrucks.activities.UserProfileActivity;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckListFragment;
 
 /**
@@ -57,7 +58,7 @@ public class TruckListAdapter extends CursorAdapter
                 if(temp != null)
                 {
 
-                    Intent profileIntent = new Intent(mContext, TruckProfileActivity.class);
+                    Intent profileIntent = new Intent(mContext, UserProfileActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("info", temp);
                     profileIntent.putExtras(bundle);

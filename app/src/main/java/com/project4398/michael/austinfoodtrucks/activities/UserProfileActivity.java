@@ -33,7 +33,7 @@ public class UserProfileActivity extends AppCompatActivity
 
         info = (TruckListInfo)bundle.getSerializable("info");
 
-        setContentView(R.layout.activity_truck_profile);
+        setContentView(R.layout.activity_user_profile);
 
 
         Fragment newFragment = new TruckProfileFragment().newFragment();

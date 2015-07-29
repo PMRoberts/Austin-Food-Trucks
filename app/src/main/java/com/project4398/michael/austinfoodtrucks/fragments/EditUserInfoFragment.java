@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.TruckListInfo;
@@ -17,7 +16,7 @@ import com.project4398.michael.austinfoodtrucks.TruckListInfo;
 /**
  * Created by Michael on 7/15/2015.
  */
-public class EditUserProfileFragment extends Fragment
+public class EditUserInfoFragment extends Fragment
 {
     private Context mContext;
     private TruckListInfo mInfo;
@@ -27,9 +26,9 @@ public class EditUserProfileFragment extends Fragment
     private EditText mAbout;
     private ImageView mImage;
 
-    public EditUserProfileFragment newFragment()
+    public EditUserInfoFragment newFragment()
     {
-        EditUserProfileFragment fragment = new EditUserProfileFragment();
+        EditUserInfoFragment fragment = new EditUserInfoFragment();
         return fragment;
     }
 
@@ -50,7 +49,7 @@ public class EditUserProfileFragment extends Fragment
     @Override @SuppressLint("NewApi")
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.fragment_user_edit_profile, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_edit_user_info, container, false);
 
         //mImage = (ImageView)rootView.findViewById(R.id.EditTruckName);
         mName = (EditText)rootView.findViewById(R.id.EditTruckName);
