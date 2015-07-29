@@ -1,93 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
-        <ImageView
-            android:id="@+id/EditTruckImage"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:padding="5dp"
-            android:background="#000000"
-            />
         <RelativeLayout
-        android:id="@+id/EditImageContainer"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_toRightOf="@+id/EditTruckImage">
-        <Button
-            android:id="@+id/ChooseNewImageButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="new picture"
-            android:layout_centerInParent="true"
-            />
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/lableTruckName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="Name: "
+                android:layout_centerVertical="true"
+                />
+            <EditText
+                android:id="@+id/EditTruckName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/lableTruckName"
+                android:text="edit here"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"/>
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#000000"
+                android:layout_alignParentTop="true"/>
         </RelativeLayout>
-        <TextView
-            android:id="@+id/lableTruckName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/EditTruckImage"
-            android:text="Name: "
-            />
-        <TextView
-            android:id="@+id/lableTruckPhoneNumer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lableTruckName"
-            android:text="Phone Number: "
-            />
-        <TextView
-            android:id="@+id/lableTruckFoodType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lableTruckPhoneNumer"
-            android:text="Food Tags: "
-            />
-        <TextView
-            android:id="@+id/lableTruckDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lableTruckFoodType"
-            android:text="About: "
-            />
-        <EditText
-            android:id="@+id/EditTruckName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/EditTruckImage"
-            android:layout_toRightOf="@+id/lableTruckName"
-            />
-        <EditText
-            android:id="@+id/EditTruckPhoneNumer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lableTruckName"
-            android:layout_toRightOf="@+id/lableTruckPhoneNumer"
-            />
-        <EditText
-            android:id="@+id/EditTruckFoodType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lableTruckPhoneNumer"
-            android:layout_toRightOf="@+id/lableTruckFoodType"
-            />
-        <EditText
-            android:id="@+id/EditTruckDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/lableTruckFoodType"
-            android:layout_toRightOf="@+id/lableTruckDescription"
-            />
+        <RelativeLayout
+            android:id="@+id/EditImageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_toRightOf="@+id/EditTruckImage">
+            <ImageView
+                android:id="@+id/EditTruckImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:padding="5dp"
+                android:background="#000000" />
+            <Button
+                android:id="@+id/ChooseNewImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="new picture"
+                android:layout_toRightOf="@+id/EditTruckImage"
+                android:layout_centerInParent="true" />
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#000000"
+                android:layout_alignParentTop="true"/>
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/lableTruckPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="Phone Number: "
+                android:layout_centerVertical="true"
+                />
+            <EditText
+                android:id="@+id/EditTruckPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/lableTruckPhoneNumber"
+                android:text="edit here"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"/>
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#000000"
+                android:layout_alignParentTop="true"/>
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/lableTruckTypes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="Food Types: "
+                android:layout_centerVertical="true"
+                />
+            <EditText
+                android:id="@+id/EditTruckTypes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/lableTruckTypes"
+                android:text="edit here"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"/>
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#000000"
+                android:layout_alignParentTop="true"/>
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/lableTruckInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="About: "
+                android:layout_centerVertical="true"
+                />
+            <EditText
+                android:id="@+id/EditTruckInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/lableTruckInfo"
+                android:text="edit here"
+                android:textSize="20sp"
+                android:layout_centerVertical="true"/>
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#000000"
+                android:layout_alignParentTop="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+            <Button
+                android:id="@+id/SaveShit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="SAVE Changes"/>
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#000000"
+                android:layout_alignParentTop="true"/>
+        </RelativeLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 </ScrollView>
