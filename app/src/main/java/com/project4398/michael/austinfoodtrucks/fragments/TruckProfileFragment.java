@@ -24,6 +24,7 @@ public class TruckProfileFragment extends Fragment
     private TextView mName;
     private TextView mTypes;
     private TextView mAbout;
+    private TextView mPhoneNumber;
     private ImageView mImage;
 
     public TruckProfileFragment newFragment()
@@ -55,10 +56,12 @@ public class TruckProfileFragment extends Fragment
         mName = (TextView)rootView.findViewById(R.id.TruckName);
         mAbout = (TextView)rootView.findViewById(R.id.TruckAbout);
         mTypes = (TextView)rootView.findViewById(R.id.TruckTypes);
+        mPhoneNumber = (TextView)rootView.findViewById(R.id.TruckPhoneNumber);
 
         mName.setText(mInfo.name);
         mTypes.setText(mInfo.foodType.get(0));
         mAbout.setText(mInfo.about);
+        mPhoneNumber.setText(mInfo.phoneNumber);
 
         mImage.setImageResource(R.drawable.soundcloud_default);
 

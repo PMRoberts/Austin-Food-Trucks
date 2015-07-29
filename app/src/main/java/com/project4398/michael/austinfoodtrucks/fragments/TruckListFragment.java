@@ -145,6 +145,7 @@ public class TruckListFragment extends Fragment
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "this is where the about info would go uf i had anything to say about this.";
         TLITemp.get(TLITemp.size()-1).menu = menuTemp;
+        TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
 
 
         TLITemp.add(new TruckListInfo());
@@ -158,6 +159,7 @@ public class TruckListFragment extends Fragment
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "its so truckin good yo. itle blow yo miiiinnnnd!!!!!";
         TLITemp.get(TLITemp.size()-1).menu = menuTemp2;
+        TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "burgs";
@@ -168,6 +170,7 @@ public class TruckListFragment extends Fragment
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "i sear dead cow flesh on a burning hot mettle slab";
         TLITemp.get(TLITemp.size()-1).menu = menuTemp;
+        TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "dfasf";
@@ -179,6 +182,7 @@ public class TruckListFragment extends Fragment
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = " hkdlfashdflk hs;dfkjsah  reiotwre cb,xmvbxzv euiwqurhysdfhaksl";
         TLITemp.get(TLITemp.size()-1).menu = menuTemp;
+        TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "food and stuff";
@@ -190,6 +194,7 @@ public class TruckListFragment extends Fragment
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "we have food and stuff. buy stuff. or dont. we dont care. ";
         TLITemp.get(TLITemp.size()-1).menu = menuTemp2;
+        TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
 
         TLITemp.add(new TruckListInfo());
         TLITemp.get(TLITemp.size()-1).name = "t";
@@ -200,6 +205,7 @@ public class TruckListFragment extends Fragment
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
         TLITemp.get(TLITemp.size()-1).about = "thai breastaurant. get it?";
         TLITemp.get(TLITemp.size()-1).menu = menuTemp;
+        TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
 
 
     }

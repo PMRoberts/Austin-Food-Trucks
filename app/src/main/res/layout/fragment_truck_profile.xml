@@ -36,6 +36,13 @@
         android:layout_below="@+id/TruckTypes"
         android:textSize="30sp"
         android:text="about"/>
+    <TextView
+        android:id="@+id/TruckPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TruckAbout"
+        android:textSize="30sp"
+        android:text="phone Number"/>
 
 
 

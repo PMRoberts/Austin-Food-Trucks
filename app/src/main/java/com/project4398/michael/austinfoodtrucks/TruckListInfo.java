@@ -13,6 +13,7 @@ public class TruckListInfo implements Serializable
     public String image;
     public String name;
     public String about;
+    public String phoneNumber;
     public ArrayList<String> foodType;
 
     public float distance;
