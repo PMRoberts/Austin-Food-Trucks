@@ -2,12 +2,18 @@ package com.project4398.michael.austinfoodtrucks.activities;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.project4398.michael.austinfoodtrucks.AWSInterface;
@@ -23,6 +29,10 @@ public class UserProfileActivity extends AppCompatActivity
 {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     public TruckInfo mInfo;
+    private Button mCheckIn;
+    private Button mEditInfo;
+    private Button mEditMenu;
+    private Context mContext;
 
 
     @Override
@@ -32,6 +42,8 @@ public class UserProfileActivity extends AppCompatActivity
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         mInfo = AWSInterface.getPlayer().getTruckByID(intent.getIntExtra("ID", 0));
+
+        mContext = this;
 
         setContentView(R.layout.activity_user_profile);
 
@@ -48,6 +60,42 @@ public class UserProfileActivity extends AppCompatActivity
         FragmentTransaction ft2 = getFragmentManager().beginTransaction();
         newFragment2.setArguments(bundle);
         ft2.add(R.id.MenuContainer, newFragment2).commit();
+
+        mCheckIn = (Button)findViewById(R.id.checkInButton);
+        mCheckIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mMap != null) {
+                    if (mMap.getMyLocation() != null) {
+                        mInfo.latitude = mMap.getMyLocation().getLatitude();
+                        mInfo.longitude = mMap.getMyLocation().getLongitude();
+                        AWSInterface.getPlayer().EditTruckByID(mInfo);
+                        ResetMap();
+                        Toast.makeText(mContext, "Checkin Successful", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(mContext, "no 'my location' set", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(mContext, "wait for map to load", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        mEditInfo = (Button)findViewById(R.id.EditInfoButton);
+        mEditInfo.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent profileIntent = new Intent(mContext, EditUserInfoActivity.class);
+                profileIntent.putExtra("ID", mInfo.id);
+                mContext.startActivity(profileIntent);
+                //finish();
+            }
+        });
+
+
+
     }
 
     @Override
@@ -79,6 +127,7 @@ public class UserProfileActivity extends AppCompatActivity
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
+            mMap.setMyLocationEnabled(true);
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();
@@ -93,6 +142,46 @@ public class UserProfileActivity extends AppCompatActivity
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+
+        //mMap.setMyLocationEnabled(true);
+        mMap.addMarker(new MarkerOptions().position(new LatLng(mInfo.latitude, mInfo.longitude)).title("Marker"));
+
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(mInfo.latitude, mInfo.longitude))      // Sets the center of the map to Mountain View
+                .zoom(17)                   // Sets the zoom
+                .bearing(0)                // Sets the orientation of the camera to east
+                .tilt(0)                   // Sets the tilt of the camera to 30 degrees
+                .build();                   // Creates a CameraPosition from the builder
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(mMap.getMyLocation().getLatitude(), mMap.getMyLocation().getLongitude())).title("Marker"));
+        //Log.i("stuff", "" + mMap.isMyLocationEnabled());
+
+    }
+    private void ResetMap() {
+
+        //mMap.setMyLocationEnabled(true);
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions().position(new LatLng(mInfo.latitude, mInfo.longitude)).title("Marker"));
+
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(mInfo.latitude, mInfo.longitude))      // Sets the center of the map to Mountain View
+                .zoom(17)                   // Sets the zoom
+                .bearing(0)                // Sets the orientation of the camera to east
+                .tilt(0)                   // Sets the tilt of the camera to 30 degrees
+                .build();                   // Creates a CameraPosition from the builder
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(mMap.getMyLocation().getLatitude(), mMap.getMyLocation().getLongitude())).title("Marker"));
+        //Log.i("stuff", "" + mMap.isMyLocationEnabled());
+
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this,TruckListActivity.class);
+        startActivity(intent);
+        //finish();
     }
 }

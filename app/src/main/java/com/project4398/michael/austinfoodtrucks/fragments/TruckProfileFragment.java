@@ -60,11 +60,13 @@ public class TruckProfileFragment extends Fragment
         mPhoneNumber = (TextView)rootView.findViewById(R.id.TruckPhoneNumber);
 
         mName.setText(mInfo.name);
-        mTypes.setText(mInfo.foodType.get(0));
+        if(!mInfo.foodType.isEmpty()) {
+            mTypes.setText(mInfo.foodType.get(0));
+        }
         mAbout.setText(mInfo.about);
         mPhoneNumber.setText(mInfo.phoneNumber);
 
-        mImage.setImageResource(R.drawable.soundcloud_default);
+        mImage.setImageResource(R.drawable.splash_icon);
 
         return rootView;
     }

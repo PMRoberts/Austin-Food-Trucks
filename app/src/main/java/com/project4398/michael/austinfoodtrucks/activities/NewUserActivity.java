@@ -10,27 +10,23 @@ import com.google.android.gms.maps.GoogleMap;
 import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.TruckInfo;
 import com.project4398.michael.austinfoodtrucks.fragments.EditUserInfoFragment;
+import com.project4398.michael.austinfoodtrucks.fragments.NewUserFragment;
 
 /**
  * Created by PRoberts on 7/29/15.
  */
 public class NewUserActivity extends AppCompatActivity
 {
-    public TruckInfo info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
-        info = new TruckInfo();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("info", info);
-
         setContentView(R.layout.activity_new_user);
 
 
-        Fragment newFragment = new EditUserInfoFragment().newFragment();
+        Fragment newFragment = new NewUserFragment().newFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         //newFragment.setArguments(bundle);
         ft.add(R.id.newUserRoot, newFragment).commit();

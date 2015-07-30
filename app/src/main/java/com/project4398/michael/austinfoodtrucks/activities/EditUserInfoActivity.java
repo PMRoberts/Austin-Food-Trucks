@@ -24,12 +24,15 @@ public class EditUserInfoActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
 
         setContentView(R.layout.activity_edit_user_info);
 
 
         Fragment newFragment = new EditUserInfoFragment().newFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
+        newFragment.setArguments(bundle);
         ft.add(R.id.editRoot, newFragment).commit();
 
     }
@@ -38,5 +41,12 @@ public class EditUserInfoActivity extends AppCompatActivity
     protected void onResume()
     {
         super.onResume();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        //finish();
     }
 }

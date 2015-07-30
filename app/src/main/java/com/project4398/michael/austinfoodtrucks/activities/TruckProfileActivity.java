@@ -120,4 +120,12 @@ public class TruckProfileActivity extends AppCompatActivity
         //Log.i("stuff", "" + mMap.isMyLocationEnabled());
 
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this,TruckListActivity.class);
+        startActivity(intent);
+        //finish();
+    }
 }

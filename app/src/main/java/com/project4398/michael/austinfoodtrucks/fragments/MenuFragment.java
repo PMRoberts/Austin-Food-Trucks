@@ -53,10 +53,13 @@ public class MenuFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
         RelativeLayout root = (RelativeLayout)rootView.findViewById(R.id.menuRoot);
         ExpandableHeightGridView theGrid = (ExpandableHeightGridView)rootView.findViewById(R.id.customGrid);
-        menuItem[] menuArray = mMenu.toArray(new menuItem[mMenu.size()]);
-        mAdapter = new MenuAdapter(mContext, menuArray);
-        theGrid.setExpanded(true);
-        theGrid.setAdapter(mAdapter);
+        if(mMenu != null)
+        {
+            menuItem[] menuArray = mMenu.toArray(new menuItem[mMenu.size()]);
+            mAdapter = new MenuAdapter(mContext, menuArray);
+            theGrid.setExpanded(true);
+            theGrid.setAdapter(mAdapter);
+        }
 
         return rootView;
     }

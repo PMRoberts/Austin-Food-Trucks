@@ -158,7 +158,7 @@ public class AWSInterface
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "rock";
-        menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
+        menuTemp2.get(menuTemp2.size()-1).description = "it is not edable";
         menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
@@ -180,7 +180,7 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).distance = 5000.0f;
         TLITemp.get(TLITemp.size()-1).favorite = true;
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
-        TLITemp.get(TLITemp.size()-1).about = "this is where the about info would go uf i had anything to say about this.";
+        TLITemp.get(TLITemp.size()-1).about = "this is where the about info would go if i had anything to say about this.";
         TLITemp.get(TLITemp.size()-1).menu = menuTemp;
         TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
         TLITemp.get(TLITemp.size()-1).latitude = 30.24989235;
@@ -285,12 +285,20 @@ public class AWSInterface
 
     public void EditTruckByID(TruckInfo newInfo)
     {
+        Boolean tempNew = true;
         for (int x = 0; x < mTruckList.size(); x++)
         {
             if (mTruckList.get(x).id == newInfo.id)
             {
+                tempNew = false;
                 mTruckList.set(x, newInfo);
             }
+        }
+        if (tempNew)
+        {
+            newInfo.id = mTruckList.size();
+            ownersTruckID = newInfo.id;
+            mTruckList.add(newInfo);
         }
     }
 

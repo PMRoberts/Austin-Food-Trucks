@@ -74,6 +74,7 @@ public class SplashActivity extends Activity
 
             Intent profileIntent = new Intent(mContext, TruckListActivity.class);
             mContext.startActivity(profileIntent);
+            //finish();
         }
 
     }

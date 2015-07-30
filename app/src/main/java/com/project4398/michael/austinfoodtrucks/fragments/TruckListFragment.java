@@ -19,6 +19,7 @@ import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.AWSInterface;
 import com.project4398.michael.austinfoodtrucks.TruckListAdapter;
 import com.project4398.michael.austinfoodtrucks.TruckInfo;
+import com.project4398.michael.austinfoodtrucks.TruckListAdapter2;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,7 @@ public class TruckListFragment extends Fragment implements LocationListener
 {
     private Context mContext;
     TruckListAdapter mAdapter;
+    private TruckListAdapter2 mAdapter2;
     private ListView mTruckList;
     public static ArrayList<TruckInfo> TLITemp;
     public TruckListFragment newFragment()
@@ -72,7 +74,7 @@ public class TruckListFragment extends Fragment implements LocationListener
         View rootView = inflater.inflate(R.layout.fragment_truck_list, container, false);
         mTruckList = (ListView) rootView.findViewById(R.id.TruckList);
         setList(TLITemp);
-        mTruckList.setAdapter(mAdapter);
+        mTruckList.setAdapter(mAdapter2);
         return rootView;
     }
     @Override
@@ -82,48 +84,51 @@ public class TruckListFragment extends Fragment implements LocationListener
     }
     public void setList(ArrayList<TruckInfo> songList)
     {
-        String temp;
-        String temp2;
-        MatrixCursor matrixCursor = new MatrixCursor(new String[] {"_id","image", "name", "distance", "foodType", "favorite", "id"});
-        if(songList != null)
-        {
-            if (songList.size() == 0)
-            {
-                matrixCursor.addRow(new String[]{"" + 1, null, null, null, null, null, null});
-            } else {
-                for (int x = 0; x < songList.size(); x++)
-                {
-                    temp = "";
-                    temp2 = "";
-                    for(int y = 0; y < songList.get(x).foodType.size(); y++)
-                    {
-                        temp += songList.get(x).foodType.get(y);
-                        if(y != songList.get(x).foodType.size()-1)
-                        {
-                            temp += ", ";
-                        }
-                    }
-                    if(songList.get(x).favorite)
-                    {
-                        temp2 = "true";
-                    }
-                    else
-                    {
-                        temp2 = "false";
-                    }
-                    //Log.i("stuff", "got to creating to cursor");
-                    matrixCursor.addRow(new String[]{"" + 1,
-                            songList.get(x).image,
-                            songList.get(x).name,
-                            "" + songList.get(x).distance,
-                            temp,
-                            temp2,
-                            "" + songList.get(x).id});
-                }
-            }
-            Cursor TruckListCursor = new MergeCursor(new Cursor[]{matrixCursor, null});
-            mAdapter.swapCursor(TruckListCursor);
-        }
+//        String temp;
+//        String temp2;
+//        MatrixCursor matrixCursor = new MatrixCursor(new String[] {"_id","image", "name", "distance", "foodType", "favorite", "id"});
+//        if(songList != null)
+//        {
+//            if (songList.size() == 0)
+//            {
+//                matrixCursor.addRow(new String[]{"" + 1, null, null, null, null, null, null});
+//            } else {
+//                for (int x = 0; x < songList.size(); x++)
+//                {
+//                    temp = "";
+//                    temp2 = "";
+//                    for(int y = 0; y < songList.get(x).foodType.size(); y++)
+//                    {
+//                        temp += songList.get(x).foodType.get(y);
+//                        if(y != songList.get(x).foodType.size()-1)
+//                        {
+//                            temp += ", ";
+//                        }
+//                    }
+//                    if(songList.get(x).favorite)
+//                    {
+//                        temp2 = "true";
+//                    }
+//                    else
+//                    {
+//                        temp2 = "false";
+//                    }
+//                    //Log.i("stuff", "got to creating to cursor");
+//                    matrixCursor.addRow(new String[]{"" + 1,
+//                            songList.get(x).image,
+//                            songList.get(x).name,
+//                            "" + songList.get(x).distance,
+//                            temp,
+//                            temp2,
+//                            "" + songList.get(x).id});
+//                }
+//            }
+//            Cursor TruckListCursor = new MergeCursor(new Cursor[]{matrixCursor, null});
+//            mAdapter.swapCursor(TruckListCursor);
+//        }
+
+        TruckInfo[] menuArray = TLITemp.toArray(new TruckInfo[TLITemp.size()]);
+        mAdapter2 = new TruckListAdapter2(mContext, menuArray);
     }
 
 

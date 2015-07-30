@@ -17,13 +17,19 @@ public class TruckInfo implements Serializable
     public ArrayList<String> foodType;
 
     public float distance;
-    public int id;
+    public int id = -1;
     public boolean favorite;
     public double latitude = 0.0;
     public double longitude = 0.0;
     public ArrayList<menuItem> menu;
     private String UserID;
     private String Password;
+
+    public TruckInfo()
+    {
+        foodType = new ArrayList<String>();
+        menu = new ArrayList<menuItem>();
+    }
 
     public boolean CheckCredentials(String UID, String password)
     {

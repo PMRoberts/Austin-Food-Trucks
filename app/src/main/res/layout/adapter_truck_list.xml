@@ -9,10 +9,11 @@
 
     <ImageView
         android:id="@+id/TruckInfoImage"
-        android:layout_height="match_parent"
-        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
+        android:scaleType="fitCenter"
         android:padding="5dp"
         android:background="#000000"/>
     <TextView
@@ -52,8 +53,8 @@
         android:layout_toLeftOf="@+id/TruckInfoFavorite"/>
     <ImageView
         android:id="@+id/TruckInfoFavorite"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:padding="5dp"

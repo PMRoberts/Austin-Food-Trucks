@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,14 +37,14 @@ public class TruckListAdapter extends CursorAdapter
         holder.truckInfo = TruckListFragment.TLITemp.get(Integer.parseInt(cursor.getString(cursor.getColumnIndex("id"))));
         final TruckInfo temp = holder.truckInfo;
 
-        holder.image.setImageResource(R.drawable.soundcloud_default);
+        holder.image.setImageResource(R.drawable.splash_icon);
         if(cursor.getString(cursor.getColumnIndex("favorite")).equals("true"))
         {
-            holder.favorite.setImageResource(R.drawable.button_soundcloud_repeat_on);
+            holder.favorite.setImageResource(R.drawable.star_on);
         }
         else
         {
-            holder.favorite.setImageResource(R.drawable.button_soundcloud_repeat_off);
+            holder.favorite.setImageResource(R.drawable.star_off);
         }
 
         holder.image.setOnClickListener(new View.OnClickListener()
@@ -63,6 +62,7 @@ public class TruckListAdapter extends CursorAdapter
 //                    profileIntent.putExtras(bundle);
                         profileIntent.putExtra("ID", temp.id);
                         mContext.startActivity(profileIntent);
+                        //finish();
                     }
                     else
                     {
@@ -72,6 +72,7 @@ public class TruckListAdapter extends CursorAdapter
 //                    profileIntent.putExtras(bundle);
                         profileIntent.putExtra("ID", temp.id);
                         mContext.startActivity(profileIntent);
+                        //finish();
                     }
                 }
             }
@@ -84,7 +85,7 @@ public class TruckListAdapter extends CursorAdapter
 
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.truck_list_adapter, null);
+        View view = inflater.inflate(R.layout.adapter_truck_list, null);
 
         TruckListInfoHolder holder = new TruckListInfoHolder();
         holder.image = (ImageView)view.findViewById(R.id.TruckInfoImage);

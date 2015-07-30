@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.project4398.michael.austinfoodtrucks.AWSInterface;
 import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.TruckInfo;
 import com.project4398.michael.austinfoodtrucks.activities.UserProfileActivity;
@@ -43,7 +44,7 @@ public class EditUserInfoFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         if(getArguments() != null) {
-            mInfo = (TruckInfo) getArguments().getSerializable("info");
+            mInfo = AWSInterface.getPlayer().getTruckByID(getArguments().getInt("ID"));
         }
 
         mContext = getActivity();
@@ -59,7 +60,7 @@ public class EditUserInfoFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.fragment_edit_user_info, container, false);
 
-        //mImage = (ImageView)rootView.findViewById(R.id.EditTruckName);
+        mImage = (ImageView)rootView.findViewById(R.id.EditTruckImage);
         mName = (EditText)rootView.findViewById(R.id.EditTruckName);
         mPhoneNumber = (EditText)rootView.findViewById(R.id.EditTruckPhoneNumber);
         mTypes = (EditText)rootView.findViewById(R.id.EditTruckTypes);
@@ -69,11 +70,14 @@ public class EditUserInfoFragment extends Fragment
         if(mInfo != null)
         {
             mName.setText(mInfo.name);
-            mTypes.setText(mInfo.foodType.get(0));
+            if (!mInfo.foodType.isEmpty())
+            {
+                mTypes.setText(mInfo.foodType.get(0));
+            }
             mAbout.setText(mInfo.about);
             mPhoneNumber.setText(mInfo.phoneNumber);
 
-            mImage.setImageResource(R.drawable.soundcloud_default);
+            mImage.setImageResource(R.drawable.splash_icon);
         }
 
         mSave.setOnClickListener(new View.OnClickListener()
@@ -87,18 +91,15 @@ public class EditUserInfoFragment extends Fragment
                 }
                 mInfo.name = mName.getText().toString();
                 mInfo.phoneNumber = mPhoneNumber.getText().toString();
-                if (mInfo.foodType == null)
-                {
-                    mInfo.foodType = new ArrayList<String>();
-                    mInfo.foodType.add(mTypes.getText().toString());
-                }
+                mInfo.foodType.add(mTypes.getText().toString());
                 mInfo.about = mAbout.getText().toString();
 
+                AWSInterface.getPlayer().EditTruckByID(mInfo);
+
                 Intent profileIntent = new Intent(mContext, UserProfileActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("info", mInfo);
-                profileIntent.putExtras(bundle);
+                profileIntent.putExtra("ID", mInfo.id);
                 mContext.startActivity(profileIntent);
+                //finish();
             }
         });
 
