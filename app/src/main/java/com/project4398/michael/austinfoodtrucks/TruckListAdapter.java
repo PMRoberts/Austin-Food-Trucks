@@ -55,12 +55,24 @@ public class TruckListAdapter extends CursorAdapter
             {
                 if(temp != null)
                 {
-
-                    Intent profileIntent = new Intent(mContext, TruckProfileActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("info", temp);
-                    profileIntent.putExtras(bundle);
-                    mContext.startActivity(profileIntent);
+                    if (AWSInterface.getPlayer().ownersTruckID == temp.id)
+                    {
+                        Intent profileIntent = new Intent(mContext, UserProfileActivity.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable("info", temp);
+//                    profileIntent.putExtras(bundle);
+                        profileIntent.putExtra("ID", temp.id);
+                        mContext.startActivity(profileIntent);
+                    }
+                    else
+                    {
+                        Intent profileIntent = new Intent(mContext, TruckProfileActivity.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable("info", temp);
+//                    profileIntent.putExtras(bundle);
+                        profileIntent.putExtra("ID", temp.id);
+                        mContext.startActivity(profileIntent);
+                    }
                 }
             }
         });

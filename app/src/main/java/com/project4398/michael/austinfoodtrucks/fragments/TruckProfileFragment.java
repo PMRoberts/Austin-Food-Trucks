@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.project4398.michael.austinfoodtrucks.AWSInterface;
 import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.TruckInfo;
 
@@ -36,7 +37,8 @@ public class TruckProfileFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        mInfo = (TruckInfo)getArguments().getSerializable("info");
+        //mInfo = (TruckInfo)getArguments().getSerializable("info");
+        mInfo = AWSInterface.getPlayer().getTruckByID(getArguments().getInt("ID", 0));
 
         mContext = getActivity();
     }
@@ -46,7 +48,7 @@ public class TruckProfileFragment extends Fragment
         super.onResume();
     }
 
-    @Override @SuppressLint("NewApi")
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.fragment_truck_profile, container, false);

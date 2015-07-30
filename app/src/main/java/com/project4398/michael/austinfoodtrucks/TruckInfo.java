@@ -22,4 +22,24 @@ public class TruckInfo implements Serializable
     public double latitude = 0.0;
     public double longitude = 0.0;
     public ArrayList<menuItem> menu;
+    private String UserID;
+    private String Password;
+
+    public boolean CheckCredentials(String UID, String password)
+    {
+        if (UserID.equals(UID) && Password.equals(password))
+        {
+            return true;
+        }
+        return false;
+    }
+    public void setUserID(String id)
+    {
+        UserID = id;
+    }
+    public void setPassword(String password)
+    {
+        Password = password;
+    }
+
 }

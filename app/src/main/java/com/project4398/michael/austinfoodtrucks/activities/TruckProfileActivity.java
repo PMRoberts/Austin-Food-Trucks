@@ -13,6 +13,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.project4398.michael.austinfoodtrucks.AWSInterface;
 import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.TruckInfo;
 import com.project4398.michael.austinfoodtrucks.fragments.MenuFragment;
@@ -24,7 +25,8 @@ import com.project4398.michael.austinfoodtrucks.fragments.TruckProfileFragment;
 public class TruckProfileActivity extends AppCompatActivity
 {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    public TruckInfo info;
+    public TruckInfo mInfo;
+
 
 
     @Override
@@ -33,9 +35,12 @@ public class TruckProfileActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
+        mInfo = AWSInterface.getPlayer().getTruckByID(intent.getIntExtra("ID", 0));
+        //Bundle bundle = new Bundle();
+        //bundle.putInt("ID", intent.getIntExtra("ID", 0));
 
 
-        info = (TruckInfo)bundle.getSerializable("info");
+//        mInfo = (TruckInfo)bundle.getSerializable("info");
 
         setContentView(R.layout.activity_truck_profile);
 
@@ -50,11 +55,10 @@ public class TruckProfileActivity extends AppCompatActivity
 
         Fragment newFragment2 = new MenuFragment().newFragment();
         FragmentTransaction ft2 = getFragmentManager().beginTransaction();
-        Bundle bundle2 = new Bundle();
-        bundle2.putSerializable("menu", info.menu);
-        newFragment2.setArguments(bundle2);
+        newFragment2.setArguments(bundle);
         ft2.add(R.id.MenuContainer, newFragment2).commit();
     }
+
 
     @Override
     protected void onResume()
@@ -102,10 +106,10 @@ public class TruckProfileActivity extends AppCompatActivity
     private void setUpMap() {
 
         //mMap.setMyLocationEnabled(true);
-        mMap.addMarker(new MarkerOptions().position(new LatLng(info.latitude, info.longitude)).title("Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(mInfo.latitude, mInfo.longitude)).title("Marker"));
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(info.latitude, info.longitude))      // Sets the center of the map to Mountain View
+                .target(new LatLng(mInfo.latitude, mInfo.longitude))      // Sets the center of the map to Mountain View
                 .zoom(17)                   // Sets the zoom
                 .bearing(0)                // Sets the orientation of the camera to east
                 .tilt(0)                   // Sets the tilt of the camera to 30 degrees

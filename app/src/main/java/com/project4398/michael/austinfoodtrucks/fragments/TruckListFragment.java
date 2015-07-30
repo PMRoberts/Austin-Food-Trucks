@@ -55,12 +55,10 @@ public class TruckListFragment extends Fragment implements LocationListener
         mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
 
-        if(AWSInterface.getPlayer() == null)
-        {
-            AWSInterface.setPlayer(new AWSInterface(mContext));
-        }
+
         s3Interface = AWSInterface.getPlayer();
-        TLITemp = s3Interface.DownloadItem();
+        //TLITemp = s3Interface.mTruckList;
+        TLITemp = AWSInterface.getPlayer().mTruckList;
 
     }
     @Override
@@ -91,7 +89,7 @@ public class TruckListFragment extends Fragment implements LocationListener
         {
             if (songList.size() == 0)
             {
-                matrixCursor.addRow(new String[]{"" + 1, null, null, null, null});
+                matrixCursor.addRow(new String[]{"" + 1, null, null, null, null, null, null});
             } else {
                 for (int x = 0; x < songList.size(); x++)
                 {

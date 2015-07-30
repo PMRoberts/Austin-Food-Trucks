@@ -47,7 +47,7 @@ public class TruckListActivity extends AppCompatActivity {
             case R.id.action_settings:
                 return true;
             case R.id.action_Login:
-                Intent profileIntent = new Intent(this, TruckProfileActivity.class);
+                Intent profileIntent = new Intent(this, LoginActivity.class);
                 this.startActivity(profileIntent);
                 return true;
         }

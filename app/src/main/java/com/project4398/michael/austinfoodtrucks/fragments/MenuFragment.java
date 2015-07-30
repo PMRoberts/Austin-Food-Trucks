@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.project4398.michael.austinfoodtrucks.AWSInterface;
 import com.project4398.michael.austinfoodtrucks.ExpandableHeightGridView;
 import com.project4398.michael.austinfoodtrucks.MenuAdapter;
 import com.project4398.michael.austinfoodtrucks.R;
@@ -37,7 +38,7 @@ public class MenuFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         mMenu = new ArrayList<menuItem>();
-        mMenu = (ArrayList<menuItem>)getArguments().getSerializable("menu");
+        mMenu = AWSInterface.getPlayer().getTruckByID(getArguments().getInt("ID", 0)).menu;
         mContext = getActivity();
     }
     @Override

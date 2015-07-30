@@ -1,6 +1,7 @@
 package com.project4398.michael.austinfoodtrucks;
 
 import android.content.Context;
+import android.widget.Button;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
@@ -25,11 +26,13 @@ public class AWSInterface
     public static AWSInterface getPlayer(){return mAWSInterface;}
     /* Singleton End */
 
-    String bucket_name;
-    CognitoCachingCredentialsProvider credentialsProvider;
-    AmazonS3Client s3Client;
-    TransferUtility transferUtility;
-    Context mContext;
+    private String bucket_name;
+    private CognitoCachingCredentialsProvider credentialsProvider;
+    private AmazonS3Client s3Client;
+    private TransferUtility transferUtility;
+    private Context mContext;
+    public static ArrayList<TruckInfo> mTruckList;
+    public int ownersTruckID = -1;
 
     public AWSInterface(Context context)
     {
@@ -44,6 +47,7 @@ public class AWSInterface
 
         s3Client = new AmazonS3Client(credentialsProvider);
         transferUtility = new TransferUtility(s3Client, context);
+        mTruckList = new ArrayList<TruckInfo>();
     }
 
     /**
@@ -71,7 +75,7 @@ public class AWSInterface
     }
 
 
-    public ArrayList<TruckInfo> DownloadItem()
+    public void DownloadList()
     {
         ArrayList<TruckInfo> TLITemp;
         ArrayList<menuItem> menuTemp;
@@ -181,6 +185,8 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
         TLITemp.get(TLITemp.size()-1).latitude = 30.24989235;
         TLITemp.get(TLITemp.size()-1).longitude = -97.74950266;
+        TLITemp.get(TLITemp.size()-1).setUserID("a");
+        TLITemp.get(TLITemp.size()-1).setPassword("1234");
 
 
         TLITemp.add(new TruckInfo());
@@ -197,6 +203,8 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
         TLITemp.get(TLITemp.size()-1).latitude = 30.2597715;
         TLITemp.get(TLITemp.size()-1).longitude = -97.75454521;
+        TLITemp.get(TLITemp.size()-1).setUserID("b");
+        TLITemp.get(TLITemp.size()-1).setPassword("1234");
 
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "burgs";
@@ -210,6 +218,8 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
         TLITemp.get(TLITemp.size()-1).latitude = 30.25261709;
         TLITemp.get(TLITemp.size()-1).longitude = -97.75918007;
+        TLITemp.get(TLITemp.size()-1).setUserID("c");
+        TLITemp.get(TLITemp.size()-1).setPassword("1234");
 
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "dfasf";
@@ -224,6 +234,8 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
         TLITemp.get(TLITemp.size()-1).latitude = 30.26416397;
         TLITemp.get(TLITemp.size()-1).longitude = -97.76353598;
+        TLITemp.get(TLITemp.size()-1).setUserID("d");
+        TLITemp.get(TLITemp.size()-1).setPassword("1234");
 
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "food and stuff";
@@ -238,6 +250,8 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
         TLITemp.get(TLITemp.size()-1).latitude = 30.24327481;
         TLITemp.get(TLITemp.size()-1).longitude = -97.78186083;
+        TLITemp.get(TLITemp.size()-1).setUserID("e");
+        TLITemp.get(TLITemp.size()-1).setPassword("1234");
 
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "t";
@@ -251,8 +265,45 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).phoneNumber = "1-800-382-5968";
         TLITemp.get(TLITemp.size()-1).latitude = 30.22625621;
         TLITemp.get(TLITemp.size()-1).longitude = -97.76237726;
+        TLITemp.get(TLITemp.size()-1).setUserID("f");
+        TLITemp.get(TLITemp.size()-1).setPassword("1234");
 
-        return TLITemp;
+        mTruckList = TLITemp;
+    }
 
+    public TruckInfo getTruckByID(int ID)
+    {
+        for (int x = 0; x < mTruckList.size(); x++)
+        {
+            if (mTruckList.get(x).id == ID)
+            {
+                return mTruckList.get(x);
+            }
+        }
+        return null;
+    }
+
+    public void EditTruckByID(TruckInfo newInfo)
+    {
+        for (int x = 0; x < mTruckList.size(); x++)
+        {
+            if (mTruckList.get(x).id == newInfo.id)
+            {
+                mTruckList.set(x, newInfo);
+            }
+        }
+    }
+
+    public Boolean CheckCredentials(String id, String password)
+    {
+        for (int x = 0; x < mTruckList.size(); x++)
+        {
+            if (mTruckList.get(x).CheckCredentials(id, password))
+            {
+                ownersTruckID = mTruckList.get(x).id;
+                return true;
+            }
+        }
+        return false;
     }
 }
