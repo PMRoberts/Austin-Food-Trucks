@@ -89,7 +89,11 @@ public class TruckProfileActivity extends AppCompatActivity
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
-            mMap.setMyLocationEnabled(true);
+            //mMap.setMyLocationEnabled(true); @todo Maybe turn this back on troubleshooting an error that keeps happening.
+            //This errror
+            //98.michael.austinfoodtrucks/com.project4398.michael.austinfoodtrucks.activities.TruckProfileActivity}:
+            // java.lang.NullPointerException: Attempt to invoke virtual method
+            // 'void com.google.android.gms.maps.GoogleMap.setMyLocationEnabled(boolean)
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();

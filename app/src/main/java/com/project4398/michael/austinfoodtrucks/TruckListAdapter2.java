@@ -66,7 +66,8 @@ public class TruckListAdapter2 extends ArrayAdapter<TruckInfo> implements Locati
 
         TextView textView3 = (TextView) rowView.findViewById(R.id.TruckInfoDistance);
         float[] tempfloat = new float[2];
-        location.distanceBetween(location.getLatitude(), location.getLongitude(), mValues[position].latitude, mValues[position].longitude, tempfloat);
+        //@todo I commented out this line to get the app to work.
+        //location.distanceBetween(location.getLatitude(), location.getLongitude(), mValues[position].latitude, mValues[position].longitude, tempfloat);
         textView3.setText("" + (Math.round((tempfloat[0]*0.000621371) * 100.0) / 100.0));
 
         ImageView imageView2 = (ImageView) rowView.findViewById(R.id.TruckInfoFavorite);
