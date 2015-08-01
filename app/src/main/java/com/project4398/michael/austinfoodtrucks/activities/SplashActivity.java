@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +14,7 @@ import com.project4398.michael.austinfoodtrucks.AWSInterface;
 import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.TruckInfo;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 
 /**
@@ -27,6 +30,18 @@ public class SplashActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+//        if(!isNetworkConnected())
+//        {
+//            finish();
+//        }
+//        else
+//        {
+//            if(!isInternetAvailable())
+//            {
+//                finish();
+//            }
+//        }
 
         mContext = this;
 
@@ -77,6 +92,32 @@ public class SplashActivity extends Activity
             //finish();
         }
 
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
+
+            if (ipAddr.equals("")) {
+                return false;
+            } else {
+                return true;
+            }
+
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        if (ni == null) {
+            // There are no active networks.
+            return false;
+        } else
+            return true;
     }
 
 }
