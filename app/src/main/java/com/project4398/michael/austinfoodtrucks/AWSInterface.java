@@ -1,16 +1,39 @@
 package com.project4398.michael.austinfoodtrucks;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.widget.Button;
 
+import com.amazonaws.ClientConfiguration;
+import com.amazonaws.Protocol;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+
+
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.*;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
+import com.amazonaws.services.s3.model.Bucket;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 /**
  * Created by PRoberts on 7/29/15.
@@ -34,10 +57,13 @@ public class AWSInterface
     public static ArrayList<TruckInfo> mTruckList;
     public int ownersTruckID = -1;
 
+
+
+
     public AWSInterface(Context context)
     {
         mContext = context;
-        bucket_name = "grp3.tsstate.edu.test";
+        bucket_name = "grp3.txstate.edu.test";//@todo make sure ths works....
         // Initialize the Amazon Cognito credentials provider
         credentialsProvider = new CognitoCachingCredentialsProvider(
                 context, //
@@ -50,6 +76,7 @@ public class AWSInterface
         mTruckList = new ArrayList<TruckInfo>();
     }
 
+
     /**
      * Uploads one item to the S3 bucket declared by bucket_name
      * </p>
@@ -58,9 +85,21 @@ public class AWSInterface
      * Creates a new credetials provider..
      * @param item which is a TruckListInfo
      */
-    public void UploadItem(TruckInfo item)
+    public void UploadItems(ArrayList<TruckInfo> item)
     {
-        TransferObserver observer = transferUtility.upload(bucket_name, item.name, createFile(item));
+
+        String filename = "ArrayList.ser";
+        FileOutputStream outputStream;
+        try{
+            File file = new File(filename);
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(item);
+            TransferObserver observer = transferUtility.upload(bucket_name, "ArrayList.ser", file);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -74,12 +113,67 @@ public class AWSInterface
         return file;
     }
 
+    public void DownloadItems(){
+        TruckInfo Temporary_trucklistinfo = new TruckInfo();
+        String filename = "ArrayList.ser";
+        FileOutputStream outputStream;
+        try{
+            File file = new File("downloadedArray");
+            TransferObserver observer = transferUtility.download(bucket_name, "ArrayList.ser", file);
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ois.readObject();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     public void DownloadList()
     {
+        AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
+
+        String accessKey = "AKIAJAVNV4LQ3AUCEPAA";
+        String secretKey = "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";
+        AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+
+        ClientConfiguration clientConfig = new ClientConfiguration();
+        clientConfig.setProtocol(Protocol.HTTP);
+
+        AmazonS3 conn = new AmazonS3Client(credentials, clientConfig);
+        conn.setEndpoint("endpoint.com");
+
+
+        mTruckList = CreateRandomInput();
+        String JsonToUpload = saveToJSON(mTruckList);
+
+
+        Bucket bucket = conn.createBucket("my-new-bucket");
+
+        ByteArrayInputStream input = new ByteArrayInputStream(JsonToUpload.getBytes());
+        conn.putObject(bucket.getName(), "TruckList", input,new ObjectMetadata());
+
+    }
+
+    /**
+     * Saves the to a JSON file the object that is the truck list.
+     * @param inv
+     */
+    public String saveToJSON(ArrayList<TruckInfo> inv){
+        Gson gson = new Gson();
+        String json = gson.toJson(inv);
+        return  json;
+    }
+
+    /**
+     * Lets fill this thing up with some data.
+     * @return
+     */
+    public ArrayList<TruckInfo> CreateRandomInput(){
         ArrayList<TruckInfo> TLITemp;
         ArrayList<menuItem> menuTemp;
         ArrayList<menuItem> menuTemp2;
+
 
         TLITemp = new ArrayList<TruckInfo>();
         menuTemp = new ArrayList<menuItem>();
@@ -170,9 +264,6 @@ public class AWSInterface
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
 
-
-
-
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "bob";
         TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
@@ -187,7 +278,6 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).longitude = -97.74950266;
         TLITemp.get(TLITemp.size()-1).setUserID("a");
         TLITemp.get(TLITemp.size()-1).setPassword("1234");
-
 
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "trucin";
@@ -267,10 +357,8 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).longitude = -97.76237726;
         TLITemp.get(TLITemp.size()-1).setUserID("f");
         TLITemp.get(TLITemp.size()-1).setPassword("1234");
-
-        mTruckList = TLITemp;
-    }
-
+        return TLITemp;
+}
     public TruckInfo getTruckByID(int ID)
     {
         for (int x = 0; x < mTruckList.size(); x++)
