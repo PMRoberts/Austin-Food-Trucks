@@ -56,7 +56,15 @@ public class TruckListAdapter2 extends ArrayAdapter<TruckInfo> implements Locati
         View rowView = inflater.inflate(R.layout.adapter_truck_list, parent, false);
 
         ImageView imageView = (ImageView) rowView.findViewById(R.id.TruckInfoImage);
-        imageView.setImageResource(R.drawable.splash_icon);
+        if(mValues[position].image != null) {
+            imageView.setImageDrawable(mValues[position].image);
+        }
+        else
+        {
+            imageView.setImageResource(R.drawable.splash_icon);
+        }
+
+        //imageView.setImageResource(R.drawable.splash_icon);
 
         TextView textView = (TextView) rowView.findViewById(R.id.TruckInfoName);
         textView.setText(mValues[position].name);

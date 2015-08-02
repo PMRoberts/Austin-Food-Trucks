@@ -66,7 +66,14 @@ public class TruckProfileFragment extends Fragment
         mAbout.setText(mInfo.about);
         mPhoneNumber.setText(mInfo.phoneNumber);
 
-        mImage.setImageResource(R.drawable.splash_icon);
+        if(mInfo.image != null)
+        {
+            mImage.setImageDrawable(mInfo.image);
+        }
+        else
+        {
+            mImage.setImageResource(R.drawable.splash_icon);
+        }
 
         return rootView;
     }

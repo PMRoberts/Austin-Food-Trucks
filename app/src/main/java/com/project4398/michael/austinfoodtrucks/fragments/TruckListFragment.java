@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class TruckListFragment extends Fragment implements LocationListener
 {
     private Context mContext;
-    TruckListAdapter mAdapter;
+    //TruckListAdapter mAdapter;
     private TruckListAdapter2 mAdapter2;
     private ListView mTruckList;
     public static ArrayList<TruckInfo> TLITemp;
@@ -47,7 +47,7 @@ public class TruckListFragment extends Fragment implements LocationListener
     {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
-        mAdapter = new TruckListAdapter(mContext, null);
+        //mAdapter = new TruckListAdapter(mContext, null);
 
 
         mLocationManager = (LocationManager)mContext.getSystemService(Context.LOCATION_SERVICE);

@@ -1,9 +1,15 @@
 package com.project4398.michael.austinfoodtrucks.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +23,7 @@ import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.TruckInfo;
 import com.project4398.michael.austinfoodtrucks.activities.UserProfileActivity;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -32,6 +39,7 @@ public class EditUserInfoFragment extends Fragment
     private EditText mAbout;
     private ImageView mImage;
     private Button mSave;
+    private Button mChooseNewImageButton;
 
     public EditUserInfoFragment newFragment()
     {
@@ -66,6 +74,7 @@ public class EditUserInfoFragment extends Fragment
         mTypes = (EditText)rootView.findViewById(R.id.EditTruckTypes);
         mAbout = (EditText)rootView.findViewById(R.id.EditTruckInfo);
         mSave = (Button)rootView.findViewById(R.id.SaveShit);
+        mChooseNewImageButton = (Button)rootView.findViewById(R.id.ChooseNewImageButton);
 
         if(mInfo != null)
         {
@@ -77,7 +86,14 @@ public class EditUserInfoFragment extends Fragment
             mAbout.setText(mInfo.about);
             mPhoneNumber.setText(mInfo.phoneNumber);
 
-            mImage.setImageResource(R.drawable.splash_icon);
+            if(mInfo.image != null)
+            {
+                mImage.setImageDrawable(mInfo.image);
+            }
+            else
+            {
+                mImage.setImageResource(R.drawable.splash_icon);
+            }
         }
 
         mSave.setOnClickListener(new View.OnClickListener()
@@ -93,6 +109,7 @@ public class EditUserInfoFragment extends Fragment
                 mInfo.phoneNumber = mPhoneNumber.getText().toString();
                 mInfo.foodType.add(mTypes.getText().toString());
                 mInfo.about = mAbout.getText().toString();
+                mInfo.image = mImage.getDrawable();
 
                 AWSInterface.getPlayer().EditTruckByID(mInfo);
 
@@ -103,7 +120,36 @@ public class EditUserInfoFragment extends Fragment
             }
         });
 
+        mChooseNewImageButton.setOnClickListener(new Button.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 0);
+            }
+        });
+
         return rootView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            Uri targetUri = data.getData();
+            //textTargetUri.setText(targetUri.toString());
+            Bitmap bitmap;
+            try {
+                bitmap = BitmapFactory.decodeStream(mContext.getContentResolver().openInputStream(targetUri));
+                Drawable drawable = new BitmapDrawable(getResources(), bitmap);
+                mImage.setImageDrawable(drawable);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
