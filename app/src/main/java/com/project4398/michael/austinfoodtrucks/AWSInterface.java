@@ -1,6 +1,8 @@
 package com.project4398.michael.austinfoodtrucks;
 
 import android.content.Context;
+import android.util.JsonWriter;
+import android.util.Log;
 import android.widget.Button;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
@@ -8,8 +10,15 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.google.gson.Gson;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 /**
@@ -269,6 +278,44 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).setPassword("1234");
 
         mTruckList = TLITemp;
+
+
+
+        Gson gson =  new Gson();
+        gson.toJson(mTruckList.get(0));
+
+
+        FileOutputStream fos = null;
+        try {
+            fos = mContext.openFileOutput("fileName.txt", Context.MODE_PRIVATE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        ObjectOutputStream os = null;
+        try {
+            os = new ObjectOutputStream(fos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            os.writeObject(gson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        File file = new File("filename.txt");
+
+        //uploadFunction(fos.getChannel());
+
+    }
+
+    public void uploadFunction(File file){
+        TransferObserver observer = transferUtility.upload(bucket_name, "ArrayList.ser",file);
     }
 
     public TruckInfo getTruckByID(int ID)
