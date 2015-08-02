@@ -284,10 +284,12 @@ public class AWSInterface
         Gson gson =  new Gson();
         gson.toJson(mTruckList.get(0));
 
+        File file = new File(mContext.getFilesDir(),"fileName.txt");
 
         FileOutputStream fos = null;
+
         try {
-            fos = mContext.openFileOutput("fileName.txt", Context.MODE_PRIVATE);
+            fos = new FileOutputStream(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -308,13 +310,15 @@ public class AWSInterface
             e.printStackTrace();
         }
 
-        File file = new File("filename.txt");
 
-        //uploadFunction(fos.getChannel());
+
+        uploadFunction(file);
 
     }
 
     public void uploadFunction(File file){
+        //KEep this inmind.
+        //mContext.getFileDir();
         TransferObserver observer = transferUtility.upload(bucket_name, "ArrayList.ser",file);
     }
 
