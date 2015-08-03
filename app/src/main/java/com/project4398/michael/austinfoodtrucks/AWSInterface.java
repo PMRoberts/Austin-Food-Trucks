@@ -107,6 +107,8 @@ public class AWSInterface
         menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
+        menuTemp.get(menuTemp.size()-1).TruckId = 0;
+        menuTemp.get(menuTemp.size()-1).id = 0;
 
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food2";
@@ -114,6 +116,8 @@ public class AWSInterface
         menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
+        menuTemp.get(menuTemp.size()-1).TruckId = 0;
+        menuTemp.get(menuTemp.size()-1).id = 1;
 
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food3";
@@ -121,6 +125,8 @@ public class AWSInterface
         menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
+        menuTemp.get(menuTemp.size()-1).TruckId = 0;
+        menuTemp.get(menuTemp.size()-1).id = 2;
 
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food4";
@@ -128,6 +134,8 @@ public class AWSInterface
         menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
+        menuTemp.get(menuTemp.size()-1).TruckId = 0;
+        menuTemp.get(menuTemp.size()-1).id = 3;
 
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food5";
@@ -135,6 +143,8 @@ public class AWSInterface
         menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
+        menuTemp.get(menuTemp.size()-1).TruckId = 0;
+        menuTemp.get(menuTemp.size()-1).id = 4;
 
 
         menuTemp2.add(new menuItem());
@@ -143,6 +153,8 @@ public class AWSInterface
         menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 0;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "chicken";
@@ -150,6 +162,8 @@ public class AWSInterface
         menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 1;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "lamb";
@@ -157,6 +171,8 @@ public class AWSInterface
         menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 2;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "pig";
@@ -164,6 +180,8 @@ public class AWSInterface
         menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 3;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "fish";
@@ -171,6 +189,8 @@ public class AWSInterface
         menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 4;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "rock";
@@ -178,6 +198,8 @@ public class AWSInterface
         menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 5;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "plant";
@@ -185,6 +207,8 @@ public class AWSInterface
         menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 6;
 
 
 

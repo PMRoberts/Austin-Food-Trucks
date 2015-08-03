@@ -13,6 +13,8 @@ public class menuItem implements Serializable
     public String name;
     public String description;
     public String price;
+    public int TruckId = -1;
+    public int id = -1;
     public boolean inStock;
     public boolean favorite;
 }
