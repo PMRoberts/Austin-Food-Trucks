@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.fragments.EditMenuFragment;
@@ -27,7 +28,7 @@ public class EditMenuActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_edit_menu);
 
-
+        Log.i("stuff", "menu activity");
         Fragment newFragment = new EditMenuFragment().newFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         newFragment.setArguments(bundle);

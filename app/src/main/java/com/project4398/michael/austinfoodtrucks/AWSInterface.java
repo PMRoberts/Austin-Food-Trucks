@@ -287,7 +287,7 @@ public class AWSInterface
         mTruckList = TLITemp;
 
         AmazonS3 s3 =  new AmazonS3Client(credentialsProvider);
-        s3.createBucket("testing.this.fucking.shit.fuck.fuck");
+        //s3.createBucket("testing.this.fucking.shit.fuck.fuck");
 
         //Other stuff.
 //        File file = new File(mContext.getFilesDir(),"fileName.txt");

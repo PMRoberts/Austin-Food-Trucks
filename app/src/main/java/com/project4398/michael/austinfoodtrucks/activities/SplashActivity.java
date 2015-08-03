@@ -50,9 +50,13 @@ public class SplashActivity extends Activity
             AWSInterface.setPlayer(new AWSInterface(this));
         }
         s3Interface = AWSInterface.getPlayer();
+
+//        s3Interface.DownloadList();
+
         new AsyncLoadList().execute();
 
-
+//        Intent profileIntent = new Intent(mContext, TruckListActivity.class);
+//        mContext.startActivity(profileIntent);
     }
     private class AsyncLoadList extends AsyncTask<Void, Void, Void>
     {

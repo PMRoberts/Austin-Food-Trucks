@@ -40,9 +40,9 @@ public class EditMenuFragment extends Fragment
     private Button mSave;
     private Button mChooseNewImageButton;
 
-    public EditUserInfoFragment newFragment()
+    public EditMenuFragment newFragment()
     {
-        EditUserInfoFragment fragment = new EditUserInfoFragment();
+        EditMenuFragment fragment = new EditMenuFragment();
         return fragment;
     }
 

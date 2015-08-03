@@ -90,22 +90,27 @@ public class TruckListAdapter2 extends ArrayAdapter<TruckInfo> implements Locati
         }
         final TruckInfo temp = mValues[position];
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (temp != null) {
-                if (AWSInterface.getPlayer().ownersTruckID == temp.id) {
-                    Intent profileIntent = new Intent(mContext, UserProfileActivity.class);
-                    profileIntent.putExtra("ID", temp.id);
-                    mContext.startActivity(profileIntent);
-                } else {
-                    Intent profileIntent = new Intent(mContext, TruckProfileActivity.class);
-                    profileIntent.putExtra("ID", temp.id);
-                    mContext.startActivity(profileIntent);
+        imageView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (temp != null)
+                {
+                    if (AWSInterface.getPlayer().ownersTruckID == temp.id)
+                    {
+                        Intent profileIntent = new Intent(mContext, UserProfileActivity.class);
+                        profileIntent.putExtra("ID", temp.id);
+                        mContext.startActivity(profileIntent);
+                    } else
+                    {
+                        Intent profileIntent = new Intent(mContext, TruckProfileActivity.class);
+                        profileIntent.putExtra("ID", temp.id);
+                        mContext.startActivity(profileIntent);
+                    }
                 }
             }
-        }
-    });
+        });
 
         return rowView;
     }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.project4398.michael.austinfoodtrucks.SquareView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.project4398.michael.austinfoodtrucks.SquareView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/MenuItemRoot"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,24 +11,24 @@
         android:id="@+id/MenuItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
         android:textSize="30sp"
         android:text="hello"/>
-    <TextView
-        android:id="@+id/MenuItemDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:textSize="30sp"
-        android:layout_below="@+id/MenuItemName"
-        android:text="dexq"/>
+
     <TextView
         android:id="@+id/MenuItemPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:textSize="30sp"
-        android:layout_below="@+id/MenuItemDescription"
         android:text="$$$$$$$$"/>
+    <ImageView
+        android:id="@+id/MenuItemImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/MenuItemName"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/MenuItemPrice"/>
 
 </com.project4398.michael.austinfoodtrucks.SquareView>
