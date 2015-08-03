@@ -93,6 +93,18 @@ public class UserProfileActivity extends AppCompatActivity
                 //finish();
             }
         });
+        mEditMenu = (Button)findViewById(R.id.EditMenuButton);
+        mEditMenu.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent profileIntent = new Intent(mContext, EditMenuActivity.class);
+                profileIntent.putExtra("ID", mInfo.id);
+                mContext.startActivity(profileIntent);
+                //finish();
+            }
+        });
 
 
 

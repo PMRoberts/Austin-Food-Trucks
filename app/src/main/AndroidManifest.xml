@@ -66,6 +66,10 @@
             android:name=".activities.NewUserActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".activities.EditMenuActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

@@ -17,7 +17,6 @@ public class MenuAdapter extends ArrayAdapter<menuItem>
 
     private Context mContext;
     private final menuItem[] mValues;
-    NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
     public MenuAdapter(Context context, menuItem[] values)
     {
@@ -41,8 +40,7 @@ public class MenuAdapter extends ArrayAdapter<menuItem>
         TextView textView2 = (TextView) rowView.findViewById(R.id.MenuItemDescription);
         textView2.setText(mValues[position].description);
         TextView textView3 = (TextView) rowView.findViewById(R.id.MenuItemPrice);
-        String output = formatter.format(mValues[position].price);
-        textView3.setText(output);
+        textView3.setText(mValues[position].price);
 
         return rowView;
     }

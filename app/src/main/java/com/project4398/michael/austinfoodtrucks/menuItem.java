@@ -1,5 +1,7 @@
 package com.project4398.michael.austinfoodtrucks;
 
+import android.graphics.drawable.Drawable;
+
 import java.io.Serializable;
 
 /**
@@ -7,10 +9,10 @@ import java.io.Serializable;
  */
 public class menuItem implements Serializable
 {
-    public String image;
+    public Drawable image;
     public String name;
     public String description;
-    public float price;
+    public String price;
     public boolean inStock;
     public boolean favorite;
 }

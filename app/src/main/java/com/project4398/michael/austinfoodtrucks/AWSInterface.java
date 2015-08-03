@@ -103,35 +103,35 @@ public class AWSInterface
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food1";
         menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
 
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food2";
         menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
 
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food3";
         menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
 
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food4";
         menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
 
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food5";
         menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
 
@@ -139,49 +139,49 @@ public class AWSInterface
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "cow";
         menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "chicken";
         menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "lamb";
         menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "pig";
         menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "fish";
         menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "rock";
         menuTemp2.get(menuTemp2.size()-1).description = "it is not edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "plant";
         menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
 
