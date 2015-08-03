@@ -296,10 +296,26 @@ public class AWSInterface
 
 
 
+        //Iterates throught the array list to upload.
+        for(int i = 0; i < mTruckList.size();i++){
+            uploadItem(mTruckList.get(i));
+        }
 
+
+//        s3Client.getObject(
+//                new GetObjectRequest(Bucket_Curr, "letsTry"),
+//                new File("downloadedTruck.ser")
+//        );
+
+//        File fileD = new File("downloadedTruck.ser");
+//        TruckInfo itemDownloaded = fromJson(fileD);
+        //transferUtility.upload(bucket_name, "ArrayList.ser",file);
+    }
+
+    public void uploadItem(TruckInfo itemToUpload) {
         File file = new File(mContext.getFilesDir(),"fileName.txt");
         FileOutputStream fos = null;
-        JSONObject TruckItemJson = toJsonAndBeyond(mTruckList.get(0));
+        JSONObject TruckItemJson = toJsonAndBeyond(itemToUpload);
         //
         try {
             fos = new FileOutputStream(file);
@@ -327,20 +343,10 @@ public class AWSInterface
                 "AKIAJL2EY65OZGTME4SA",
                 "XkFG0M28GpE7/x2h0w5nE8rME/v0LsTr1O8s3SRc") );
         String Bucket_Curr = "group3.txstate.1217";
-        s3Client.createBucket(Bucket_Curr);
+        //s3Client.createBucket(Bucket_Curr);
 
-        PutObjectRequest por = new PutObjectRequest( Bucket_Curr, "LetsTry", file );
+        PutObjectRequest por = new PutObjectRequest( Bucket_Curr, itemToUpload.name, file );
         s3Client.putObject(por);
-
-
-        s3Client.getObject(
-                new GetObjectRequest(Bucket_Curr, "letsTry"),
-                new File("downloadedTruck.ser")
-        );
-
-        File fileD = new File("downloadedTruck.ser");
-        TruckInfo itemDownloaded = fromJson(fileD);
-        //transferUtility.upload(bucket_name, "ArrayList.ser",file);
     }
 
     /**
@@ -348,6 +354,7 @@ public class AWSInterface
      * @param item
      * @return converted json objet.
      */
+
     public JSONObject toJsonAndBeyond(TruckInfo item){
         JSONObject obj = new JSONObject();
         try {
@@ -373,6 +380,7 @@ public class AWSInterface
      */
     public TruckInfo fromJson(File file){
         TruckInfo item = new TruckInfo();
+        JSONObject obj = new JSONObject();
 
         return item;
     }
