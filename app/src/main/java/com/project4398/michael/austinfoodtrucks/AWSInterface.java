@@ -6,12 +6,16 @@ import android.util.JsonWriter;
 import android.util.Log;
 import android.widget.Button;
 
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.internal.Constants;
+import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -310,59 +314,91 @@ public class AWSInterface
 
         mTruckList = TLITemp;
 
-        AmazonS3 s3 =  new AmazonS3Client(credentialsProvider);
-        //s3.createBucket("testing.this.fucking.shit.fuck.fuck");
-
-        //Other stuff.
-//        File file = new File(mContext.getFilesDir(),"fileName.txt");
-//        FileOutputStream fos = null;
-//        JSONObject TruckItemJson = toJsonAndBeyond(mTruckList.get(0));
-//        //
-//        try {
-//            fos = new FileOutputStream(file);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        ObjectOutputStream os = null;
-//        try {
-//            os = new ObjectOutputStream(fos);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            os.writeObject(TruckItemJson);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            os.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
 
+
+
+
+
+
+        File file = new File(mContext.getFilesDir(),"fileName.txt");
+        FileOutputStream fos = null;
+        JSONObject TruckItemJson = toJsonAndBeyond(mTruckList.get(0));
+        //
+        try {
+            fos = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        ObjectOutputStream os = null;
+        try {
+            os = new ObjectOutputStream(fos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            os.writeObject(TruckItemJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials(
+                "AKIAJL2EY65OZGTME4SA",
+                "XkFG0M28GpE7/x2h0w5nE8rME/v0LsTr1O8s3SRc") );
+        String Bucket_Curr = "group3.txstate.1217";
+        s3Client.createBucket(Bucket_Curr);
+
+        PutObjectRequest por = new PutObjectRequest( Bucket_Curr, "LetsTry", file );
+        s3Client.putObject(por);
+
+
+        s3Client.getObject(
+                new GetObjectRequest(Bucket_Curr, "letsTry"),
+                new File("downloadedTruck.ser")
+        );
+
+        File fileD = new File("downloadedTruck.ser");
+        TruckInfo itemDownloaded = fromJson(fileD);
         //transferUtility.upload(bucket_name, "ArrayList.ser",file);
     }
-    public void toJsonAndBeyond(TruckInfo item){
-//        JSONObject obj = new JSONObject();
-//        try {
-//            obj.put("name", item.name.toString());
-//            obj.put("imageUrl", "------");
-//            obj.put("Description",  "about us");
-//            obj.put("distance", item.distance);
-//            obj.put("favorite", item.favorite);
-//            obj.put("latitude", item.latitude);
-//            obj.put("longitude", item.longitude);
-//            obj.put("UserID", "UserID");
-//            obj.put("Password", "Password");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//        AmazonS3 s3 =  new AmazonS3Client(credentialsProvider);
-//        s3.createBucket("testing.this.fucking.shit.fuck.fuck");
-//        return obj;
+
+    /**
+     * Convets given item into a json item and returns the JSON object
+     * @param item
+     * @return converted json objet.
+     */
+    public JSONObject toJsonAndBeyond(TruckInfo item){
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("name", item.name.toString());
+            obj.put("imageUrl", "------");
+            obj.put("Description",  "about us");
+            obj.put("distance", item.distance);
+            obj.put("favorite", item.favorite);
+            obj.put("latitude", item.latitude);
+            obj.put("longitude", item.longitude);
+            obj.put("UserID", "UserID");
+            obj.put("Password", "Password");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
+    /**
+     * Converts the given file to a Json and returns it as an item.
+     * @param file the file that will be converted in JSON
+     * @return the item contained the transformed file
+     */
+    public TruckInfo fromJson(File file){
+        TruckInfo item = new TruckInfo();
+
+        return item;
     }
 
     public void uploadFunction(File file){
