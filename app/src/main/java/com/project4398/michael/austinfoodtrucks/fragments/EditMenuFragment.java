@@ -33,6 +33,7 @@ public class EditMenuFragment extends Fragment
 {
     private Context mContext;
     private TruckInfo mInfo;
+    private menuItem mMenuItem;
     private EditText mName;
     private EditText mAbout;
     private EditText mPrice;
@@ -52,6 +53,10 @@ public class EditMenuFragment extends Fragment
         super.onCreate(savedInstanceState);
         if(getArguments() != null) {
             mInfo = AWSInterface.getPlayer().getTruckByID(getArguments().getInt("ID"));
+            if(getArguments().getInt("MenuID", -1) >= 0)
+            {
+                mMenuItem = mInfo.menu.get(getArguments().getInt("MenuID", -1));
+            }
         }
 
         mContext = getActivity();
@@ -74,34 +79,45 @@ public class EditMenuFragment extends Fragment
         mSave = (Button)rootView.findViewById(R.id.SaveShit);
         mChooseNewImageButton = (Button)rootView.findViewById(R.id.ChooseNewImageButton);
 
-//        if(mInfo != null)
-//        {
-//            if(!mInfo.menu.isEmpty())
-//            {
-//                mName.setText(mInfo.menu.get());
-//                mAbout.setText(mInfo.about);
-//                mPrice.getText();
-//                if (mInfo.image != null)
-//                {
-//                    mImage.setImageDrawable(mInfo.image);
-//                }
-//                else
-//                {
-//                    mImage.setImageResource(R.drawable.splash_icon);
-//                }
-//            }
-//        }
+        if(mMenuItem != null)
+        {
+            mName.setText(mMenuItem.name);
+            mAbout.setText(mMenuItem.description);
+            mPrice.setText(mMenuItem.price);
+            if (mMenuItem.image != null)
+            {
+                mImage.setImageDrawable(mMenuItem.image);
+            }
+            else
+            {
+                mImage.setImageResource(R.drawable.splash_icon);
+            }
+        }
 
         mSave.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                mInfo.menu.add(new menuItem());
-                mInfo.menu.get(mInfo.menu.size()-1).name = mName.getText().toString();
-                mInfo.menu.get(mInfo.menu.size()-1).description = mAbout.getText().toString();
-                mInfo.menu.get(mInfo.menu.size()-1).price = mPrice.getText().toString();
-                mInfo.menu.get(mInfo.menu.size()-1).image = mImage.getDrawable();
+                if(mMenuItem != null)
+                {
+                    mMenuItem.name = mName.getText().toString();
+                    mMenuItem.description = mAbout.getText().toString();
+                    mMenuItem.price = mPrice.getText().toString();
+                    mMenuItem.image = mImage.getDrawable();
+                    mInfo.menu.set(mMenuItem.id, mMenuItem);
+                }
+                else
+                {
+                    mMenuItem = new menuItem();
+                    mMenuItem.name = mName.getText().toString();
+                    mMenuItem.description = mAbout.getText().toString();
+                    mMenuItem.price = mPrice.getText().toString();
+                    mMenuItem.image = mImage.getDrawable();
+                    mMenuItem.id = mInfo.menu.size();
+                    mMenuItem.TruckId = mInfo.id;
+                    mInfo.menu.add(mMenuItem);
+                }
 
                 AWSInterface.getPlayer().EditTruckByID(mInfo);
 
