@@ -366,9 +366,8 @@ public class AWSInterface
         AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials(
                 "AKIAJL2EY65OZGTME4SA",
                 "XkFG0M28GpE7/x2h0w5nE8rME/v0LsTr1O8s3SRc") );
-        String Bucket_Curr = "group3.txstate.1217";
-
-        //s3Client.createBucket(Bucket_Curr);
+        String Bucket_Curr = "group3.txstate.1250";
+        s3Client.createBucket(Bucket_Curr);
 
         PutObjectRequest por = new PutObjectRequest( Bucket_Curr, itemToUpload.name, file );
         s3Client.putObject(por);
