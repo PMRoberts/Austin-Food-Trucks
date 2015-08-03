@@ -10,6 +10,7 @@ import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.google.gson.Gson;
 
@@ -285,62 +286,64 @@ public class AWSInterface
 
         mTruckList = TLITemp;
 
-
+        AmazonS3 s3 =  new AmazonS3Client(credentialsProvider);
+        s3.createBucket("testing.this.fucking.shit.fuck.fuck");
 
         //Other stuff.
-
-        File file = new File(mContext.getFilesDir(),"fileName.txt");
-
-        FileOutputStream fos = null;
-
-        JSONObject TruckItemJson = toJsonAndBeyond(mTruckList.get(0));
-        //
-        try {
-            fos = new FileOutputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        ObjectOutputStream os = null;
-        try {
-            os = new ObjectOutputStream(fos);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            os.writeObject(TruckItemJson);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            os.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        File file = new File(mContext.getFilesDir(),"fileName.txt");
+//        FileOutputStream fos = null;
+//        JSONObject TruckItemJson = toJsonAndBeyond(mTruckList.get(0));
+//        //
+//        try {
+//            fos = new FileOutputStream(file);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        ObjectOutputStream os = null;
+//        try {
+//            os = new ObjectOutputStream(fos);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            os.writeObject(TruckItemJson);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            os.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 
         //transferUtility.upload(bucket_name, "ArrayList.ser",file);
     }
-    public JSONObject toJsonAndBeyond(TruckInfo item){
-        JSONObject obj = new JSONObject();
-        try {
-            obj.put("name", item.name.toString());
-            obj.put("imageUrl", "------");
-            obj.put("Description",  "about us");
-            obj.put("distance", item.distance);
-            obj.put("favorite", item.favorite);
-            obj.put("latitude", item.latitude);
-            obj.put("longitude", item.longitude);
-            obj.put("UserID", "UserID");
-            obj.put("Password", "Password");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return obj;
+    public void toJsonAndBeyond(TruckInfo item){
+//        JSONObject obj = new JSONObject();
+//        try {
+//            obj.put("name", item.name.toString());
+//            obj.put("imageUrl", "------");
+//            obj.put("Description",  "about us");
+//            obj.put("distance", item.distance);
+//            obj.put("favorite", item.favorite);
+//            obj.put("latitude", item.latitude);
+//            obj.put("longitude", item.longitude);
+//            obj.put("UserID", "UserID");
+//            obj.put("Password", "Password");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        AmazonS3 s3 =  new AmazonS3Client(credentialsProvider);
+//        s3.createBucket("testing.this.fucking.shit.fuck.fuck");
+//        return obj;
     }
 
     public void uploadFunction(File file){
-        //KEep this inmind.
-        //mContext.getFileDir();
+//        KEep this inmind.
+//        mContext.getFileDir();
 
     }
 
