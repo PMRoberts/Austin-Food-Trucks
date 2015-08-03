@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.project4398.michael.austinfoodtrucks.AWSInterface;
 import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckListFragment;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckProfileFragment;
@@ -45,12 +46,24 @@ public class TruckListActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
 
-        switch (id) {
-            case R.id.action_settings:
-                return true;
+        switch (id)
+        {
             case R.id.action_Login:
                 Intent profileIntent = new Intent(this, LoginActivity.class);
                 this.startActivity(profileIntent);
+                //finish();
+                return true;
+            case R.id.action_Logout:
+                if(AWSInterface.getPlayer().ownersTruckID >= 0)
+                {
+                    AWSInterface.getPlayer().ownersTruckID = -1;
+                    Toast.makeText(this,"You Have Successfully Logged Out", Toast.LENGTH_SHORT).show();
+                }
+                //finish();
+                return true;
+            case R.id.action_ShowMap:
+                Intent profileIntent2 = new Intent(this, TruckMapActivity.class);
+                this.startActivity(profileIntent2);
                 //finish();
                 return true;
         }

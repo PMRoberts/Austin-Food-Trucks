@@ -1,8 +1,12 @@
 package com.project4398.michael.austinfoodtrucks;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +78,35 @@ public class MenuAdapter extends ArrayAdapter<menuItem>
 //                    Intent profileIntent = new Intent(mContext, EditMenuActivity.class);
 //                    profileIntent.putExtra("ID", temp);
 //                    mContext.startActivity(profileIntent);
+                    View view = View.inflate(mContext,R.layout.dialog_menu_item,null);
+                    TextView t = (TextView)view.findViewById(R.id.dialogMenuAbout);
+                    t.setText(temp.description);
+                    TextView t2 = (TextView)view.findViewById(R.id.dialogMenuPrice);
+                    t2.setText(temp.price);
+                    ImageView IV = (ImageView)view.findViewById(R.id.dialogMenuImage);
+                    if (temp.image != null)
+                    {
+                        IV.setImageDrawable(temp.image);
+                    }
+                    else
+                    {
+                        IV.setImageResource(R.drawable.splash_icon);
+                    }
+
+                    View view2 = View.inflate(mContext,R.layout.dialog_custom_title,null);
+                    TextView t3 = (TextView)view2.findViewById(R.id.DialogCustomTitle);
+                    t3.setText(temp.name);
+
+                    new AlertDialog.Builder(mContext)
+                            //.setTitle(temp.name)
+                            .setCustomTitle(view2)
+                            .setView(view)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // continue with delete
+                                }
+                            })
+                            .show();
                 }
             }
         });

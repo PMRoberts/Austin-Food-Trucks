@@ -1,10 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".TruckListActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_Logout"
+        android:title="Log Out"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
     <item android:id="@+id/action_Login"
         android:title="Truck Login"
         android:orderInCategory="99"
         app:showAsAction="never" />
+    <item android:id="@+id/action_ShowMap"
+        android:title="Show Map"
+        android:orderInCategory="99"
+        android:icon="@drawable/splash_icon"
+        app:showAsAction="always" />
+
 </menu>
