@@ -24,7 +24,7 @@ public class UploadItem {
      * @param item which is a TruckListInfo
      */
     public UploadItem(TruckInfo item, Context context) {
-        String bucket_name = "grp3.tsstate.edu.test";
+        String bucket_name = "grp3.txstate.edu";
         // Initialize the Amazon Cognito credentials provider
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                 context, //

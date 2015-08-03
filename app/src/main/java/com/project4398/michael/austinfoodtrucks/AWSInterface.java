@@ -52,7 +52,7 @@ public class AWSInterface
     public AWSInterface(Context context)
     {
         mContext = context;
-        bucket_name = "grp3.txstate.edu.test";
+        bucket_name = "grp3.txstate.edu";
         // Initialize the Amazon Cognito credentials provider
         credentialsProvider = new CognitoCachingCredentialsProvider(
                 context, //
@@ -287,7 +287,7 @@ public class AWSInterface
 
 
 
-        //////////////Other stuff.
+        //Other stuff.
 
         File file = new File(mContext.getFilesDir(),"fileName.txt");
 
