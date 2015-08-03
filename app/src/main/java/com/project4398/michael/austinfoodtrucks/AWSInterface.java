@@ -1,6 +1,7 @@
 package com.project4398.michael.austinfoodtrucks;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.JsonWriter;
 import android.util.Log;
 import android.widget.Button;
@@ -11,6 +12,11 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,7 +52,7 @@ public class AWSInterface
     public AWSInterface(Context context)
     {
         mContext = context;
-        bucket_name = "grp3.tsstate.edu.test";
+        bucket_name = "grp3.txstate.edu.test";
         // Initialize the Amazon Cognito credentials provider
         credentialsProvider = new CognitoCachingCredentialsProvider(
                 context, //
@@ -281,13 +287,14 @@ public class AWSInterface
 
 
 
-        Gson gson =  new Gson();
-        gson.toJson(mTruckList.get(0));
+        //////////////Other stuff.
 
         File file = new File(mContext.getFilesDir(),"fileName.txt");
 
         FileOutputStream fos = null;
 
+        JSONObject TruckItemJson = toJsonAndBeyond(mTruckList.get(0));
+        //
         try {
             fos = new FileOutputStream(file);
         } catch (FileNotFoundException e) {
@@ -300,7 +307,7 @@ public class AWSInterface
             e.printStackTrace();
         }
         try {
-            os.writeObject(gson);
+            os.writeObject(TruckItemJson);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -311,15 +318,30 @@ public class AWSInterface
         }
 
 
-
-        uploadFunction(file);
-
+        //transferUtility.upload(bucket_name, "ArrayList.ser",file);
+    }
+    public JSONObject toJsonAndBeyond(TruckInfo item){
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("name", item.name.toString());
+            obj.put("imageUrl", "------");
+            obj.put("Description",  "about us");
+            obj.put("distance", item.distance);
+            obj.put("favorite", item.favorite);
+            obj.put("latitude", item.latitude);
+            obj.put("longitude", item.longitude);
+            obj.put("UserID", "UserID");
+            obj.put("Password", "Password");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
     }
 
     public void uploadFunction(File file){
         //KEep this inmind.
         //mContext.getFileDir();
-        TransferObserver observer = transferUtility.upload(bucket_name, "ArrayList.ser",file);
+
     }
 
     public TruckInfo getTruckByID(int ID)
