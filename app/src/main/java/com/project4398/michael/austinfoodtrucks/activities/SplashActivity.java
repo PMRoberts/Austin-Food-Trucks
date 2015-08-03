@@ -49,10 +49,14 @@ public class SplashActivity extends Activity
         {
             AWSInterface.setPlayer(new AWSInterface(this));
         }
-        s3Interface = AWSInterface.getPlayer().getPlayer();
+        s3Interface = AWSInterface.getPlayer();
+
+//        s3Interface.DownloadList();
+
         new AsyncLoadList().execute();
 
-
+//        Intent profileIntent = new Intent(mContext, TruckListActivity.class);
+//        mContext.startActivity(profileIntent);
     }
     private class AsyncLoadList extends AsyncTask<Void, Void, Void>
     {
@@ -71,7 +75,6 @@ public class SplashActivity extends Activity
 
             //this method will be running on background thread so don't update UI frome here
             //do your long running http tasks here,you dont want to pass argument and u can access the parent class' variable url over here
-
 
             s3Interface.DownloadList();
             try {

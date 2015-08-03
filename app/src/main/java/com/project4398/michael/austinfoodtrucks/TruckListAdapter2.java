@@ -56,7 +56,15 @@ public class TruckListAdapter2 extends ArrayAdapter<TruckInfo> implements Locati
         View rowView = inflater.inflate(R.layout.adapter_truck_list, parent, false);
 
         ImageView imageView = (ImageView) rowView.findViewById(R.id.TruckInfoImage);
-        imageView.setImageResource(R.drawable.splash_icon);
+        if(mValues[position].image != null) {
+            imageView.setImageDrawable(mValues[position].image);
+        }
+        else
+        {
+            imageView.setImageResource(R.drawable.splash_icon);
+        }
+
+        //imageView.setImageResource(R.drawable.splash_icon);
 
         TextView textView = (TextView) rowView.findViewById(R.id.TruckInfoName);
         textView.setText(mValues[position].name);
@@ -83,22 +91,27 @@ public class TruckListAdapter2 extends ArrayAdapter<TruckInfo> implements Locati
         }
         final TruckInfo temp = mValues[position];
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (temp != null) {
-                if (AWSInterface.getPlayer().ownersTruckID == temp.id) {
-                    Intent profileIntent = new Intent(mContext, UserProfileActivity.class);
-                    profileIntent.putExtra("ID", temp.id);
-                    mContext.startActivity(profileIntent);
-                } else {
-                    Intent profileIntent = new Intent(mContext, TruckProfileActivity.class);
-                    profileIntent.putExtra("ID", temp.id);
-                    mContext.startActivity(profileIntent);
+        imageView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (temp != null)
+                {
+                    if (AWSInterface.getPlayer().ownersTruckID == temp.id)
+                    {
+                        Intent profileIntent = new Intent(mContext, UserProfileActivity.class);
+                        profileIntent.putExtra("ID", temp.id);
+                        mContext.startActivity(profileIntent);
+                    } else
+                    {
+                        Intent profileIntent = new Intent(mContext, TruckProfileActivity.class);
+                        profileIntent.putExtra("ID", temp.id);
+                        mContext.startActivity(profileIntent);
+                    }
                 }
             }
-        }
-    });
+        });
 
         return rowView;
     }

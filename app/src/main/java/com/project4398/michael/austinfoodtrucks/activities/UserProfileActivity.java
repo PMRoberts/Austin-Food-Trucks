@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -87,9 +88,23 @@ public class UserProfileActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                Log.i("stuff", "info button");
                 Intent profileIntent = new Intent(mContext, EditUserInfoActivity.class);
                 profileIntent.putExtra("ID", mInfo.id);
                 mContext.startActivity(profileIntent);
+                //finish();
+            }
+        });
+        mEditMenu = (Button)findViewById(R.id.EditMenuButton);
+        mEditMenu.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.i("stuff", "menu button");
+                Intent profileIntent2 = new Intent(mContext, EditMenuActivity.class);
+                profileIntent2.putExtra("ID", mInfo.id);
+                mContext.startActivity(profileIntent2);
                 //finish();
             }
         });

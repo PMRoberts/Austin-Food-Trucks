@@ -1,12 +1,11 @@
 package com.project4398.michael.austinfoodtrucks;
 
-import android.content.ClipData;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.JsonWriter;
+import android.util.Log;
 import android.widget.Button;
 
-import com.amazonaws.ClientConfiguration;
-import com.amazonaws.Protocol;
-import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
@@ -14,26 +13,24 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-
-
-import com.amazonaws.auth.CognitoCachingCredentialsProvider;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.*;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
-import com.amazonaws.services.s3.model.Bucket;
-import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.internal.Constants;
+import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 /**
  * Created by PRoberts on 7/29/15.
@@ -57,13 +54,10 @@ public class AWSInterface
     public static ArrayList<TruckInfo> mTruckList;
     public int ownersTruckID = -1;
 
-
-
-
     public AWSInterface(Context context)
     {
         mContext = context;
-        bucket_name = "grp3.txstate.edu.test";//@todo make sure ths works....
+        bucket_name = "grp3.txstate.edu";
         // Initialize the Amazon Cognito credentials provider
         credentialsProvider = new CognitoCachingCredentialsProvider(
                 context, //
@@ -76,7 +70,6 @@ public class AWSInterface
         mTruckList = new ArrayList<TruckInfo>();
     }
 
-
     /**
      * Uploads one item to the S3 bucket declared by bucket_name
      * </p>
@@ -85,21 +78,9 @@ public class AWSInterface
      * Creates a new credetials provider..
      * @param item which is a TruckListInfo
      */
-    public void UploadItems(ArrayList<TruckInfo> item)
+    public void UploadItem(TruckInfo item)
     {
-
-        String filename = "ArrayList.ser";
-        FileOutputStream outputStream;
-        try{
-            File file = new File(filename);
-            FileOutputStream fos = new FileOutputStream(file);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(item);
-            TransferObserver observer = transferUtility.upload(bucket_name, "ArrayList.ser", file);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
+        TransferObserver observer = transferUtility.upload(bucket_name, item.name, createFile(item));
     }
 
     /**
@@ -113,67 +94,12 @@ public class AWSInterface
         return file;
     }
 
-    public void DownloadItems(){
-        TruckInfo Temporary_trucklistinfo = new TruckInfo();
-        String filename = "ArrayList.ser";
-        FileOutputStream outputStream;
-        try{
-            File file = new File("downloadedArray");
-            TransferObserver observer = transferUtility.download(bucket_name, "ArrayList.ser", file);
-            FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            ois.readObject();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
 
     public void DownloadList()
     {
-        AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
-
-        String accessKey = "AKIAJAVNV4LQ3AUCEPAA";
-        String secretKey = "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";
-        AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
-
-        ClientConfiguration clientConfig = new ClientConfiguration();
-        clientConfig.setProtocol(Protocol.HTTP);
-
-        AmazonS3 conn = new AmazonS3Client(credentials, clientConfig);
-        conn.setEndpoint("endpoint.com");
-
-
-        mTruckList = CreateRandomInput();
-        String JsonToUpload = saveToJSON(mTruckList);
-
-
-        Bucket bucket = conn.createBucket("my-new-bucket");
-
-        ByteArrayInputStream input = new ByteArrayInputStream(JsonToUpload.getBytes());
-        conn.putObject(bucket.getName(), "TruckList", input,new ObjectMetadata());
-
-    }
-
-    /**
-     * Saves the to a JSON file the object that is the truck list.
-     * @param inv
-     */
-    public String saveToJSON(ArrayList<TruckInfo> inv){
-        Gson gson = new Gson();
-        String json = gson.toJson(inv);
-        return  json;
-    }
-
-    /**
-     * Lets fill this thing up with some data.
-     * @return
-     */
-    public ArrayList<TruckInfo> CreateRandomInput(){
         ArrayList<TruckInfo> TLITemp;
         ArrayList<menuItem> menuTemp;
         ArrayList<menuItem> menuTemp2;
-
 
         TLITemp = new ArrayList<TruckInfo>();
         menuTemp = new ArrayList<menuItem>();
@@ -182,87 +108,114 @@ public class AWSInterface
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food1";
         menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
+        menuTemp.get(menuTemp.size()-1).TruckId = 0;
+        menuTemp.get(menuTemp.size()-1).id = 0;
 
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food2";
         menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
+        menuTemp.get(menuTemp.size()-1).TruckId = 0;
+        menuTemp.get(menuTemp.size()-1).id = 1;
 
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food3";
         menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
+        menuTemp.get(menuTemp.size()-1).TruckId = 0;
+        menuTemp.get(menuTemp.size()-1).id = 2;
 
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food4";
         menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
+        menuTemp.get(menuTemp.size()-1).TruckId = 0;
+        menuTemp.get(menuTemp.size()-1).id = 3;
 
         menuTemp.add(new menuItem());
         menuTemp.get(menuTemp.size()-1).name = "food5";
         menuTemp.get(menuTemp.size()-1).description = "it is edable";
-        menuTemp.get(menuTemp.size()-1).price = 7.00f;
+        menuTemp.get(menuTemp.size()-1).price = "$7.00";
         menuTemp.get(menuTemp.size()-1).inStock = true;
         menuTemp.get(menuTemp.size()-1).favorite = true;
+        menuTemp.get(menuTemp.size()-1).TruckId = 0;
+        menuTemp.get(menuTemp.size()-1).id = 4;
 
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "cow";
         menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 0;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "chicken";
         menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 1;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "lamb";
         menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 2;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "pig";
         menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 3;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "fish";
         menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 4;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "rock";
         menuTemp2.get(menuTemp2.size()-1).description = "it is not edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 5;
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "plant";
         menuTemp2.get(menuTemp2.size()-1).description = "it is edable";
-        menuTemp2.get(menuTemp2.size()-1).price = 7.00f;
+        menuTemp2.get(menuTemp2.size()-1).price = "$7.00";
         menuTemp2.get(menuTemp2.size()-1).inStock = true;
         menuTemp2.get(menuTemp2.size()-1).favorite = true;
+        menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
+        menuTemp2.get(menuTemp2.size()-1).id = 6;
+
+
+
 
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "bob";
@@ -278,6 +231,7 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).longitude = -97.74950266;
         TLITemp.get(TLITemp.size()-1).setUserID("a");
         TLITemp.get(TLITemp.size()-1).setPassword("1234");
+
 
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "trucin";
@@ -357,8 +311,111 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).longitude = -97.76237726;
         TLITemp.get(TLITemp.size()-1).setUserID("f");
         TLITemp.get(TLITemp.size()-1).setPassword("1234");
-        return TLITemp;
-}
+
+        mTruckList = TLITemp;
+
+
+
+
+
+
+
+        //Iterates throught the array list to upload.
+        for(int i = 0; i < mTruckList.size();i++){
+            uploadItem(mTruckList.get(i));
+        }
+
+
+//        s3Client.getObject(
+//                new GetObjectRequest(Bucket_Curr, "letsTry"),
+//                new File("downloadedTruck.ser")
+//        );
+
+//        File fileD = new File("downloadedTruck.ser");
+//        TruckInfo itemDownloaded = fromJson(fileD);
+        //transferUtility.upload(bucket_name, "ArrayList.ser",file);
+    }
+
+    public void uploadItem(TruckInfo itemToUpload) {
+        File file = new File(mContext.getFilesDir(),"fileName.txt");
+        FileOutputStream fos = null;
+        JSONObject TruckItemJson = toJsonAndBeyond(itemToUpload);
+        //
+        try {
+            fos = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        ObjectOutputStream os = null;
+        try {
+            os = new ObjectOutputStream(fos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            os.writeObject(TruckItemJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials(
+                "AKIAJL2EY65OZGTME4SA",
+                "XkFG0M28GpE7/x2h0w5nE8rME/v0LsTr1O8s3SRc") );
+        String Bucket_Curr = "group3.txstate.1217";
+
+        //s3Client.createBucket(Bucket_Curr);
+
+        PutObjectRequest por = new PutObjectRequest( Bucket_Curr, itemToUpload.name, file );
+        s3Client.putObject(por);
+    }
+
+    /**
+     * Convets given item into a json item and returns the JSON object
+     * @param item
+     * @return converted json objet.
+     */
+
+    public JSONObject toJsonAndBeyond(TruckInfo item){
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("name", item.name.toString());
+            obj.put("imageUrl", "------");
+            obj.put("Description",  "about us");
+            obj.put("distance", item.distance);
+            obj.put("favorite", item.favorite);
+            obj.put("latitude", item.latitude);
+            obj.put("longitude", item.longitude);
+            obj.put("UserID", "UserID");
+            obj.put("Password", "Password");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
+    /**
+     * Converts the given file to a Json and returns it as an item.
+     * @param file the file that will be converted in JSON
+     * @return the item contained the transformed file
+     */
+    public TruckInfo fromJson(File file){
+        TruckInfo item = new TruckInfo();
+        JSONObject obj = new JSONObject();
+
+        return item;
+    }
+
+    public void uploadFunction(File file){
+//        KEep this inmind.
+//        mContext.getFileDir();
+
+    }
+
     public TruckInfo getTruckByID(int ID)
     {
         for (int x = 0; x < mTruckList.size(); x++)
