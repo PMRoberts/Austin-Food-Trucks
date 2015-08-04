@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.util.JsonReader;
 import android.util.JsonWriter;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
@@ -120,6 +121,7 @@ public class AWSInterface
             mTruckList.add(truckInfo);
         }
 
+        dummyDataForMenu();
 
             logged("FINISHED:DownloadList();");
     }
@@ -613,30 +615,37 @@ public class AWSInterface
      *
      * Dummy data for only the menu.
      */
-    public void dummyDataForMenu(){
-
-
-    ArrayList<MenuItem> menuTemp = new ArrayList<MenuItem>(0);
-
+    public void dummyDataForMenu() {
+        for (int x = 0; x < mTruckList.size(); x++) {
+            ArrayList<menuItem> menuTemp;
+            menuTemp = new ArrayList<menuItem>();
     /*
         Quick array list to variate the items in the menus
      */
-    ArrayList<String> dishes = new ArrayList<String>();
-    dishes.add("Tacos"); dishes.add("Quesadilla");dishes.add("Flautas");
-    dishes.add("Pollo Loco");dishes.add("good fagita");dishes.add("Huevostaco");
+            ArrayList<String> dishes = new ArrayList<String>();
+            dishes.add("Tacos");
+            dishes.add("Quesadilla");
+            dishes.add("Flautas");
+            dishes.add("Pollo Loco");
+            dishes.add("good fagita");
+            dishes.add("Huevostaco");
 
-    for(int i = 0; i < dishes.size(); i++) {
-    //menuTemp.add(new menuItem());
-//    menuTemp.get(i).name = dishes.get(i);
-//    menuTemp.get(i).description = "Really good!!!";
-//    menuTemp.get(i).price = "$" + (i*i+1) + ".99";
-//    menuTemp.get(i).inStock = true;
-//    menuTemp.get(i).favorite = true;
-//    menuTemp.get(i).TruckId = 0;
-//    menuTemp.get(i).id = 0;
-//    menuTemp.get(i).imageUrl =  "https://s3.amazonaws.com/aft.photos.250.250/"+ (i+1) +".jpeg";
-//    menuTemp.get(i).image = loadImage(menuTemp.get(i).imageUrl);
-    }
+
+            for (int i = 0; i < dishes.size(); i++) {
+
+                menuTemp.add(new menuItem());
+                menuTemp.get(i).name = dishes.get(i);
+                menuTemp.get(i).description = "Really good!!!";
+                menuTemp.get(i).price = "$" + (i * i + 1) + ".99";
+                menuTemp.get(i).inStock = true;
+                menuTemp.get(i).favorite = true;
+                menuTemp.get(i).TruckId = 0;
+                menuTemp.get(i).id = 0;
+                menuTemp.get(i).imageUrl = "https://s3.amazonaws.com/aft.photos.250.250/" + (i + 1) + ".jpeg";
+                menuTemp.get(i).image = loadImage(menuTemp.get(i).imageUrl);
+            }
+            mTruckList.get(x).menu = menuTemp;
+        }
     }
 
 
