@@ -209,6 +209,11 @@ public class AWSInterface
         return item;
     }
 
+    /**
+     * Converts a given json object into a an object
+     * @param string
+     * @return
+     */
     public TruckInfo jsonToObject(String string){
 
         Log.d("userDebug","jsonToOBjectStart");
@@ -669,13 +674,10 @@ public class AWSInterface
 
 
     /*************************************************************************
-     *
-     * @param url
-     * @return
+     *transfors a url image into  a drawable object.
+     * @param url Take the given URL to be created as drawable object
+     * @return Returns either null or a drawable object.
      */
-
-
-
     public static Drawable loadImage(String url) {
         try {
             InputStream is = (InputStream) new URL(url).getContent();
