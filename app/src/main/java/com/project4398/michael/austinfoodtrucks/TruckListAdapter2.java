@@ -56,7 +56,8 @@ public class TruckListAdapter2 extends ArrayAdapter<TruckInfo> implements Locati
         View rowView = inflater.inflate(R.layout.adapter_truck_list, parent, false);
 
         ImageView imageView = (ImageView) rowView.findViewById(R.id.TruckInfoImage);
-        if(mValues[position].image != null) {
+        if(mValues[position].image != null)
+        {
             imageView.setImageDrawable(mValues[position].image);
         }
         else
@@ -75,7 +76,7 @@ public class TruckListAdapter2 extends ArrayAdapter<TruckInfo> implements Locati
         TextView textView3 = (TextView) rowView.findViewById(R.id.TruckInfoDistance);
         float[] tempfloat = new float[2];
         location.distanceBetween(location.getLatitude(), location.getLongitude(), mValues[position].latitude, mValues[position].longitude, tempfloat);
-        textView3.setText("" + (Math.round((tempfloat[0]*0.000621371) * 100.0) / 100.0));
+        textView3.setText("" + (Math.round((tempfloat[0]*0.000621371) * 100.0) / 100.0) + "MI");
 
         ImageView imageView2 = (ImageView) rowView.findViewById(R.id.TruckInfoFavorite);
         imageView2.setImageResource(R.drawable.splash_icon);

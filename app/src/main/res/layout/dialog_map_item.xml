@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/InfoContainer"
+    android:layout_width="wrap_content"
+    android:layout_height="100dp"
+    android:background="#ffffffff">
+
+    <ImageView
+        android:id="@+id/MapDialogImage"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:scaleType="fitCenter"
+        android:padding="5dp"
+        android:background="#000000"/>
+    <TextView
+        android:id="@+id/MapDialogName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp"
+        android:text="0"
+        android:textColor="#323232"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@+id/MapDialogImage" />
+    <TextView
+        android:id="@+id/MapDialogTypes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textSize="16dp"
+        android:text="0"
+        android:textColor="#323232"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@+id/MapDialogImage" />
+    <TextView
+        android:id="@+id/MapDialogDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:textSize="16dp"
+        android:text="0"
+        android:textColor="#323232"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@+id/MapDialogImage" />
+
+
+</RelativeLayout>
