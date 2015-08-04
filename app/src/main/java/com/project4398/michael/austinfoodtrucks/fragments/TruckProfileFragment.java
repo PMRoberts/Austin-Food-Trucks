@@ -76,9 +76,9 @@ public class TruckProfileFragment extends Fragment implements LocationListener
         textView3.setText("" + (Math.round((tempfloat[0] * 0.000621371) * 100.0) / 100.0)+ "MI");
 
         mName.setText(mInfo.name);
-        if(!mInfo.foodType.isEmpty()) {
-            mTypes.setText(mInfo.foodType.get(0));
-        }
+//        if(!mInfo.foodType.isEmpty()) {
+            mTypes.setText(mInfo.foodType);
+//        }
         mAbout.setText(mInfo.about);
         mPhoneNumber.setText(mInfo.phoneNumber);
 

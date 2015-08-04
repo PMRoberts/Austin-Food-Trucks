@@ -200,8 +200,8 @@ public class AWSInterface
 
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "bob";
-        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
-        TLITemp.get(TLITemp.size()-1).foodType.add("person");
+        //TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
+        TLITemp.get(TLITemp.size()-1).foodType="person";
         TLITemp.get(TLITemp.size()-1).distance = 5000.0f;
         TLITemp.get(TLITemp.size()-1).favorite = true;
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
@@ -216,10 +216,8 @@ public class AWSInterface
 
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "trucin";
-        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
-        TLITemp.get(TLITemp.size()-1).foodType.add("tacos");
-        TLITemp.get(TLITemp.size()-1).foodType.add("tacos");
-        TLITemp.get(TLITemp.size()-1).foodType.add("tacos");
+//        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
+        TLITemp.get(TLITemp.size()-1).foodType="tacos";
         TLITemp.get(TLITemp.size()-1).distance = 1.2f;
         TLITemp.get(TLITemp.size()-1).favorite = true;
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
@@ -233,8 +231,8 @@ public class AWSInterface
 
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "burgs";
-        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
-        TLITemp.get(TLITemp.size()-1).foodType.add("burgers");
+//        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
+        TLITemp.get(TLITemp.size()-1).foodType="burgers";
         TLITemp.get(TLITemp.size()-1).distance = 1.0f;
         TLITemp.get(TLITemp.size()-1).favorite = false;
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
@@ -248,9 +246,8 @@ public class AWSInterface
 
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "dfasf";
-        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
-        TLITemp.get(TLITemp.size()-1).foodType.add("erererf");
-        TLITemp.get(TLITemp.size()-1).foodType.add("cvbcvbcvb");
+//        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
+        TLITemp.get(TLITemp.size()-1).foodType="erererf";
         TLITemp.get(TLITemp.size()-1).distance = 5050.5f;
         TLITemp.get(TLITemp.size()-1).favorite = false;
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
@@ -264,9 +261,8 @@ public class AWSInterface
 
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "food and stuff";
-        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
-        TLITemp.get(TLITemp.size()-1).foodType.add("food");
-        TLITemp.get(TLITemp.size()-1).foodType.add("stuff");
+//        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
+        TLITemp.get(TLITemp.size()-1).foodType="food";
         TLITemp.get(TLITemp.size()-1).distance = 2.0f;
         TLITemp.get(TLITemp.size()-1).favorite = true;
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);
@@ -280,8 +276,8 @@ public class AWSInterface
 
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "t";
-        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
-        TLITemp.get(TLITemp.size()-1).foodType.add("thai");
+//        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
+        TLITemp.get(TLITemp.size()-1).foodType="thai";
         TLITemp.get(TLITemp.size()-1).distance = 5.0f;
         TLITemp.get(TLITemp.size()-1).favorite = false;
         TLITemp.get(TLITemp.size()-1).id = (TLITemp.size()-1);

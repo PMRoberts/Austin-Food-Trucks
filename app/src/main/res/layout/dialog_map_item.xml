@@ -5,7 +5,7 @@
     android:id="@+id/InfoContainer"
     android:layout_width="wrap_content"
     android:layout_height="100dp"
-    android:background="#ffffffff">
+    android:background="#d8e6f0">
 
     <ImageView
         android:id="@+id/MapDialogImage"

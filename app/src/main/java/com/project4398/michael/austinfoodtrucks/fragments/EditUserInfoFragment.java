@@ -79,10 +79,10 @@ public class EditUserInfoFragment extends Fragment
         if(mInfo != null)
         {
             mName.setText(mInfo.name);
-            if (!mInfo.foodType.isEmpty())
-            {
-                mTypes.setText(mInfo.foodType.get(0));
-            }
+//            if (!mInfo.foodType.isEmpty())
+//            {
+                mTypes.setText(mInfo.foodType);
+//            }
             mAbout.setText(mInfo.about);
             mPhoneNumber.setText(mInfo.phoneNumber);
 
@@ -107,7 +107,7 @@ public class EditUserInfoFragment extends Fragment
                 }
                 mInfo.name = mName.getText().toString();
                 mInfo.phoneNumber = mPhoneNumber.getText().toString();
-                mInfo.foodType.add(mTypes.getText().toString());
+                mInfo.foodType =mTypes.getText().toString();//.add(mTypes.getText().toString());
                 mInfo.about = mAbout.getText().toString();
                 mInfo.image = mImage.getDrawable();
 
@@ -146,7 +146,7 @@ public class EditUserInfoFragment extends Fragment
                 bitmap = BitmapFactory.decodeStream(mContext.getContentResolver().openInputStream(targetUri));
                 Drawable drawable = new BitmapDrawable(getResources(), bitmap);
                 mImage.setImageDrawable(drawable);
-                bitmap.recycle();
+                //bitmap.recycle();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

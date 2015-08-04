@@ -154,7 +154,7 @@ public class EditMenuFragment extends Fragment
                 bitmap = BitmapFactory.decodeStream(mContext.getContentResolver().openInputStream(targetUri));
                 Drawable drawable = new BitmapDrawable(getResources(), bitmap);
                 mImage.setImageDrawable(drawable);
-                bitmap.recycle();
+                //bitmap.recycle();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }

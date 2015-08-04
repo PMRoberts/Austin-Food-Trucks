@@ -83,7 +83,7 @@ public class TruckMapActivity extends FragmentActivity {
                             TextView t = (TextView)view.findViewById(R.id.MapDialogName);
                             t.setText(AWSInterface.getPlayer().mTruckList.get(x).name);
                             TextView t2 = (TextView)view.findViewById(R.id.MapDialogTypes);
-                            t2.setText(AWSInterface.getPlayer().mTruckList.get(x).foodType.get(0));
+                            t2.setText(AWSInterface.getPlayer().mTruckList.get(x).foodType);
                             TextView t3 = (TextView)view.findViewById(R.id.MapDialogDistance);
                             t3.setText("hello");
                             ImageView IV = (ImageView)view.findViewById(R.id.MapDialogImage);
@@ -183,12 +183,13 @@ public class TruckMapActivity extends FragmentActivity {
             Canvas canvas = new Canvas(mutableBitmap);
             d.setBounds(0, 0, 100, 100);
             d.draw(canvas);
+
             MarkerOptions mOps = new MarkerOptions().position(new LatLng(AWSInterface.getPlayer().mTruckList.get(x).latitude,
                     AWSInterface.getPlayer().mTruckList.get(x).longitude)).title(AWSInterface.getPlayer().mTruckList.get(x).name)
                     .icon(BitmapDescriptorFactory.fromBitmap(mutableBitmap));
 
             mMap.addMarker(mOps);
-            mutableBitmap.recycle();
+            //mutableBitmap.recycle();
         }
 
         mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener()
@@ -206,5 +207,12 @@ public class TruckMapActivity extends FragmentActivity {
                 mMap.setOnMyLocationChangeListener(null);
             }
         });
+    }
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this,TruckListActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

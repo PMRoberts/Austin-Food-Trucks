@@ -15,7 +15,8 @@ public class TruckInfo implements Serializable
     public String name;
     public String about;
     public String phoneNumber;
-    public ArrayList<String> foodType;
+//    public ArrayList<String> foodType;
+    public String foodType;
 
     public float distance;
     public int id = -1;
@@ -28,7 +29,7 @@ public class TruckInfo implements Serializable
 
     public TruckInfo()
     {
-        foodType = new ArrayList<String>();
+//        foodType = new ArrayList<String>();
         menu = new ArrayList<menuItem>();
     }
 

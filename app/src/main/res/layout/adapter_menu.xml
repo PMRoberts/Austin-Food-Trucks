@@ -5,8 +5,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#33000000"
+    android:padding="7dp">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#335544">
-
     <TextView
         android:id="@+id/MenuItemName"
         android:layout_width="wrap_content"
@@ -30,5 +34,7 @@
         android:layout_below="@+id/MenuItemName"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/MenuItemPrice"/>
+</RelativeLayout>
+
 
 </com.project4398.michael.austinfoodtrucks.SquareView>

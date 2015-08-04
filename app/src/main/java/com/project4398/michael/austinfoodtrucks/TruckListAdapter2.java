@@ -72,7 +72,7 @@ public class TruckListAdapter2 extends ArrayAdapter<TruckInfo> implements Locati
         textView.setText(mValues[position].name);
 
         TextView textView2 = (TextView) rowView.findViewById(R.id.TruckInfoTypes);
-        textView2.setText(mValues[position].foodType.get(0));
+        textView2.setText(mValues[position].foodType);
 
         TextView textView3 = (TextView) rowView.findViewById(R.id.TruckInfoDistance);
         float[] tempfloat = new float[2];
