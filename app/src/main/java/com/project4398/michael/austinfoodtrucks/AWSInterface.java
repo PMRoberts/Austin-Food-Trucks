@@ -238,8 +238,8 @@ public class AWSInterface
             truck.latitude = (Double)  jsonObj.get("latitude");
             truck.longitude = (Double)  jsonObj.get("longitude");
 
-//            MenuItem mi = new MenuItem;
-            //mi = jsonObj.getJSONArray("").getJSONObject(0).get("Menu_item"+0);
+//           MenuItem mi = new MenuItem;
+//           mi = jsonObj.getJSONArray("").getJSONObject(0).get("Menu_item"+0);
 
             String us  = (String) jsonObj.get("UserID");
             truck.setUserID(us);
