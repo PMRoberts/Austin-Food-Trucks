@@ -2,6 +2,7 @@ package com.project4398.michael.austinfoodtrucks;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.JsonReader;
 import android.util.JsonWriter;
 import android.util.Log;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.internal.Constants;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -23,13 +25,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 
 /**
@@ -46,6 +53,7 @@ public class AWSInterface
     public static AWSInterface getPlayer(){return mAWSInterface;}
     /* Singleton End */
 
+    public String Bucket_Curr = "group3.txstate.0791";
     private String bucket_name;
     private CognitoCachingCredentialsProvider credentialsProvider;
     private AmazonS3Client s3Client;
@@ -68,30 +76,6 @@ public class AWSInterface
         s3Client = new AmazonS3Client(credentialsProvider);
         transferUtility = new TransferUtility(s3Client, context);
         mTruckList = new ArrayList<TruckInfo>();
-    }
-
-    /**
-     * Uploads one item to the S3 bucket declared by bucket_name
-     * </p>
-     * uses cognito to upload the file and sets the region
-     * </p>
-     * Creates a new credetials provider..
-     * @param item which is a TruckListInfo
-     */
-    public void UploadItem(TruckInfo item)
-    {
-        TransferObserver observer = transferUtility.upload(bucket_name, item.name, createFile(item));
-    }
-
-    /**
-     * Creates a file to be used as a parameter on the transferUtility.Upload(par,par,FILE)
-     * @param item
-     * @return File containing the item that was passed as a parameter.
-     */
-    public File createFile(TruckInfo item)
-    {
-        File file = createFile(item);
-        return file;
     }
 
 
@@ -214,9 +198,6 @@ public class AWSInterface
         menuTemp2.get(menuTemp2.size()-1).TruckId = 1;
         menuTemp2.get(menuTemp2.size()-1).id = 6;
 
-
-
-
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "bob";
         TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
@@ -314,63 +295,109 @@ public class AWSInterface
 
         mTruckList = TLITemp;
 
-
-
-
-
-
-
         //Iterates throught the array list to upload.
         for(int i = 0; i < mTruckList.size();i++){
             uploadItem(mTruckList.get(i));
         }
 
-
-//        s3Client.getObject(
-//                new GetObjectRequest(Bucket_Curr, "letsTry"),
-//                new File("downloadedTruck.ser")
-//        );
-
-//        File fileD = new File("downloadedTruck.ser");
-//        TruckInfo itemDownloaded = fromJson(fileD);
-        //transferUtility.upload(bucket_name, "ArrayList.ser",file);
+        downloadItem();
     }
 
-    public void uploadItem(TruckInfo itemToUpload) {
-        File file = new File(mContext.getFilesDir(),"fileName.txt");
-        FileOutputStream fos = null;
-        JSONObject TruckItemJson = toJsonAndBeyond(itemToUpload);
-        //
-        try {
-            fos = new FileOutputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        ObjectOutputStream os = null;
-        try {
-            os = new ObjectOutputStream(fos);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            os.writeObject(TruckItemJson);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            os.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    /**
+     * Download the given item.
+     * @return
+     */
+    public TruckInfo downloadItem(){
         AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials(
                 "AKIAJL2EY65OZGTME4SA",
                 "XkFG0M28GpE7/x2h0w5nE8rME/v0LsTr1O8s3SRc") );
-        String Bucket_Curr = "group3.txstate.1217";
 
-        //s3Client.createBucket(Bucket_Curr);
+        Log.d("userDebug", "Downloading an object");
+        S3Object s3object = s3Client.getObject(new GetObjectRequest(
+                Bucket_Curr, "bob"));
 
-        PutObjectRequest por = new PutObjectRequest( Bucket_Curr, itemToUpload.name, file );
+
+        String jsonObject = s3object.getObjectContent().toString();
+
+
+        Log.d("userDebug","Let's print the object:");
+        Log.d("userDebug",jsonObject);
+
+        TruckInfo item = new TruckInfo();
+
+        return item;
+
+    }
+
+    /**
+     * Display the text from the downloaded file for debugging purposes.
+     * @param input we input the file. to read it and make sure that it will done.
+     * @throws IOException
+     */
+    private static void displayTextInputStream(InputStream input)
+            throws IOException {
+        // Read one text line at a time and display.
+        BufferedReader reader = new BufferedReader(new
+                InputStreamReader(input));
+        while (true) {
+            String line = reader.readLine();
+            if (line == null) break;
+
+            Log.d("userDebug","    " + line);
+        }
+        Log.d("userDebug", "hmmmm. Finished");
+    }
+
+
+    /**
+     * Creates a temporary file with text data to demonstrate uploading a file
+     * to Amazon S3
+     *
+     * @return A newly created temporary file with text data.
+     *
+     * @throws IOException
+     */
+    private static File createSampleFile(JSONObject jsonObject) throws IOException {
+        File file = File.createTempFile("aws-java-sdk-", ".txt");
+        file.deleteOnExit();
+        Writer writer = new OutputStreamWriter(new FileOutputStream(file));
+        writer.write(jsonObject.toString());
+        writer.close();
+        return file;
+    }
+
+    /**
+     * uploadItem, Creates  a new file, with filename.txt name.
+     * </p> Creates a file by the filename.txt, a fileoutpustream by the name of fos
+     * </p> Create a jSON object that is then passed through a functions see
+     * </p> toJsonAndBeyond for details. Tryes to create a file from the given json object
+     * </p> Lastly credentials are loaded. and s3 object is created and the file is uploaded.
+     * Uploads the given item.
+     * @param itemToUpload - this item is converted to JSON file and then uploaded into s3.
+     */
+    public void uploadItem(TruckInfo itemToUpload){
+        File file = new File(mContext.getFilesDir(),"fileName.txt");
+        FileOutputStream fos = null;
+        JSONObject TruckItemJson = toJsonAndBeyond(itemToUpload);
+
+        try {
+            file = createSampleFile(TruckItemJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("uploadItem","Creating an AmazonS3Client");
+        AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials(
+                "AKIAJL2EY65OZGTME4SA",
+                "XkFG0M28GpE7/x2h0w5nE8rME/v0LsTr1O8s3SRc") );
+//        String Bucket_Curr = "group3.txstate.1250";
+        s3Client.createBucket(Bucket_Curr);
+
+//        PutObjectRequest por = new PutObjectRequest( Bucket_Curr, itemToUpload.name, file );
+        PutObjectRequest por = new PutObjectRequest( Bucket_Curr,
+                itemToUpload.name,
+                file);
+
         s3Client.putObject(por);
     }
 
@@ -383,9 +410,9 @@ public class AWSInterface
     public JSONObject toJsonAndBeyond(TruckInfo item){
         JSONObject obj = new JSONObject();
         try {
-            obj.put("name", item.name.toString());
+            obj.put("name", item.name);
             obj.put("imageUrl", "------");
-            obj.put("Description",  "about us");
+            obj.put("about", item.about);
             obj.put("distance", item.distance);
             obj.put("favorite", item.favorite);
             obj.put("latitude", item.latitude);
@@ -395,6 +422,9 @@ public class AWSInterface
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
+
         return obj;
     }
 
@@ -407,14 +437,22 @@ public class AWSInterface
         TruckInfo item = new TruckInfo();
         JSONObject obj = new JSONObject();
 
+
         return item;
     }
 
-    public void uploadFunction(File file){
-//        KEep this inmind.
-//        mContext.getFileDir();
 
-    }
+
+
+
+
+
+    /***********************************************************************************************
+
+        These functions will be to edit and modify items and check.
+
+     **********************************************************************************************/
+
 
     public TruckInfo getTruckByID(int ID)
     {
@@ -447,6 +485,9 @@ public class AWSInterface
         }
     }
 
+    /**
+     * Method will check that the user name and password are legit.
+     */
     public Boolean CheckCredentials(String id, String password)
     {
         for (int x = 0; x < mTruckList.size(); x++)
