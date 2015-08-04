@@ -87,43 +87,54 @@ public class AWSInterface
         mTruckList = new ArrayList<TruckInfo>();
     }
 
-
+    /**
+     * Main function of the class downloads the list of Trucks currently in the S3 bucket by the
+     * </P> By the given truck name.
+     */
     public void DownloadList()
     {
-
         /*
             The next block comment should only be used to generate data for the
             truck list. will be commented out but left here for future troubleshooting
          */
 //        DummyData();
-
         /*
             The next block of code tries to upload all the trucks that
             needed to be uploaded by bulk if you wish to upload a single
-            item you shoul call the function uploadItem(TruckInfo);
+            item you should call the function uploadItem(TruckInfo);
          */
-//        logged("mTrucklist size:" + mTruckList.size());
 //        for(int i = 0; i < mTruckList.size();i++){
-//            //Assersts if there is no truck in the list
 //            uploadItem(mTruckList.get(i));
-//            logged("Uploading" + mTruckList.get(i).name);
 //        }
 
         /*
             Create an array of Strings that will hold the names of all the trucks in the s3 bucket
          */
-        ArrayList <String> list_of_trucks_from_s3 = AllItemsInBucket(); logged();
+        ArrayList <String> list_of_trucks_from_s3 = AllItemsInBucket();
+
+        ArrayList <String> list_of_url_for_trucks = new ArrayList<String>(0);
+
+
+
+
+
 
         for(int current_key = 0; current_key < list_of_trucks_from_s3.size(); current_key++) {
             TruckInfo truckInfo = new TruckInfo();
             truckInfo = downloadItem(list_of_trucks_from_s3.get(current_key));
             logged(truckInfo.name + "downloaded from s3");
             mTruckList.add(truckInfo);
+            createImageForTruck(current_key);
         }
 
         dummyDataForMenu();
 
         logged("FINISHED:DownloadList();");
+    }
+
+    public void createImageForTruck(int current_key) {
+        mTruckList.get(current_key).imageURL = "https://s3.amazonaws.com/aft.photos.500.500/Truck+("+ (current_key + 1) +").jpg";
+        mTruckList.get(current_key).image = loadImage(mTruckList.get(current_key).imageURL);
     }
 
     public ArrayList<String> AllItemsInBucket(){
@@ -133,9 +144,7 @@ public class AWSInterface
         /*
             First we create an s3Client to communicate and download the object;
          */
-        AmazonS3Client s3client = new AmazonS3Client(new BasicAWSCredentials(
-                "AKIAJL2EY65OZGTME4SA",
-                "XkFG0M28GpE7/x2h0w5nE8rME/v0LsTr1O8s3SRc"));
+        AmazonS3Client s3client = getAmazonS3Client();
 
 
         ListObjectsRequest listObjectsRequest = new ListObjectsRequest()
@@ -158,6 +167,12 @@ public class AWSInterface
         return list;
     }
 
+    public AmazonS3Client getAmazonS3Client() {
+        return new AmazonS3Client(new BasicAWSCredentials(
+                    "AKIAJL2EY65OZGTME4SA",
+                    "XkFG0M28GpE7/x2h0w5nE8rME/v0LsTr1O8s3SRc"));
+    }
+
 
     /**
      * Download the given item.
@@ -168,9 +183,7 @@ public class AWSInterface
         /*
             First we create an s3Cliente to communicate and download the object;
          */
-        AmazonS3Client s3Client = new AmazonS3Client(new BasicAWSCredentials(
-                "AKIAJL2EY65OZGTME4SA",
-                "XkFG0M28GpE7/x2h0w5nE8rME/v0LsTr1O8s3SRc"));
+        AmazonS3Client s3Client = getAmazonS3Client();
         Log.d("userDebug", "Inside downloadItem();s3Client Created");
 
         S3Object s3object = s3Client.getObject(new GetObjectRequest(
@@ -209,18 +222,17 @@ public class AWSInterface
             Log.d("userDebug","jsonToOBject();These are the attributes" +
                     " from online");
             //Name,imageUrl,about,phonenumber,distance,id,lat,long,userid,password
-            truck.name = (String) jsonObj.get("name");i++;
+            truck.name = (String) jsonObj.get("name");
             truck.name = truck.name.toString();
-            truck.imageURL = (String) jsonObj.get("imageUrl");i++;
-            truck.about = (String)jsonObj.get("about");i++;
-            truck.phoneNumber = (String)jsonObj.get("phoneNumber");i++;
+            truck.imageURL = (String) jsonObj.get("imageUrl");
+            truck.about = (String)jsonObj.get("about");
+            truck.phoneNumber = (String)jsonObj.get("phoneNumber");
             truck.distance =  -1;//@todo need to fix this show actual distanc.
-            truck.id = (Integer)  jsonObj.get("id");i++;
-
+            truck.id = (Integer)  jsonObj.get("id");
 
             //obj.put("favorite", item.favorite);
 
-            truck.foodType ="Da fudging best!";
+            truck.foodType ="Food Truck Type!";
 //            truck.foodType = (String) jsonObj.get("da best")
             //Lat and Long for the current item.
             truck.latitude = (Double)  jsonObj.get("latitude");
@@ -309,10 +321,8 @@ public class AWSInterface
             Creates an amazon s3client;
          */
         Log.d("uploadItem","Creating an AmazonS3Client");
-        AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials(
-                "AKIAJL2EY65OZGTME4SA",
-                "XkFG0M28GpE7/x2h0w5nE8rME/v0LsTr1O8s3SRc") );
-        s3Client.createBucket(Bucket_Curr);
+        AmazonS3Client s3Client = getAmazonS3Client();
+        //s3Client.createBucket(Bucket_Curr);
 
 
         /*
@@ -427,18 +437,7 @@ public class AWSInterface
         dishes.add("Tacos"); dishes.add("Quesadilla");dishes.add("Flautas");
         dishes.add("Pollo Loco");dishes.add("good fagita");dishes.add("Huevostaco");
 
-        for(int i = 0; i < dishes.size(); i++) {
-            menuTemp.add(new menuItem());
-            menuTemp.get(i).name = dishes.get(i);
-            menuTemp.get(i).description = "Really good!!!";
-            menuTemp.get(i).price = "$" + (i*i+1) + ".99";
-            menuTemp.get(i).inStock = true;
-            menuTemp.get(i).favorite = true;
-            menuTemp.get(i).TruckId = 0;
-            menuTemp.get(i).id = 0;
-            menuTemp.get(i).imageUrl =  "https://s3.amazonaws.com/aft.photos.250.250/"+ (i+1) +".jpeg";
-            menuTemp.get(i).image = loadImage(menuTemp.get(i).imageUrl);
-        }
+        createDishesForDummyInfo(menuTemp, dishes);
 
 
         menuTemp2.add(new menuItem());
@@ -608,6 +607,21 @@ public class AWSInterface
         loadImage(TLITemp.get(TLITemp.size()-1).imageURL);
 
         mTruckList = TLITemp;
+    }
+
+    public void createDishesForDummyInfo(ArrayList<menuItem> menuTemp, ArrayList<String> dishes) {
+        for(int i = 0; i < dishes.size(); i++) {
+            menuTemp.add(new menuItem());
+            menuTemp.get(i).name = dishes.get(i);
+            menuTemp.get(i).description = "Really good!!!";
+            menuTemp.get(i).price = "$" + (i*i+1) + ".99";
+            menuTemp.get(i).inStock = true;
+            menuTemp.get(i).favorite = true;
+            menuTemp.get(i).TruckId = 0;
+            menuTemp.get(i).id = 0;
+            menuTemp.get(i).imageUrl =  "https://s3.amazonaws.com/aft.photos.250.250/"+ (i+1) +".jpeg";
+            menuTemp.get(i).image = loadImage(menuTemp.get(i).imageUrl);
+        }
     }
 
     /**
