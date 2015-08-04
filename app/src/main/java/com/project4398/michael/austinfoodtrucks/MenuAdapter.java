@@ -1,5 +1,6 @@
 package com.project4398.michael.austinfoodtrucks;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -72,7 +73,9 @@ public class MenuAdapter extends ArrayAdapter<menuItem>
                     Intent profileIntent = new Intent(mContext, EditMenuActivity.class);
                     profileIntent.putExtra("ID", temp.TruckId);
                     profileIntent.putExtra("MenuID", temp.id);
+                    profileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     mContext.startActivity(profileIntent);
+                    //((Activity)mContext).finish();
                 } else
                 {
 //                    Intent profileIntent = new Intent(mContext, EditMenuActivity.class);

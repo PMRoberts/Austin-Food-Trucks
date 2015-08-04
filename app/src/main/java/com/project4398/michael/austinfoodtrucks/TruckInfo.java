@@ -1,8 +1,6 @@
 package com.project4398.michael.austinfoodtrucks;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -3,12 +3,14 @@ package com.project4398.michael.austinfoodtrucks.activities;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -74,7 +76,8 @@ public class TruckMapActivity extends FragmentActivity {
                 {
                     for(int x = 0; x < AWSInterface.getPlayer().mTruckList.size(); x++)
                     {
-                        if(marker.getTitle().equals(AWSInterface.getPlayer().mTruckList.get(x).name));
+                        Log.i("stuff", "marker title " + marker.getTitle());
+                        if(AWSInterface.getPlayer().mTruckList.get(x).name.equals(marker.getTitle()))
                         {
                             View view = View.inflate(mContext,R.layout.dialog_map_item,null);
                             TextView t = (TextView)view.findViewById(R.id.MapDialogName);
@@ -92,6 +95,27 @@ public class TruckMapActivity extends FragmentActivity {
                             {
                                 IV.setImageResource(R.drawable.splash_icon);
                             }
+                            final int temp = x;
+                            IV.setOnClickListener(new View.OnClickListener()
+                            {
+                                @Override
+                                public void onClick(View v)
+                                {
+                                    if (AWSInterface.getPlayer().ownersTruckID == AWSInterface.getPlayer().mTruckList.get(temp).id)
+                                    {
+                                        Intent profileIntent = new Intent(mContext, UserProfileActivity.class);
+                                        profileIntent.putExtra("ID", AWSInterface.getPlayer().mTruckList.get(temp).id);
+                                        mContext.startActivity(profileIntent);
+                                        finish();
+                                    } else
+                                    {
+                                        Intent profileIntent = new Intent(mContext, TruckProfileActivity.class);
+                                        profileIntent.putExtra("ID", AWSInterface.getPlayer().mTruckList.get(temp).id);
+                                        mContext.startActivity(profileIntent);
+                                        finish();
+                                    }
+                                }
+                            });
 
 //                            View view2 = View.inflate(mContext,R.layout.dialog_custom_title,null);
 //                            TextView t3 = (TextView)view2.findViewById(R.id.DialogCustomTitle);
@@ -101,7 +125,25 @@ public class TruckMapActivity extends FragmentActivity {
                                     //.setTitle(temp.name)
 //                                    .setCustomTitle(view2)
                                     .setView(view)
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    .setPositiveButton("Go to Page", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which)
+                                        {
+                                            if (AWSInterface.getPlayer().ownersTruckID == AWSInterface.getPlayer().mTruckList.get(temp).id)
+                                            {
+                                                Intent profileIntent = new Intent(mContext, UserProfileActivity.class);
+                                                profileIntent.putExtra("ID", AWSInterface.getPlayer().mTruckList.get(temp).id);
+                                                mContext.startActivity(profileIntent);
+                                                finish();
+                                            } else
+                                            {
+                                                Intent profileIntent = new Intent(mContext, TruckProfileActivity.class);
+                                                profileIntent.putExtra("ID", AWSInterface.getPlayer().mTruckList.get(temp).id);
+                                                mContext.startActivity(profileIntent);
+                                                finish();
+                                            }
+                                        }
+                                    })
+                                    .setNegativeButton("Close", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             // continue with delete
                                         }
@@ -146,11 +188,8 @@ public class TruckMapActivity extends FragmentActivity {
                     .icon(BitmapDescriptorFactory.fromBitmap(mutableBitmap));
 
             mMap.addMarker(mOps);
-//            mMap.addMarker(new MarkerOptions().position(new LatLng(AWSInterface.getPlayer().mTruckList.get(x).latitude,
-//                    AWSInterface.getPlayer().mTruckList.get(x).longitude)).title(AWSInterface.getPlayer().mTruckList.get(x).name)
-//                    .icon(BitmapDescriptorFactory.fromBitmap(mutableBitmap)));
+            mutableBitmap.recycle();
         }
-//        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
 
         mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener()
         {
@@ -167,16 +206,5 @@ public class TruckMapActivity extends FragmentActivity {
                 mMap.setOnMyLocationChangeListener(null);
             }
         });
-//        if (mMap.getMyLocation() != null)
-//            {
-//
-//                CameraPosition cameraPosition = new CameraPosition.Builder()
-//                        .target(new LatLng(mMap.getMyLocation().getLatitude(), mMap.getMyLocation().getLongitude()))
-//                        .zoom(15)
-//                        .bearing(0)
-//                        .tilt(0)
-//                        .build();
-//                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-//            }
     }
 }

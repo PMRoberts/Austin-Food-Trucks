@@ -74,7 +74,8 @@ public class TruckListActivity extends AppCompatActivity {
     private Boolean exit = false;
     @Override
     public void onBackPressed() {
-        if (exit) {
+        if (exit)
+        {
             finish(); // finish activity
         } else {
             Toast.makeText(this, "Press Back again to Exit.",

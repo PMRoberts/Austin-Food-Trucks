@@ -1,5 +1,6 @@
 package com.project4398.michael.austinfoodtrucks;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -102,12 +103,16 @@ public class TruckListAdapter2 extends ArrayAdapter<TruckInfo> implements Locati
                     {
                         Intent profileIntent = new Intent(mContext, UserProfileActivity.class);
                         profileIntent.putExtra("ID", temp.id);
+                        profileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         mContext.startActivity(profileIntent);
+                        //((Activity)mContext).finish();
                     } else
                     {
                         Intent profileIntent = new Intent(mContext, TruckProfileActivity.class);
                         profileIntent.putExtra("ID", temp.id);
+                        profileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         mContext.startActivity(profileIntent);
+                        //((Activity)mContext).finish();
                     }
                 }
             }

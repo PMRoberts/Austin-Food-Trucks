@@ -1,6 +1,7 @@
 package com.project4398.michael.austinfoodtrucks;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -62,6 +63,7 @@ public class TruckListAdapter extends CursorAdapter
 //                    profileIntent.putExtras(bundle);
                         profileIntent.putExtra("ID", temp.id);
                         mContext.startActivity(profileIntent);
+                        ((Activity)mContext).finish();
                         //finish();
                     }
                     else
@@ -72,6 +74,7 @@ public class TruckListAdapter extends CursorAdapter
 //                    profileIntent.putExtras(bundle);
                         profileIntent.putExtra("ID", temp.id);
                         mContext.startActivity(profileIntent);
+                        ((Activity)mContext).finish();
                         //finish();
                     }
                 }

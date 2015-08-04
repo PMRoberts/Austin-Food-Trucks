@@ -116,7 +116,7 @@ public class EditUserInfoFragment extends Fragment
                 Intent profileIntent = new Intent(mContext, UserProfileActivity.class);
                 profileIntent.putExtra("ID", mInfo.id);
                 mContext.startActivity(profileIntent);
-                //finish();
+                ((Activity)mContext).finish();
             }
         });
 
@@ -146,6 +146,7 @@ public class EditUserInfoFragment extends Fragment
                 bitmap = BitmapFactory.decodeStream(mContext.getContentResolver().openInputStream(targetUri));
                 Drawable drawable = new BitmapDrawable(getResources(), bitmap);
                 mImage.setImageDrawable(drawable);
+                bitmap.recycle();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
