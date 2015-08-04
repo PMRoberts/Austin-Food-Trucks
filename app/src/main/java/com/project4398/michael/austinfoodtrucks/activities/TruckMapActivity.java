@@ -85,7 +85,18 @@ public class TruckMapActivity extends FragmentActivity {
                             TextView t2 = (TextView)view.findViewById(R.id.MapDialogTypes);
                             t2.setText(AWSInterface.getPlayer().mTruckList.get(x).foodType);
                             TextView t3 = (TextView)view.findViewById(R.id.MapDialogDistance);
-                            t3.setText("hello");
+
+                            float[] tempfloat = new float[2];
+                            mMap.getMyLocation().distanceBetween(
+                                    mMap.getMyLocation().getLatitude(),
+                                    mMap.getMyLocation().getLongitude(),
+                                    marker.getPosition().latitude,
+                                    marker.getPosition().longitude,
+                                    tempfloat);
+
+                            t3.setText("" + (Math.round((tempfloat[0] * 0.000621371) * 100.0) / 100.0)+ "MI");
+
+                            //t3.setText("");
                             ImageView IV = (ImageView)view.findViewById(R.id.MapDialogImage);
                             if (AWSInterface.getPlayer().mTruckList.get(x).image != null)
                             {

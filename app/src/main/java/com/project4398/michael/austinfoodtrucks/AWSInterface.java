@@ -300,10 +300,11 @@ public class AWSInterface
 
         mTruckList = TLITemp;
 
-        TruckInfo truckInfo = new TruckInfo();
-        truckInfo = downloadItem();
-        Log.d("userDebug", "Trying out the download item eh." + truckInfo.name.toString());
-        mTruckList.add(truckInfo);
+//        TruckInfo truckInfo = new TruckInfo();
+//        truckInfo = downloadItem();
+//        Log.d("userDebug", "Trying out the download item eh." + truckInfo.name.toString());
+//        Log.d("userDebug", "eh" + truckInfo.id);
+//        mTruckList.add(truckInfo);
         //Iterates throught the array list to upload.
 
         /*
