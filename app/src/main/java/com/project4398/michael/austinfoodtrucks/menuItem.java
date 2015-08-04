@@ -15,6 +15,6 @@ public class menuItem implements Serializable
     public String price;
     public int TruckId = -1;
     public int id = -1;
-    public boolean inStock;
-    public boolean favorite;
+    public boolean inStock = false;
+    public boolean favorite = false;
 }

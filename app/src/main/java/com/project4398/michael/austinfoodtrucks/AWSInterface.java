@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,6 +39,8 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * Created by PRoberts on 7/29/15.
@@ -53,7 +56,7 @@ public class AWSInterface
     public static AWSInterface getPlayer(){return mAWSInterface;}
     /* Singleton End */
 
-    public String Bucket_Curr = "group3.txstate.0791";
+    public String Bucket_Curr = "aft.version.1.1.1";
     private String bucket_name;
     private CognitoCachingCredentialsProvider credentialsProvider;
     private AmazonS3Client s3Client;
@@ -81,6 +84,11 @@ public class AWSInterface
 
     public void DownloadList()
     {
+
+        /*
+            The next block comment should only be used to generate data for the
+            truck list. Roughly 210 lines of code.
+         */
         ArrayList<TruckInfo> TLITemp;
         ArrayList<menuItem> menuTemp;
         ArrayList<menuItem> menuTemp2;
@@ -213,7 +221,6 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).setUserID("a");
         TLITemp.get(TLITemp.size()-1).setPassword("1234");
 
-
         TLITemp.add(new TruckInfo());
         TLITemp.get(TLITemp.size()-1).name = "trucin";
 //        TLITemp.get(TLITemp.size()-1).foodType = new ArrayList<String>();
@@ -289,59 +296,148 @@ public class AWSInterface
         TLITemp.get(TLITemp.size()-1).setUserID("f");
         TLITemp.get(TLITemp.size()-1).setPassword("1234");
 
+
+
         mTruckList = TLITemp;
 
+        TruckInfo truckInfo = new TruckInfo();
+        truckInfo = downloadItem();
+        Log.d("userDebug", "Trying out the download item eh." + truckInfo.name.toString());
+        mTruckList.add(truckInfo);
         //Iterates throught the array list to upload.
-        for(int i = 0; i < mTruckList.size();i++){
-            uploadItem(mTruckList.get(i));
-        }
 
-        downloadItem();
+        /*
+            The next block of code tries to upload all the trucks that
+            needed to be uploaded by bulk if you wish to upload a single
+            item you shoul call the function uploadItem(TruckInfo);
+         */
+//        for(int i = 0; i < mTruckList.size();i++){
+//            //Assersts if there is no truck in the list
+//            if(mTruckList.size() != 0) {
+//                //uploads the current item to aws saving station
+//                uploadItem(mTruckList.get(i));
+//                break;
+//            }
+//            else{Log.d("userDebug","Just Letting you " +
+//                    "know there isn't any trucks to upload");}
+//        }
     }
 
     /**
      * Download the given item.
-     * @return
+     * @return returns the downloaed item.
      */
     public TruckInfo downloadItem(){
-        AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials(
+        TruckInfo item = new TruckInfo();
+        /*
+            First we create an s3Cliente to communicate and download the object;
+         */
+        AmazonS3Client s3Client = new AmazonS3Client(new BasicAWSCredentials(
                 "AKIAJL2EY65OZGTME4SA",
-                "XkFG0M28GpE7/x2h0w5nE8rME/v0LsTr1O8s3SRc") );
+                "XkFG0M28GpE7/x2h0w5nE8rME/v0LsTr1O8s3SRc"));
+        Log.d("userDebug", "Inside downloadItem();s3Client Created");
 
-        Log.d("userDebug", "Downloading an object");
         S3Object s3object = s3Client.getObject(new GetObjectRequest(
                 Bucket_Curr, "bob"));
+        Log.d("userDebug", "Inside downloadItem();created an s3Object and" +
+                " getobject reques");
 
 
-        String jsonObject = s3object.getObjectContent().toString();
+       // String jsonObject = s3object.getObjectContent().toString();
+
+        try {
+            Log.d("userDebug", "Inside downloadItem();Output of currently downloaded file");
+            String hope = displayTextInputStream(s3object.getObjectContent());
+            Log.d("userDebug", "Inside downloadItem();End of downloaded file");
+
+            TruckInfo yassss = new TruckInfo();
+            yassss = jsonToObject(hope);
+            item = yassss;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
-        Log.d("userDebug","Let's print the object:");
-        Log.d("userDebug",jsonObject);
 
-        TruckInfo item = new TruckInfo();
+
+        //@todo parse through the file to get all attributes into a truck info item
+
+
+
+
+
 
         return item;
-
     }
+
+    public TruckInfo jsonToObject(String string){
+
+        Log.d("userDebug","jsonToOBjectStart");
+        Log.d("userDebug",string);
+        //Creates a new truck info.
+        TruckInfo truck = new TruckInfo();
+        try {
+            JSONObject jsonObj = new JSONObject(string);
+            int i = 0;
+            Log.d("userDebug", "Current downloaded json string: " + string);
+            Log.d("userDebug","jsonToOBject();These are the attributes" +
+                    " from online");
+            //Name,imageUrl,about,phonenumber,distance,id,lat,long,userid,password
+            truck.name = (String) jsonObj.get("name");i++;
+            truck.name = "New" + truck.name.toString();
+            Log.d("userDebug","user::"+i);
+            truck.imageURL = (String) jsonObj.get("imageUrl");i++;
+            Log.d("userDebug","user::"+i);
+            truck.about = (String)jsonObj.get("about");i++;
+            Log.d("userDebug","user::"+i);
+            truck.phoneNumber = (String)jsonObj.get("phoneNumber");i++;
+            Log.d("userDebug","user::"+i);
+            truck.distance = (Integer) jsonObj.get("distance");i++;
+            Log.d("userDebug","user::"+i);
+            truck.id = (Integer)  jsonObj.get("id");i++;
+            Log.d("userDebug","user::"+i);
+
+            //obj.put("favorite", item.favorite);
+
+            truck.foodType ="Da fudging best!";
+//            truck.foodType = (String) jsonObj.get("da best")
+            //Lat and Long for the current item.
+            truck.latitude = (Double)  jsonObj.get("latitude");
+            truck.longitude = (Double)  jsonObj.get("longitude");
+
+
+            String us  = (String) jsonObj.get("UserID");i++;
+            truck.setUserID(us);
+            String ps =  (String) jsonObj.get("Password");i++;
+            truck.setPassword(ps);
+
+            Log.d("userDebug","jsonToObject() asdfasdfasdfaf:" + truck.name);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return truck;
+    }
+
+
 
     /**
      * Display the text from the downloaded file for debugging purposes.
      * @param input we input the file. to read it and make sure that it will done.
      * @throws IOException
      */
-    private static void displayTextInputStream(InputStream input)
+    private String displayTextInputStream(InputStream input)
             throws IOException {
         // Read one text line at a time and display.
         BufferedReader reader = new BufferedReader(new
                 InputStreamReader(input));
-        while (true) {
-            String line = reader.readLine();
-            if (line == null) break;
 
-            Log.d("userDebug","    " + line);
-        }
-        Log.d("userDebug", "hmmmm. Finished");
+        String line = "";
+        int i = 0;
+
+        line = line + reader.readLine();
+            Log.d("userDebug","loop");
+        Log.d("userDebug",line);
+        return line;
     }
 
 
@@ -372,6 +468,7 @@ public class AWSInterface
      * @param itemToUpload - this item is converted to JSON file and then uploaded into s3.
      */
     public void uploadItem(TruckInfo itemToUpload){
+
         File file = new File(mContext.getFilesDir(),"fileName.txt");
         FileOutputStream fos = null;
         JSONObject TruckItemJson = toJsonAndBeyond(itemToUpload);
@@ -382,14 +479,25 @@ public class AWSInterface
             e.printStackTrace();
         }
 
+        /*
+            Creates an amazon s3client;
+         */
         Log.d("uploadItem","Creating an AmazonS3Client");
         AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials(
                 "AKIAJL2EY65OZGTME4SA",
                 "XkFG0M28GpE7/x2h0w5nE8rME/v0LsTr1O8s3SRc") );
-//        String Bucket_Curr = "group3.txstate.1250";
-        s3Client.createBucket(Bucket_Curr);
 
+
+        /*
+              Keep the following block for troubleshooting or mass upload!!!
+         */
+//        String Bucket_Curr = "group3.txstate.1250";
+//        s3Client.createBucket(Bucket_Curr);
 //        PutObjectRequest por = new PutObjectRequest( Bucket_Curr, itemToUpload.name, file );
+
+        /*
+            Creates an upload a file request to the amazon s3.
+         */
         PutObjectRequest por = new PutObjectRequest( Bucket_Curr,
                 itemToUpload.name,
                 file);
@@ -399,28 +507,73 @@ public class AWSInterface
 
     /**
      * Convets given item into a json item and returns the JSON object
+     * </P> To later be use to uploaded online
      * @param item
      * @return converted json objet.
      */
-
     public JSONObject toJsonAndBeyond(TruckInfo item){
+
+        //Create an object to use for puting the trucks attributes.
         JSONObject obj = new JSONObject();
+
         try {
+            Log.d("userDebug", "Try: putting everything to objects");
+
+            //All public items for the current item.
             obj.put("name", item.name);
-            obj.put("imageUrl", "------");
+            obj.put("imageUrl", "DummyURl");
             obj.put("about", item.about);
-            obj.put("distance", item.distance);
-            obj.put("favorite", item.favorite);
-            obj.put("latitude", item.latitude);
-            obj.put("longitude", item.longitude);
+            obj.put("phoneNumber",item.phoneNumber);
+            obj.put("distance", new Float(item.distance));
+            obj.put("id", new Integer(item.id));
+
+            //@todo comment it out for now might come back later;
+            //obj.put("favorite", item.favorite);
+
+            //Lat and Long for the current item.
+            obj.put("latitude", new Double(item.latitude));
+            obj.put("longitude", new Double(item.longitude));
+            obj.put("end",null);
+
+            /*
+                Menu Arraylist for given item.
+             */
+            int current_menu_item = 0; //keeps track of the index
+            int number_of_menu_items = 0;//initialize to zero.
+
+
+            number_of_menu_items = item.menu.size();//creates a new
+
+            //iterates through the list
+            for(current_menu_item = 0;
+                current_menu_item<number_of_menu_items;
+                current_menu_item++) {
+
+                ArrayList list = new ArrayList();
+                list.add(item.menu.get(current_menu_item).name + "new!!yay");
+                //Get Description
+                list.add(item.menu.get(current_menu_item).description);
+                //get price
+                list.add(item.menu.get(current_menu_item).price);
+                //Get ID
+                list.add(item.menu.get(current_menu_item).id);
+                //TruckId
+                list.add(item.menu.get(current_menu_item).TruckId);
+                JSONArray jsonArray = new JSONArray(list);
+
+                obj.put("Menu_item" + current_menu_item, jsonArray);
+            }
+
+            //Private Strings from current item.
             obj.put("UserID", "UserID");
             obj.put("Password", "Password");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-
-
+        Log.d("userDebug",obj.toString());
+        Log.d("userDebug","Done returning object");
         return obj;
     }
 
