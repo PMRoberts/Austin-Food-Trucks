@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class menuItem implements Serializable
 {
     public Drawable image;
+    public String imageUrl = "https://s3.amazonaws.com/aft.photos.250.250/5.jpg";
     public String name;
     public String description;
     public String price;

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class TruckInfo implements Serializable
 {
-    public String imageURL;
+    public String imageURL = "https://s3.amazonaws.com/aft.photos.500.500/Truck+(1).jpg";
     public Drawable image;
     public String name;
     public String about;
