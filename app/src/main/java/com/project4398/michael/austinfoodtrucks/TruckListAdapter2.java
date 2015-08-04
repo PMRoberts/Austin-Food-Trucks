@@ -1,5 +1,6 @@
 package com.project4398.michael.austinfoodtrucks;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -56,7 +57,8 @@ public class TruckListAdapter2 extends ArrayAdapter<TruckInfo> implements Locati
         View rowView = inflater.inflate(R.layout.adapter_truck_list, parent, false);
 
         ImageView imageView = (ImageView) rowView.findViewById(R.id.TruckInfoImage);
-        if(mValues[position].image != null) {
+        if(mValues[position].image != null)
+        {
             imageView.setImageDrawable(mValues[position].image);
         }
         else
@@ -70,13 +72,12 @@ public class TruckListAdapter2 extends ArrayAdapter<TruckInfo> implements Locati
         textView.setText(mValues[position].name);
 
         TextView textView2 = (TextView) rowView.findViewById(R.id.TruckInfoTypes);
-        textView2.setText(mValues[position].foodType.get(0));
+        textView2.setText(mValues[position].foodType);
 
         TextView textView3 = (TextView) rowView.findViewById(R.id.TruckInfoDistance);
         float[] tempfloat = new float[2];
-        //@todo I commented out this line to get the app to work.
-        //location.distanceBetween(location.getLatitude(), location.getLongitude(), mValues[position].latitude, mValues[position].longitude, tempfloat);
-        textView3.setText("" + (Math.round((tempfloat[0]*0.000621371) * 100.0) / 100.0));
+        location.distanceBetween(location.getLatitude(), location.getLongitude(), mValues[position].latitude, mValues[position].longitude, tempfloat);
+        textView3.setText("" + (Math.round((tempfloat[0]*0.000621371) * 100.0) / 100.0) + "MI");
 
         ImageView imageView2 = (ImageView) rowView.findViewById(R.id.TruckInfoFavorite);
         imageView2.setImageResource(R.drawable.splash_icon);
@@ -102,12 +103,16 @@ public class TruckListAdapter2 extends ArrayAdapter<TruckInfo> implements Locati
                     {
                         Intent profileIntent = new Intent(mContext, UserProfileActivity.class);
                         profileIntent.putExtra("ID", temp.id);
+                        profileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         mContext.startActivity(profileIntent);
+                        //((Activity)mContext).finish();
                     } else
                     {
                         Intent profileIntent = new Intent(mContext, TruckProfileActivity.class);
                         profileIntent.putExtra("ID", temp.id);
+                        profileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         mContext.startActivity(profileIntent);
+                        //((Activity)mContext).finish();
                     }
                 }
             }

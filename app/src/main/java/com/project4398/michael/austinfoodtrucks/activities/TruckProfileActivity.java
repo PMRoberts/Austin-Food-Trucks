@@ -130,6 +130,6 @@ public class TruckProfileActivity extends AppCompatActivity
     {
         Intent intent = new Intent(this,TruckListActivity.class);
         startActivity(intent);
-        //finish();
+        finish();
     }
 }

@@ -1,8 +1,6 @@
 package com.project4398.michael.austinfoodtrucks;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ public class TruckInfo implements Serializable
     public String name;
     public String about;
     public String phoneNumber;
-    public ArrayList<String> foodType;
+    public String foodType;
 
     public float distance;
     public int id = -1;
@@ -30,7 +28,6 @@ public class TruckInfo implements Serializable
 
     public TruckInfo()
     {
-        foodType = new ArrayList<String>();
         menu = new ArrayList<menuItem>();
     }
 

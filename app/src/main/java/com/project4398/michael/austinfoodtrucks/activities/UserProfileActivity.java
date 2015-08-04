@@ -4,11 +4,15 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,7 +39,6 @@ public class UserProfileActivity extends AppCompatActivity
     private Button mEditMenu;
     private Context mContext;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -45,6 +48,7 @@ public class UserProfileActivity extends AppCompatActivity
         mInfo = AWSInterface.getPlayer().getTruckByID(intent.getIntExtra("ID", 0));
 
         mContext = this;
+
 
         setContentView(R.layout.activity_user_profile);
 
@@ -197,6 +201,9 @@ public class UserProfileActivity extends AppCompatActivity
     {
         Intent intent = new Intent(this,TruckListActivity.class);
         startActivity(intent);
+        finish();
         //finish();
     }
+
+
 }

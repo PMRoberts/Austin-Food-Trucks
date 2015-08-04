@@ -1,6 +1,7 @@
 package com.project4398.michael.austinfoodtrucks.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -76,7 +77,7 @@ public class NewUserFragment extends Fragment
                         Intent profileIntent = new Intent(mContext, EditUserInfoActivity.class);
                         profileIntent.putExtra("ID", mInfo.id);
                         mContext.startActivity(profileIntent);
-
+                        ((Activity)mContext).finish();
                     }
             }
         });

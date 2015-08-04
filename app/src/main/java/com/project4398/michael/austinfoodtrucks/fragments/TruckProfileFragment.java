@@ -3,7 +3,11 @@ package com.project4398.michael.austinfoodtrucks.fragments;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +21,7 @@ import com.project4398.michael.austinfoodtrucks.TruckInfo;
 /**
  * Created by Michael on 7/15/2015.
  */
-public class TruckProfileFragment extends Fragment
+public class TruckProfileFragment extends Fragment implements LocationListener
 {
     private Context mContext;
     private TruckInfo mInfo;
@@ -25,7 +29,10 @@ public class TruckProfileFragment extends Fragment
     private TextView mTypes;
     private TextView mAbout;
     private TextView mPhoneNumber;
+    private TextView mDistance;
     private ImageView mImage;
+    LocationManager mLocationManager;
+    Location location;
 
     public TruckProfileFragment newFragment()
     {
@@ -41,6 +48,10 @@ public class TruckProfileFragment extends Fragment
         mInfo = AWSInterface.getPlayer().getTruckByID(getArguments().getInt("ID", 0));
 
         mContext = getActivity();
+
+        mLocationManager = (LocationManager)mContext.getSystemService(Context.LOCATION_SERVICE);
+        location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
     }
     @Override
     public void onResume()
@@ -59,10 +70,15 @@ public class TruckProfileFragment extends Fragment
         mTypes = (TextView)rootView.findViewById(R.id.TruckTypes);
         mPhoneNumber = (TextView)rootView.findViewById(R.id.TruckPhoneNumber);
 
+        TextView textView3 = (TextView)rootView.findViewById(R.id.Distance);
+        float[] tempfloat = new float[2];
+        location.distanceBetween(location.getLatitude(), location.getLongitude(), mInfo.latitude, mInfo.longitude, tempfloat);
+        textView3.setText("" + (Math.round((tempfloat[0] * 0.000621371) * 100.0) / 100.0)+ "MI");
+
         mName.setText(mInfo.name);
-        if(!mInfo.foodType.isEmpty()) {
-            mTypes.setText(mInfo.foodType.get(0));
-        }
+//        if(!mInfo.foodType.isEmpty()) {
+            mTypes.setText(mInfo.foodType);
+//        }
         mAbout.setText(mInfo.about);
         mPhoneNumber.setText(mInfo.phoneNumber);
 
@@ -96,4 +112,16 @@ public class TruckProfileFragment extends Fragment
     {
         super.onDestroy();
     }
+
+    public void onLocationChanged(Location location) {
+        if (location != null) {
+            Log.v("Location Changed", location.getLatitude() + " and " + location.getLongitude());
+            mLocationManager.removeUpdates(this);
+        }
+    }
+
+    // Required functions
+    public void onProviderDisabled(String arg0) {}
+    public void onProviderEnabled(String arg0) {}
+    public void onStatusChanged(String arg0, int arg1, Bundle arg2) {}
 }

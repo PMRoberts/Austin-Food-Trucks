@@ -1,6 +1,7 @@
 package com.project4398.michael.austinfoodtrucks.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -67,7 +68,7 @@ public class LoginFragment extends Fragment
             {
                     Intent profileIntent = new Intent(mContext, NewUserActivity.class);
                     mContext.startActivity(profileIntent);
-                    //finish();
+                    ((Activity)mContext).finish();
             }
         });
         mLogIn.setOnClickListener(new View.OnClickListener()
@@ -80,7 +81,7 @@ public class LoginFragment extends Fragment
                     Toast.makeText(mContext,"Login Successful", Toast.LENGTH_SHORT).show();
                     Intent profileIntent = new Intent(mContext, TruckListActivity.class);
                     mContext.startActivity(profileIntent);
-                    //finish();
+                    ((Activity)mContext).finish();
                 }
                 else
                 {

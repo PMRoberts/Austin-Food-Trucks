@@ -2,9 +2,6 @@ package com.project4398.michael.austinfoodtrucks.fragments;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.MatrixCursor;
-import android.database.MergeCursor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -17,7 +14,6 @@ import android.widget.ListView;
 
 import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.AWSInterface;
-import com.project4398.michael.austinfoodtrucks.TruckListAdapter;
 import com.project4398.michael.austinfoodtrucks.TruckInfo;
 import com.project4398.michael.austinfoodtrucks.TruckListAdapter2;
 

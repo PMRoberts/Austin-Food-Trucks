@@ -3,12 +3,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:id="@+id/InfoContainer"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="100dp"
-    android:background="#ffffff">
+    android:background="#d8e6f0">
 
     <ImageView
-        android:id="@+id/TruckInfoImage"
+        android:id="@+id/MapDialogImage"
         android:layout_height="100dp"
         android:layout_width="100dp"
         android:layout_centerVertical="true"
@@ -17,7 +17,7 @@
         android:padding="5dp"
         android:background="#000000"/>
     <TextView
-        android:id="@+id/TruckInfoName"
+        android:id="@+id/MapDialogName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -25,10 +25,10 @@
         android:text="0"
         android:textColor="#323232"
         android:layout_margin="10dp"
-        android:layout_toRightOf="@+id/TruckInfoImage"
-        android:layout_toLeftOf="@+id/TruckInfoFavorite"/>
+        android:layout_alignTop="@+id/MapDialogImage"
+        android:layout_toRightOf="@+id/MapDialogImage" />
     <TextView
-        android:id="@+id/TruckInfoTypes"
+        android:id="@+id/MapDialogTypes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -37,27 +37,18 @@
         android:text="0"
         android:textColor="#323232"
         android:layout_margin="10dp"
-        android:layout_toRightOf="@+id/TruckInfoImage"
-        android:layout_toLeftOf="@+id/TruckInfoFavorite"/>
+        android:layout_toRightOf="@+id/MapDialogImage" />
     <TextView
-        android:id="@+id/TruckInfoDistance"
+        android:id="@+id/MapDialogDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
         android:textSize="16dp"
         android:text="0"
         android:textColor="#323232"
         android:layout_margin="10dp"
-        android:layout_toRightOf="@+id/TruckInfoImage"
-        android:layout_toLeftOf="@+id/TruckInfoFavorite"/>
-    <ImageView
-        android:id="@+id/TruckInfoFavorite"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:padding="5dp" />
+        android:layout_alignBottom="@+id/MapDialogImage"
+        android:layout_toRightOf="@+id/MapDialogImage" />
 
 
 </RelativeLayout>

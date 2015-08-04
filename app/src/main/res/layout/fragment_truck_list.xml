@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#d8e6f0">
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="8dp"
         android:id="@+id/TruckList"
-        android:dividerHeight="4px">
+        android:dividerHeight="8dp"
+        android:divider="#d8e6f0">
     </ListView>
 
 </LinearLayout>

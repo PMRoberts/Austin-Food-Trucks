@@ -3,6 +3,7 @@
     android:id="@+id/editRoot"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#d8e6f0">
 
 </LinearLayout>

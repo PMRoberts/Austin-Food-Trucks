@@ -3,16 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/menuRoot"
-    >
+    android:background="#d8e6f0">
     <com.project4398.michael.austinfoodtrucks.ExpandableHeightGridView
         android:id="@+id/customGrid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="8dp"
         android:gravity="center"
-        android:horizontalSpacing="2dp"
+        android:horizontalSpacing="8dp"
+        android:verticalSpacing="8dp"
         android:isScrollContainer="false"
         android:numColumns="2"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="2dp"></com.project4398.michael.austinfoodtrucks.ExpandableHeightGridView>
+        android:stretchMode="columnWidth"></com.project4398.michael.austinfoodtrucks.ExpandableHeightGridView>
 
 </RelativeLayout>
