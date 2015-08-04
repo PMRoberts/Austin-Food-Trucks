@@ -12,7 +12,7 @@
     <item android:id="@+id/action_ShowMap"
         android:title="Show Map"
         android:orderInCategory="99"
-        android:icon="@drawable/splash_icon"
+        android:icon="@drawable/google_maps_icon"
         app:showAsAction="always" />
 
 </menu>
