@@ -146,7 +146,7 @@ public class UserProfileActivity extends AppCompatActivity
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
-            mMap.setMyLocationEnabled(true);
+ //           mMap.setMyLocationEnabled(true);//@todo Commented this off so it will work on the macbook air.
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();

@@ -48,4 +48,12 @@ public class TruckInfo implements Serializable
         Password = password;
     }
 
+
+    public String getUserID(){
+        return UserID;
+    }
+
+    public String getPassword(){
+        return Password;
+    }
 }

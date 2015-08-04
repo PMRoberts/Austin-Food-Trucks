@@ -50,6 +50,20 @@ import java.util.LinkedList;
 
 /**
  * Created by PRoberts on 7/29/15.
+ *
+ *
+ *
+ *     To delete an object follow the next lines.
+         AmazonS3Client s3 = getAmazonS3Client();
+         DeleteAnObject deleteAnObject = new DeleteAnObject(Bucket_Curr, "t",s3);
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  */
 public class AWSInterface
 {
@@ -62,7 +76,7 @@ public class AWSInterface
     public static AWSInterface getPlayer(){return mAWSInterface;}
     /* Singleton End */
 
-    public String Bucket_Curr = "aft.version.1.1.7";
+    public String Bucket_Curr = "aft.version.1.2.0"; //Current Version of Data
     private String bucket_name;
     private CognitoCachingCredentialsProvider credentialsProvider;
     private AmazonS3Client s3Client;
@@ -112,12 +126,6 @@ public class AWSInterface
          */
         ArrayList <String> list_of_trucks_from_s3 = AllItemsInBucket();
 
-        ArrayList <String> list_of_url_for_trucks = new ArrayList<String>(0);
-
-
-
-
-
 
         for(int current_key = 0; current_key < list_of_trucks_from_s3.size(); current_key++) {
             TruckInfo truckInfo = new TruckInfo();
@@ -128,6 +136,8 @@ public class AWSInterface
         }
 
         dummyDataForMenu();
+
+
 
         logged("FINISHED:DownloadList();");
     }
@@ -215,17 +225,10 @@ public class AWSInterface
      * @return
      */
     public TruckInfo jsonToObject(String string){
-
-        Log.d("userDebug","jsonToOBjectStart");
-        Log.d("userDebug",string);
-        //Creates a new truck info.
         TruckInfo truck = new TruckInfo();
         try {
             JSONObject jsonObj = new JSONObject(string);
             int i = 0;
-            Log.d("userDebug", "Current downloaded json string: " + string);
-            Log.d("userDebug","jsonToOBject();These are the attributes" +
-                    " from online");
             //Name,imageUrl,about,phonenumber,distance,id,lat,long,userid,password
             truck.name = (String) jsonObj.get("name");
             truck.name = truck.name.toString();
@@ -234,35 +237,18 @@ public class AWSInterface
             truck.phoneNumber = (String)jsonObj.get("phoneNumber");
             truck.distance =  -1;//@todo need to fix this show actual distanc.
             truck.id = (Integer)  jsonObj.get("id");
-
-            //obj.put("favorite", item.favorite);
-
-            truck.foodType ="Food Truck Type!";
-//            truck.foodType = (String) jsonObj.get("da best")
-            //Lat and Long for the current item.
-            truck.latitude = (Double)  jsonObj.get("latitude");
+            truck.foodType = (String)jsonObj.get("foodtype");
+//          truck.latitude = (Double)  jsonObj.get("latitude");
             truck.longitude = (Double)  jsonObj.get("longitude");
-
-//           MenuItem mi = new MenuItem;
-//           mi = jsonObj.getJSONArray("").getJSONObject(0).get("Menu_item"+0);
-
             String us  = (String) jsonObj.get("UserID");
             truck.setUserID(us);
             String ps =  (String) jsonObj.get("Password");
             truck.setPassword(ps);
-
-
-
-
-            logged("Downloaded:" + truck.name);
-        } catch (JSONException e) {
+             } catch (JSONException e) {
             e.printStackTrace();
         }
         return truck;
     }
-
-
-
     /**
      * Display the text from the downloaded file for debugging purposes.
      * @param input we input the file. to read it and make sure that it will done.
@@ -273,17 +259,11 @@ public class AWSInterface
         // Read one text line at a time and display.
         BufferedReader reader = new BufferedReader(new
                 InputStreamReader(input));
-
         String line = "";
         int i = 0;
-
         line = line + reader.readLine();
-        Log.d("userDebug", "loop");
-        Log.d("userDebug", line);
         return line;
     }
-
-
     /**
      * Creates a temporary file with text data to demonstrate uploading a file
      * to Amazon S3
@@ -300,7 +280,6 @@ public class AWSInterface
         writer.close();
         return file;
     }
-
     /**
      * uploadItem, Creates  a new file, with filename.txt name.
      * </p> Creates a file by the filename.txt, a fileoutpustream by the name of fos
@@ -327,25 +306,20 @@ public class AWSInterface
          */
         Log.d("uploadItem","Creating an AmazonS3Client");
         AmazonS3Client s3Client = getAmazonS3Client();
-        //s3Client.createBucket(Bucket_Curr);
-
-
+//        s3Client.createBucket(Bucket_Curr); //@todo on or off depending on trouble shooting
         /*
               Keep the following block for troubleshooting or mass upload!!!
          */
 //        s3Client.createBucket(Bucket_Curr);
 //        PutObjectRequest por = new PutObjectRequest( Bucket_Curr, itemToUpload.name, file );
-
         /*
             Creates an upload a file request to the amazon s3.
          */
         PutObjectRequest por = new PutObjectRequest( Bucket_Curr,
                 itemToUpload.name,
                 file);
-
         s3Client.putObject(por);
     }
-
     /**
      * Convets given item into a json item and returns the JSON object
      * </P> To later be use to uploaded online
@@ -362,38 +336,30 @@ public class AWSInterface
 
             //All public items for the current item.
             obj.put("name", item.name);
+            obj.put("foodtype", item.foodType);
             obj.put("imageUrl",item.imageURL);
             obj.put("about", item.about);
             obj.put("phoneNumber",item.phoneNumber);
             obj.put("distance", Float.valueOf(item.distance));
             obj.put("id", Integer.valueOf(item.id));
-
-
             //@todo comment it out for now might come back later;
             //obj.put("favorite", item.favorite);
-
             //Lat and Long for the current item.
             obj.put("latitude", Double.valueOf(item.latitude));
             obj.put("longitude", Double.valueOf(item.longitude));
             obj.put("end",null);
-
             /*
                 Menu Arraylist for given item.
              */
             int current_menu_item = 0; //keeps track of the index
             int number_of_menu_items = 0;//initialize to zero.
-
-
             number_of_menu_items = item.menu.size();//creates a new
-
             //iterates through the list
             ArrayList menuList = new ArrayList();
             //obj.put(obj.put())
             for(current_menu_item = 0;
                 current_menu_item<number_of_menu_items;
                 current_menu_item++) {
-
-
                 ArrayList list = new ArrayList();
                 list.add(item.menu.get(current_menu_item).name + "new!!yay");
                 //Get Description
@@ -411,8 +377,8 @@ public class AWSInterface
             }
 
             //Private Strings from current item.
-            obj.put("UserID", "UserID");
-            obj.put("Password", "Password");
+            obj.put("UserID", item.getUserID());
+            obj.put("Password", item.getPassword());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -707,15 +673,28 @@ public class AWSInterface
         return null;
     }
 
+    /**
+     * This method will iterate throught the existing list of trucks and seeing if there is a match
+     * </P>.If there is a match for the same id. The old Item will be removed from S3. This will
+     * </p> the user to be able to upload a file without collision. Therefore 2 Trucks can't have
+     * </p> the same name or .id
+     * </P> The DeleteAnobject.java will be used.
+     * @param newInfo The comparison file.
+     */
     public void EditTruckByID(TruckInfo newInfo)
     {
         Boolean tempNew = true;
         for (int x = 0; x < mTruckList.size(); x++)
         {
+            logged("here we are");
             if (mTruckList.get(x).id == newInfo.id)
             {
+                logged("uuuuu I found a matching id");
                 tempNew = false;
+                AmazonS3Client s3 = getAmazonS3Client();
+                DeleteAnObject deleteAnObject = new DeleteAnObject(Bucket_Curr,newInfo.name,s3);
                 mTruckList.set(x, newInfo);
+                uploadItem(newInfo);
             }
         }
         if (tempNew)
