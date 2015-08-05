@@ -52,7 +52,7 @@ public class EditUserInfoFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         if(getArguments() != null) {
-            mInfo = AWSInterface.getPlayer().getTruckByID(getArguments().getInt("ID"));
+            mInfo = new TruckInfo(AWSInterface.getPlayer().getTruckByID(getArguments().getInt("ID")));
         }
 
         mContext = getActivity();

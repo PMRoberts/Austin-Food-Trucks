@@ -52,7 +52,9 @@ public class EditMenuFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         if(getArguments() != null) {
-            mInfo = AWSInterface.getPlayer().getTruckByID(getArguments().getInt("ID"));
+            //mInfo = AWSInterface.getPlayer().getTruckByID(getArguments().getInt("ID"));
+            mInfo = new TruckInfo(AWSInterface.getPlayer().getTruckByID(getArguments().getInt("ID")));
+
             if(getArguments().getInt("MenuID", -1) >= 0)
             {
                 mMenuItem = mInfo.menu.get(getArguments().getInt("MenuID", -1));

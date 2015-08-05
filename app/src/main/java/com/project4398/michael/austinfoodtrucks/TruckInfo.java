@@ -52,4 +52,23 @@ public class TruckInfo implements Serializable
     public String getPassword(){
         return Password;
     }
+
+    public TruckInfo(TruckInfo TI)
+    {
+        menu = new ArrayList<menuItem>();
+        menu = TI.menu;
+        imageURL = TI.imageURL;
+        image = TI.image;
+        name = TI.name;
+        about = TI.about;
+        phoneNumber = TI.phoneNumber;
+        foodType = TI.foodType;
+        distance = TI.distance;
+        id = TI.id;
+        favorite = TI.favorite;
+        latitude = TI.latitude;
+        longitude = TI.longitude;
+        UserID = TI.UserID;
+        Password = TI.Password;
+    }
 }

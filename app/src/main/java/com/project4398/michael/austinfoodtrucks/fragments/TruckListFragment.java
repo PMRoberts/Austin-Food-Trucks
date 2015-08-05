@@ -43,8 +43,6 @@ public class TruckListFragment extends Fragment implements LocationListener
     {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
-        //mAdapter = new TruckListAdapter(mContext, null);
-
 
         mLocationManager = (LocationManager)mContext.getSystemService(Context.LOCATION_SERVICE);
 
@@ -55,7 +53,6 @@ public class TruckListFragment extends Fragment implements LocationListener
 
 
         s3Interface = AWSInterface.getPlayer();
-        //TLITemp = s3Interface.mTruckList;
         TLITemp = AWSInterface.getPlayer().mTruckList;
 
     }
@@ -80,49 +77,6 @@ public class TruckListFragment extends Fragment implements LocationListener
     }
     public void setList(ArrayList<TruckInfo> songList)
     {
-//        String temp;
-//        String temp2;
-//        MatrixCursor matrixCursor = new MatrixCursor(new String[] {"_id","image", "name", "distance", "foodType", "favorite", "id"});
-//        if(songList != null)
-//        {
-//            if (songList.size() == 0)
-//            {
-//                matrixCursor.addRow(new String[]{"" + 1, null, null, null, null, null, null});
-//            } else {
-//                for (int x = 0; x < songList.size(); x++)
-//                {
-//                    temp = "";
-//                    temp2 = "";
-//                    for(int y = 0; y < songList.get(x).foodType.size(); y++)
-//                    {
-//                        temp += songList.get(x).foodType.get(y);
-//                        if(y != songList.get(x).foodType.size()-1)
-//                        {
-//                            temp += ", ";
-//                        }
-//                    }
-//                    if(songList.get(x).favorite)
-//                    {
-//                        temp2 = "true";
-//                    }
-//                    else
-//                    {
-//                        temp2 = "false";
-//                    }
-//                    //Log.i("stuff", "got to creating to cursor");
-//                    matrixCursor.addRow(new String[]{"" + 1,
-//                            songList.get(x).image,
-//                            songList.get(x).name,
-//                            "" + songList.get(x).distance,
-//                            temp,
-//                            temp2,
-//                            "" + songList.get(x).id});
-//                }
-//            }
-//            Cursor TruckListCursor = new MergeCursor(new Cursor[]{matrixCursor, null});
-//            mAdapter.swapCursor(TruckListCursor);
-//        }
-
         TruckInfo[] menuArray = TLITemp.toArray(new TruckInfo[TLITemp.size()]);
         mAdapter2 = new TruckListAdapter2(mContext, menuArray);
     }

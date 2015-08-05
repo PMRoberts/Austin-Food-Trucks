@@ -45,7 +45,8 @@ public class UserProfileActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
-        mInfo = AWSInterface.getPlayer().getTruckByID(intent.getIntExtra("ID", 0));
+        //mInfo = AWSInterface.getPlayer().getTruckByID(intent.getIntExtra("ID", 0));
+        mInfo = new TruckInfo(AWSInterface.getPlayer().getTruckByID(intent.getIntExtra("ID", 0)));
 
         mContext = this;
 
