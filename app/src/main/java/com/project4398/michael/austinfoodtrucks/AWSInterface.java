@@ -2,6 +2,7 @@ package com.project4398.michael.austinfoodtrucks;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.JsonWriter;
 import android.util.Log;
@@ -642,7 +643,9 @@ public class AWSInterface
             if (mTruckList.get(x).id == newInfo.id)
             {
                 tempNew = false;
-                uploadItem(newInfo);
+                Log.i("stuff", "my album 'my album is dropping' is dropping");
+                new UploadItemTask().execute(newInfo);
+                //uploadItem(newInfo);
                 //mTruckList.set(x, newInfo);
             }
         }
@@ -684,5 +687,27 @@ public class AWSInterface
      */
     public void logged(String comment){
         Log.d("userDebug", comment);
+    }
+
+
+    class UploadItemTask extends AsyncTask<TruckInfo, Void, Void>
+    {
+        protected Void doInBackground(TruckInfo... newInfo)
+        {
+            try
+            {
+                uploadItem(newInfo[0]);
+                return null;
+            } catch (Exception e)
+            {
+                Log.i("stuff", "uploadItem Fail");
+                e.printStackTrace();
+                return null;
+            }
+        }
+        protected void onPostExecute(Void feed)
+        {
+            Log.i("stuff", "uploadItem ended");
+        }
     }
 }
