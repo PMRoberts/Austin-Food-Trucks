@@ -592,7 +592,7 @@ public class AWSInterface
                 menuTemp.get(i).inStock = true;
                 menuTemp.get(i).favorite = true;
                 menuTemp.get(i).TruckId = mTruckList.get(x).id;
-                menuTemp.get(i).id = 0;
+                menuTemp.get(i).id = i;
                 menuTemp.get(i).imageUrl = "https://s3.amazonaws.com/aft.photos.250.250/" + (i + 1) + ".jpeg";
                 menuTemp.get(i).image = loadImage(menuTemp.get(i).imageUrl);
             }
