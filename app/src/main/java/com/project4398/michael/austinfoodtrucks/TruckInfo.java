@@ -30,7 +30,6 @@ public class TruckInfo implements Serializable
     {
         menu = new ArrayList<menuItem>();
     }
-
     public boolean CheckCredentials(String UID, String password)
     {
         if (UserID.equals(UID) && Password.equals(password))
@@ -47,12 +46,9 @@ public class TruckInfo implements Serializable
     {
         Password = password;
     }
-
-
     public String getUserID(){
         return UserID;
     }
-
     public String getPassword(){
         return Password;
     }

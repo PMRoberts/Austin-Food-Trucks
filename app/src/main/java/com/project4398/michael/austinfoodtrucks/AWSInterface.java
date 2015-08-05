@@ -42,6 +42,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
+import java.io.StringReader;
 import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
@@ -50,20 +51,8 @@ import java.util.LinkedList;
 
 /**
  * Created by PRoberts on 7/29/15.
- *
- *
- *
- *     To delete an object follow the next lines.
-         AmazonS3Client s3 = getAmazonS3Client();
-         DeleteAnObject deleteAnObject = new DeleteAnObject(Bucket_Curr, "t",s3);
- *
- *
- *
- *
- *
- *
- *
- *
+ *@author Paul M. Roberts
+ *@author Luis M. Rocha
  */
 public class AWSInterface
 {
@@ -267,17 +256,34 @@ public class AWSInterface
      * @param itemToUpload - this item is converted to JSON file and then uploaded into s3.
      */
     public void uploadItem(TruckInfo itemToUpload){
-
+        AmazonS3Client s3Client = getAmazonS3Client();
         File file = new File(mContext.getFilesDir(),"fileName.txt");
         FileOutputStream fos = null;
         JSONObject TruckItemJson = toJsonAndBeyond(itemToUpload);
+        logged("1");
+        for (int x = 0; x < mTruckList.size(); x++)
+        {
+            logged("......");
+            if (mTruckList.get(x).id == itemToUpload.id)
+            {
+                logged("12");
+                String name_to_erase = mTruckList.get(x).name;
+                mTruckList.remove(x);
+                mTruckList.add(itemToUpload);
+                DeleteAnObject deleteAnObject =
+                        new DeleteAnObject(Bucket_Curr,name_to_erase,s3Client);
+            }
+        }
+
+        logged("123");
+
 
         try {
             file = createSampleFile(TruckItemJson);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        AmazonS3Client s3Client = getAmazonS3Client();
+        //AmazonS3Client s3Client = getAmazonS3Client();
 //        s3Client.createBucket(Bucket_Curr); //@todo on or off depending on trouble shooting
         /*
               Keep the following block for troubleshooting or mass upload!!!
@@ -368,7 +374,6 @@ public class AWSInterface
         dishes.add("Pollo Loco");dishes.add("good fagita");dishes.add("Huevostaco");
 
         createDishesForDummyInfo(menuTemp, dishes);
-
 
         menuTemp2.add(new menuItem());
         menuTemp2.get(menuTemp2.size()-1).name = "cow";
@@ -538,7 +543,6 @@ public class AWSInterface
 
         mTruckList = TLITemp;
     }
-
     public void createDishesForDummyInfo(ArrayList<menuItem> menuTemp, ArrayList<String> dishes) {
         for(int i = 0; i < dishes.size(); i++) {
             menuTemp.add(new menuItem());
@@ -553,7 +557,6 @@ public class AWSInterface
             menuTemp.get(i).image = loadImage(menuTemp.get(i).imageUrl);
         }
     }
-
     /**
      *
      *
@@ -574,7 +577,6 @@ public class AWSInterface
             dishes.add("good fagita");
             dishes.add("Huevostaco");
 
-
             for (int i = 0; i < dishes.size(); i++) {
 
                 menuTemp.add(new menuItem());
@@ -591,13 +593,6 @@ public class AWSInterface
             mTruckList.get(x).menu = menuTemp;
         }
     }
-
-
-
-
-
-
-
     /*************************************************************************
      *transfors a url image into  a drawable object.
      * @param url Take the given URL to be created as drawable object
@@ -612,14 +607,11 @@ public class AWSInterface
             return null;
         }
     }
-
     /***********************************************************************************************
 
      These functions will be to edit and modify items and check.
 
      **********************************************************************************************/
-
-
     public TruckInfo getTruckByID(int ID)
     {
         for (int x = 0; x < mTruckList.size(); x++)
@@ -631,7 +623,6 @@ public class AWSInterface
         }
         return null;
     }
-
     /**
      * This method will iterate throught the existing list of trucks and seeing if there is a match
      * </P>.If there is a match for the same id. The old Item will be removed from S3. This will
@@ -642,18 +633,17 @@ public class AWSInterface
      */
     public void EditTruckByID(TruckInfo newInfo)
     {
+        logged("EDITTRUCKBYID method has been called: Should only be once per new account");
         Boolean tempNew = true;
         for (int x = 0; x < mTruckList.size(); x++)
         {
-            logged("here we are");
+            logged("The id for the new item is:" + newInfo.id);
+            logged("The id for the Current:" + mTruckList.get(x).id);
             if (mTruckList.get(x).id == newInfo.id)
             {
-                logged("uuuuu I found a matching id");
                 tempNew = false;
-                AmazonS3Client s3 = getAmazonS3Client();
-                DeleteAnObject deleteAnObject = new DeleteAnObject(Bucket_Curr,newInfo.name,s3);
-                mTruckList.set(x, newInfo);
                 uploadItem(newInfo);
+                //mTruckList.set(x, newInfo);
             }
         }
         if (tempNew)
@@ -663,7 +653,6 @@ public class AWSInterface
             mTruckList.add(newInfo);
         }
     }
-
     /**
      * Method will check that the user name and password are legit.
      */
@@ -679,18 +668,15 @@ public class AWSInterface
         }
         return false;
     }
-
     /*
            The next methods are just for ease of use when using the logcats
      */
-
     /**
      * Display a line full of ************** mainly used for console logcat not for the user.
      */
     public void logged(){
         Log.d("userDebug", "***********************************************************\n");
     }
-
     /**
      * Makes it easier to write notes on the logcat console by making anything inside the brakcetss
      * </p> have user debug prefix
