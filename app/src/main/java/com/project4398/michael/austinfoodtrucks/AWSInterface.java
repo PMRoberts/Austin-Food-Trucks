@@ -148,35 +148,30 @@ public class AWSInterface
     }
 
     public ArrayList<String> AllItemsInBucket(){
-        logged("AllItemsInBucket");
         ArrayList<String> list = new ArrayList<String>(0);
-
         /*
             First we create an s3Client to communicate and download the object;
          */
         AmazonS3Client s3client = getAmazonS3Client();
-
-
         ListObjectsRequest listObjectsRequest = new ListObjectsRequest()
                 .withBucketName(Bucket_Curr)
                 .withPrefix("");
         ObjectListing objectListing;
-
-        logged("---START OF LIST---");
         do {
             objectListing = s3client.listObjects(listObjectsRequest);
             for (S3ObjectSummary objectSummary :
                     objectListing.getObjectSummaries()) {
                 list.add(objectSummary.getKey());
-                Log.d("userDebug", objectSummary.getKey());
             }
             listObjectsRequest.setMarker(objectListing.getNextMarker());
         } while (objectListing.isTruncated());
-
-        logged("---END OF LIST---");
         return list;
     }
 
+    /**
+     * This is used to be able to access s3. It automally creates a key for the developer/user
+     * @return an amazons3 clients that allow upload and download
+     */
     public AmazonS3Client getAmazonS3Client() {
         return new AmazonS3Client(new BasicAWSCredentials(
                     "AKIAJL2EY65OZGTME4SA",
@@ -190,35 +185,19 @@ public class AWSInterface
      */
     public TruckInfo downloadItem(String key_of_item){
         TruckInfo item = new TruckInfo();
-        /*
-            First we create an s3Cliente to communicate and download the object;
-         */
         AmazonS3Client s3Client = getAmazonS3Client();
-        Log.d("userDebug", "Inside downloadItem();s3Client Created");
-
         S3Object s3object = s3Client.getObject(new GetObjectRequest(
                 Bucket_Curr, key_of_item));
-        Log.d("userDebug", "Inside downloadItem();created an s3Object and" +
-                " getobject request");
-
-
-        // String jsonObject = s3object.getObjectContent().toString();
-
         try {
-            Log.d("userDebug", "Inside downloadItem();Output of currently downloaded file");
             String hope = displayTextInputStream(s3object.getObjectContent());
-            Log.d("userDebug", "Inside downloadItem();End of downloaded file");
-
             TruckInfo yassss = new TruckInfo();
             yassss = jsonToObject(hope);
             item = yassss;
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return item;
     }
-
     /**
      * Converts a given json object into a an object
      * @param string
@@ -229,7 +208,6 @@ public class AWSInterface
         try {
             JSONObject jsonObj = new JSONObject(string);
             int i = 0;
-            //Name,imageUrl,about,phonenumber,distance,id,lat,long,userid,password
             truck.name = (String) jsonObj.get("name");
             truck.name = truck.name.toString();
             truck.imageURL = (String) jsonObj.get("imageUrl");
@@ -238,7 +216,7 @@ public class AWSInterface
             truck.distance =  -1;//@todo need to fix this show actual distanc.
             truck.id = (Integer)  jsonObj.get("id");
             truck.foodType = (String)jsonObj.get("foodtype");
-//          truck.latitude = (Double)  jsonObj.get("latitude");
+            truck.latitude = (Double)  jsonObj.get("latitude");
             truck.longitude = (Double)  jsonObj.get("longitude");
             String us  = (String) jsonObj.get("UserID");
             truck.setUserID(us);
@@ -257,8 +235,7 @@ public class AWSInterface
     private String displayTextInputStream(InputStream input)
             throws IOException {
         // Read one text line at a time and display.
-        BufferedReader reader = new BufferedReader(new
-                InputStreamReader(input));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
         String line = "";
         int i = 0;
         line = line + reader.readLine();
@@ -300,11 +277,6 @@ public class AWSInterface
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        /*
-            Creates an amazon s3client;
-         */
-        Log.d("uploadItem","Creating an AmazonS3Client");
         AmazonS3Client s3Client = getAmazonS3Client();
 //        s3Client.createBucket(Bucket_Curr); //@todo on or off depending on trouble shooting
         /*
@@ -332,8 +304,6 @@ public class AWSInterface
         JSONObject obj = new JSONObject();
 
         try {
-            Log.d("userDebug", "Try: putting everything to objects");
-
             //All public items for the current item.
             obj.put("name", item.name);
             obj.put("foodtype", item.foodType);
@@ -343,14 +313,10 @@ public class AWSInterface
             obj.put("distance", Float.valueOf(item.distance));
             obj.put("id", Integer.valueOf(item.id));
             //@todo comment it out for now might come back later;
-            //obj.put("favorite", item.favorite);
             //Lat and Long for the current item.
             obj.put("latitude", Double.valueOf(item.latitude));
             obj.put("longitude", Double.valueOf(item.longitude));
             obj.put("end",null);
-            /*
-                Menu Arraylist for given item.
-             */
             int current_menu_item = 0; //keeps track of the index
             int number_of_menu_items = 0;//initialize to zero.
             number_of_menu_items = item.menu.size();//creates a new
@@ -372,23 +338,16 @@ public class AWSInterface
                 list.add(item.menu.get(current_menu_item).TruckId);
                 JSONArray jsonArray = new JSONArray(list);
                 list.add(item.menu.get(current_menu_item).imageUrl);
-
                 obj.put("Menu_item" + current_menu_item, jsonArray);
             }
-
             //Private Strings from current item.
             obj.put("UserID", item.getUserID());
             obj.put("Password", item.getPassword());
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        Log.d("userDebug",obj.toString());
-        Log.d("userDebug", "Done returning object");
         return obj;
     }
-
     /**
      * Creates a bulk amount items for troubleshooing or inital state
      */
