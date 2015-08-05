@@ -9,8 +9,7 @@ import java.util.ArrayList;
  * Created by PRoberts on 7/16/15.
  */
 public class TruckInfo implements Serializable
-{
-    public String imageURL = "https://s3.amazonaws.com/aft.photos.500.500/Truck+(1).jpg";
+{    public String imageURL = "https://s3.amazonaws.com/aft.photos.500.500/Truck+(1).jpg";
     public Drawable image;
     public String name;
     public String about;
@@ -25,6 +24,7 @@ public class TruckInfo implements Serializable
     public ArrayList<menuItem> menu;
     private String UserID;
     private String Password;
+
 
     public TruckInfo()
     {

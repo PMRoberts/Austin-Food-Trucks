@@ -75,6 +75,8 @@ public class AWSInterface
     public static ArrayList<TruckInfo> mTruckList;
     public int ownersTruckID = -1;
 
+    private String  truck_to_be_deleted = "";
+
     public AWSInterface(Context context)
     {
         mContext = context;
@@ -129,7 +131,6 @@ public class AWSInterface
 
 
 
-        logged("FINISHED:DownloadList();");
     }
 
     public void createImageForTruck(int current_key) {
@@ -264,15 +265,19 @@ public class AWSInterface
         logged("1");
         for (int x = 0; x < mTruckList.size(); x++)
         {
-            logged("......");
+            logged("1.1");
             if (mTruckList.get(x).id == itemToUpload.id)
             {
-                logged("12");
+                logged("Current Item:" + mTruckList.get(x).name);
+                logged("Current Item:" + itemToUpload.name);
+                logged("The item that should be deleted:" + truck_to_be_deleted);
+                logged("1.2");
                 String name_to_erase = mTruckList.get(x).name;
                 mTruckList.remove(x);
                 mTruckList.add(itemToUpload);
                 DeleteAnObject deleteAnObject =
                         new DeleteAnObject(Bucket_Curr,name_to_erase,s3Client);
+                logged("Deleting the object" + name_to_erase + "from s3");
             }
         }
 
@@ -586,7 +591,7 @@ public class AWSInterface
                 menuTemp.get(i).price = "$" + (i * i + 1) + ".99";
                 menuTemp.get(i).inStock = true;
                 menuTemp.get(i).favorite = true;
-                menuTemp.get(i).TruckId = 0;
+                menuTemp.get(i).TruckId = mTruckList.get(x).id;
                 menuTemp.get(i).id = 0;
                 menuTemp.get(i).imageUrl = "https://s3.amazonaws.com/aft.photos.250.250/" + (i + 1) + ".jpeg";
                 menuTemp.get(i).image = loadImage(menuTemp.get(i).imageUrl);
@@ -634,26 +639,34 @@ public class AWSInterface
      */
     public void EditTruckByID(TruckInfo newInfo)
     {
+        for (int x = 0; x < mTruckList.size(); x++){
+            logged("list of name:" + x + mTruckList.get(x).name);
+        }
         logged("EDITTRUCKBYID method has been called: Should only be once per new account");
         Boolean tempNew = true;
         for (int x = 0; x < mTruckList.size(); x++)
         {
             logged("The id for the new item is:" + newInfo.id);
+            logged("name" + newInfo.name);
             logged("The id for the Current:" + mTruckList.get(x).id);
+            logged("name" + mTruckList.get(x).name);
             if (mTruckList.get(x).id == newInfo.id)
             {
+
+                truck_to_be_deleted = mTruckList.get(x).name;
                 tempNew = false;
                 Log.i("stuff", "my album 'my album is dropping' is dropping");
                 new UploadItemTask().execute(newInfo);
                 //uploadItem(newInfo);
                 //mTruckList.set(x, newInfo);
+                break;
             }
         }
         if (tempNew)
         {
             newInfo.id = mTruckList.size();
             ownersTruckID = newInfo.id;
-            mTruckList.add(newInfo);
+            //mTruckList.add(newInfo);
         }
     }
     /**
