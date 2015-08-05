@@ -666,7 +666,7 @@ public class AWSInterface
         {
             newInfo.id = mTruckList.size();
             ownersTruckID = newInfo.id;
-            //mTruckList.add(newInfo);
+            mTruckList.add(newInfo);
         }
     }
     /**

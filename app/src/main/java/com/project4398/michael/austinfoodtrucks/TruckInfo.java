@@ -56,6 +56,7 @@ public class TruckInfo implements Serializable
     public TruckInfo(TruckInfo TI)
     {
         menu = new ArrayList<menuItem>();
+//        if(TI.menu != null)
         menu = TI.menu;
         imageURL = TI.imageURL;
         image = TI.image;

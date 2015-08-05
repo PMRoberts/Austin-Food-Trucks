@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,14 @@ public class EditUserInfoFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
         if(getArguments() != null) {
-            mInfo = new TruckInfo(AWSInterface.getPlayer().getTruckByID(getArguments().getInt("ID")));
+            Log.i("stuff", "searching for id: " + getArguments().getInt("ID"));
+            if(AWSInterface.getPlayer().getTruckByID(getArguments().getInt("ID")) != null) {
+                mInfo = new TruckInfo(AWSInterface.getPlayer().getTruckByID(getArguments().getInt("ID")));
+            }
+            else
+            {
+                Log.i("stuff", "it was null");
+            }
         }
 
         mContext = getActivity();

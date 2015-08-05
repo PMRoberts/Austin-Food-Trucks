@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +76,7 @@ public class NewUserFragment extends Fragment
                         AWSInterface.getPlayer().EditTruckByID(mInfo);
 
                         Intent profileIntent = new Intent(mContext, EditUserInfoActivity.class);
+                        Log.i("stuff", "newTRuckID = " + mInfo.id);
                         profileIntent.putExtra("ID", mInfo.id);
                         mContext.startActivity(profileIntent);
                         ((Activity)mContext).finish();
