@@ -9,6 +9,8 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.project4398.michael.austinfoodtrucks.AWSInterface;
 import com.project4398.michael.austinfoodtrucks.R;
@@ -18,7 +20,13 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 
 /**
- * Created by Michael on 7/29/2015.
+ * Splash Screen that is display while the information from S3 is beig downloaded onto the device.
+ * This includes the TruckInfo for each Item and The MenuItem for each truck. It also checks if
+ * network connection is connected.
+ *
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class SplashActivity extends Activity
 {
@@ -31,17 +39,12 @@ public class SplashActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-//        if(!isNetworkConnected())
-//        {
-//            finish();
-//        }
-//        else
-//        {
-//            if(!isInternetAvailable())
-//            {
-//                finish();
-//            }
-//        }
+        if(!isNetworkConnected())
+        {
+            Log.i("stuff", "blah blah blah");
+            Toast.makeText(this, "no internet connection", Toast.LENGTH_SHORT).show();
+            this.finish();
+        }
 
         mContext = this;
 
@@ -58,6 +61,10 @@ public class SplashActivity extends Activity
 //        Intent profileIntent = new Intent(mContext, TruckListActivity.class);
 //        mContext.startActivity(profileIntent);
     }
+
+    /**
+     * Creates a sync class that is used to call download list.
+     */
     private class AsyncLoadList extends AsyncTask<Void, Void, Void>
     {
 //        ProgressDialog pdLoading = new ProgressDialog(mContext);
@@ -98,22 +105,10 @@ public class SplashActivity extends Activity
 
     }
 
-    public boolean isInternetAvailable() {
-        try {
-            InetAddress ipAddr = InetAddress.getByName("google.com"); //You can replace it with your name
-
-            if (ipAddr.equals("")) {
-                return false;
-            } else {
-                return true;
-            }
-
-        } catch (Exception e) {
-            return false;
-        }
-
-    }
-
+    /**
+     * Checks to see if the network is currently connected.
+     * @return True or false depending on if network connectivity is found
+     */
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
