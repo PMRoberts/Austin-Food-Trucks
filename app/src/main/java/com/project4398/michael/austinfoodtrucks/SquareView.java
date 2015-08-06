@@ -7,7 +7,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
- * Created by Michael on 7/23/2015.
+ * A standard class; a relative view that automatically creates the width and height of the screen
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class SquareView extends RelativeLayout{
 
@@ -31,9 +34,6 @@ public class SquareView extends RelativeLayout{
     }
     public void init()
     {
-//        mInflater.inflate(R.layout.custom_view, this, true);
-//        TextView tv = (TextView) v.findViewById(R.id.textView1);
-//        tv.setText(" Custom RelativeLayout");
     }
 
     @Override

@@ -19,7 +19,10 @@ import com.project4398.michael.austinfoodtrucks.fragments.MenuFragment;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckProfileFragment;
 
 /**
- * Created by PRoberts on 7/29/15.
+ * Houses log in fragments.
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class LoginActivity extends AppCompatActivity
 {

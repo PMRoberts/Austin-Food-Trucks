@@ -18,7 +18,10 @@ import com.project4398.michael.austinfoodtrucks.menuItem;
 import java.util.ArrayList;
 
 /**
- * Created by PRoberts on 7/20/15.
+ * This is what houses the list for menu items.
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class MenuFragment extends Fragment
 {
@@ -27,6 +30,10 @@ public class MenuFragment extends Fragment
     private MenuAdapter mAdapter;
 
 
+    /**
+     * Standard constructor for MenuFragment
+     * @return new MenuFragment
+     */
     public MenuFragment newFragment()
     {
         MenuFragment fragment = new MenuFragment();

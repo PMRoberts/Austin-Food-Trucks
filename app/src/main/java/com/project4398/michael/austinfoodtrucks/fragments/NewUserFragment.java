@@ -22,7 +22,11 @@ import com.project4398.michael.austinfoodtrucks.activities.NewUserActivity;
 import com.project4398.michael.austinfoodtrucks.activities.TruckListActivity;
 
 /**
- * Created by PRoberts on 7/29/15.
+ * Allows the user to enter a new user to enter in a UserId and Password
+ *
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class NewUserFragment extends Fragment
 {
@@ -35,6 +39,10 @@ public class NewUserFragment extends Fragment
     private Button mNewUser;
     private TruckInfo mInfo;
 
+    /**
+     * Standard constructor
+     * @return NewUserFragment
+     */
     public NewUserFragment newFragment()
     {
         NewUserFragment fragment = new NewUserFragment();
@@ -83,38 +91,6 @@ public class NewUserFragment extends Fragment
                     }
             }
         });
-
-
-
-//        mNewUser.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                    Intent profileIntent = new Intent(mContext, NewUserActivity.class);
-//                    mContext.startActivity(profileIntent);
-//                    //finish();
-//            }
-//        });
-//        mLogIn.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                if(AWSInterface.getPlayer().CheckCredentials(mUserID.getText().toString(), mPassword.getText().toString()))
-//                {
-//                    Toast.makeText(mContext,"Login Successful", Toast.LENGTH_SHORT).show();
-//                    Intent profileIntent = new Intent(mContext, TruckListActivity.class);
-//                    mContext.startActivity(profileIntent);
-//                    //finish();
-//                }
-//                else
-//                {
-//                    Toast.makeText(mContext,"Invalid Login", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-
 
 
         return rootView;

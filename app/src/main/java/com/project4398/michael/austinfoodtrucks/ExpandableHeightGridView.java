@@ -6,7 +6,10 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 /**
- * Created by PRoberts on 7/21/15.
+ * A customized gridview, it will square items out, and also make it easier to list items
+ * It resizes the screen as needed while scrolling. The methods here standard.
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class ExpandableHeightGridView extends GridView
 {

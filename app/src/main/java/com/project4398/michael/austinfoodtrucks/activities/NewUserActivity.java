@@ -13,7 +13,10 @@ import com.project4398.michael.austinfoodtrucks.fragments.EditUserInfoFragment;
 import com.project4398.michael.austinfoodtrucks.fragments.NewUserFragment;
 
 /**
- * Created by PRoberts on 7/29/15.
+ * Houses NewUser fragments.
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class NewUserActivity extends AppCompatActivity
 {

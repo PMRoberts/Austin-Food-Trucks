@@ -20,7 +20,11 @@ import com.project4398.michael.austinfoodtrucks.fragments.MenuFragment;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckProfileFragment;
 
 /**
- * Created by Michael on 7/15/2015.
+ * * Houses an instance of TruckProfilesFragments, an instance of google Maps, and an instance of
+ * MenuFragment. This is what a non logged in truck owner or user will do.
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class TruckProfileActivity extends AppCompatActivity
 {

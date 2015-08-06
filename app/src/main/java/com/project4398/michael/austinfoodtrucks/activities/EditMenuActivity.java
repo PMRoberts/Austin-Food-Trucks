@@ -14,7 +14,10 @@ import com.project4398.michael.austinfoodtrucks.fragments.EditUserInfoFragment;
 import java.io.File;
 
 /**
- * Created by Michael on 8/2/2015.
+ * Houses the edit menu fragments.
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class EditMenuActivity extends AppCompatActivity
 {

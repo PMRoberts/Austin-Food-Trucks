@@ -12,7 +12,10 @@ import com.project4398.michael.austinfoodtrucks.TruckInfo;
 import com.project4398.michael.austinfoodtrucks.fragments.EditUserInfoFragment;
 
 /**
- * Created by Michael on 7/15/2015.
+ * Houses edituserinfo fragments.
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class EditUserInfoActivity extends AppCompatActivity
 {

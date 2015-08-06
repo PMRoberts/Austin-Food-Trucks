@@ -28,7 +28,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
- * Created by Michael on 7/15/2015.
+ * The user input to edit/add a new truck info. Handles the transaction of getting all the information
+ * from the user. If existing user it pulls the profile.
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class EditUserInfoFragment extends Fragment
 {
@@ -42,11 +45,15 @@ public class EditUserInfoFragment extends Fragment
     private Button mSave;
     private Button mChooseNewImageButton;
 
+    /**
+     * Standard constructor to create a new EditSUerInfoFragment
+     */
     public EditUserInfoFragment newFragment()
     {
         EditUserInfoFragment fragment = new EditUserInfoFragment();
         return fragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -141,6 +148,14 @@ public class EditUserInfoFragment extends Fragment
         return rootView;
     }
 
+
+    /**
+     * Allows the user to pick a picture from the gallary and then
+     * returns if the transaction was successful with a resutlt code.
+     * @param requestCode an Integer not used
+     * @param resultCode  an Integer is used to say if the request was successful or not.
+     * @param data  Intent stores the uri into the phone gallary.
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {

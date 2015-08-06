@@ -24,7 +24,13 @@ import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckListFragment;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckProfileFragment;
 
-
+/**
+ * Houses TruckListFragment and it also sets up the action bar. Which is where the menu options,
+ * the map icon are held.
+ *
+ *  * @author Paul M. Roberts
+ * @author Luis M. Rocha
+ */
 public class TruckListActivity extends AppCompatActivity {
 
     @Override

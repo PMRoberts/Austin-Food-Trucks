@@ -20,7 +20,10 @@ import com.project4398.michael.austinfoodtrucks.TruckListAdapter2;
 import java.util.ArrayList;
 
 /**
- * Created by Michael on 7/15/2015.
+ * Displays the list of trucks to the user.
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class TruckListFragment extends Fragment implements LocationListener
 {
@@ -94,7 +97,11 @@ public class TruckListFragment extends Fragment implements LocationListener
         super.onDestroy();
     }
 
-
+    /**
+     * Indicates that the location has changed. And it is called whenver the loction has been
+     * changed.
+     * @param location the new location..
+     */
     public void onLocationChanged(Location location) {
         if (location != null) {
             Log.v("Location Changed", location.getLatitude() + " and " + location.getLongitude());

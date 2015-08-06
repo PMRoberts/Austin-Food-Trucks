@@ -26,6 +26,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.project4398.michael.austinfoodtrucks.AWSInterface;
 import com.project4398.michael.austinfoodtrucks.R;
 
+/**
+ * Creates a full screen map that displays location of the trucks.
+ */
 public class TruckMapActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
@@ -60,6 +63,10 @@ public class TruckMapActivity extends FragmentActivity {
      * have been completely destroyed during this process (it is likely that it would only be
      * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
      * method in {@link #onResume()} to guarantee that it will be called.
+     *
+     *
+     * Sets up on click listener of markers on the map. Displays a dialog given information about
+     * the truck that the marker is associated with.
      */
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
@@ -173,10 +180,11 @@ public class TruckMapActivity extends FragmentActivity {
     }
 
     /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
+     * This is where we can add markers and add listeners or move the camera.
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
+     * For this particular one it generates the markers on the map.
+     * 
      */
     private void setUpMap() {
         for(int x = 0; x < AWSInterface.getPlayer().mTruckList.size(); x++)

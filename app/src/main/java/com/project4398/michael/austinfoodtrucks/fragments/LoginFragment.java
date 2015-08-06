@@ -23,7 +23,10 @@ import com.project4398.michael.austinfoodtrucks.activities.TruckListActivity;
 import com.project4398.michael.austinfoodtrucks.activities.TruckProfileActivity;
 
 /**
- * Created by PRoberts on 7/29/15.
+ * This is what handles the user log in for editing.
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class LoginFragment extends Fragment
 {
@@ -33,6 +36,10 @@ public class LoginFragment extends Fragment
     private Button mLogIn;
     private Button mNewUser;
 
+    /**
+     * Standard constructor.
+     * @return
+     */
     public LoginFragment newFragment()
     {
         LoginFragment fragment = new LoginFragment();

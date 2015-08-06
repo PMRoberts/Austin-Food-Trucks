@@ -19,7 +19,11 @@ import com.project4398.michael.austinfoodtrucks.R;
 import com.project4398.michael.austinfoodtrucks.TruckInfo;
 
 /**
- * Created by Michael on 7/15/2015.
+ * It displays information about the truck that is not editable. Example a user that is not the
+ * truck owner or a truck owner that was not logged in.
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class TruckProfileFragment extends Fragment implements LocationListener
 {
@@ -34,6 +38,10 @@ public class TruckProfileFragment extends Fragment implements LocationListener
     LocationManager mLocationManager;
     Location location;
 
+    /**
+     * Standard copy constructor.
+     * @return a new fragment.
+     */
     public TruckProfileFragment newFragment()
     {
         TruckProfileFragment fragment = new TruckProfileFragment();
@@ -113,6 +121,11 @@ public class TruckProfileFragment extends Fragment implements LocationListener
         super.onDestroy();
     }
 
+    /**
+     * Indicates that the location has changed. And it is called whenver the loction has been
+     * changed.
+     * @param location the new location..
+     */
     public void onLocationChanged(Location location) {
         if (location != null) {
             Log.v("Location Changed", location.getLatitude() + " and " + location.getLongitude());

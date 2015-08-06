@@ -21,7 +21,9 @@ import com.project4398.michael.austinfoodtrucks.activities.UserProfileActivity;
 import java.text.NumberFormat;
 
 /**
- * Created by Michael on 7/22/2015.
+ *  Takes an array of truck info and dispays them and creates the view for them.
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class TruckListAdapter2 extends ArrayAdapter<TruckInfo> implements LocationListener
 {

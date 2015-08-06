@@ -28,7 +28,13 @@ import com.project4398.michael.austinfoodtrucks.fragments.MenuFragment;
 import com.project4398.michael.austinfoodtrucks.fragments.TruckProfileFragment;
 
 /**
- * Created by Michael on 7/15/2015.
+ * Houses an instance of TruckProfilesFragments, an instance of google maps, an instance
+ * of menu fragments as well as a button to update user's location. As well as another button to go
+ * to EditUserInfoActivity. as well as another button to go to editMenuActivity. This is what the
+ * owner of the truck will see.
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class UserProfileActivity extends AppCompatActivity
 {
@@ -156,8 +162,7 @@ public class UserProfileActivity extends AppCompatActivity
     }
 
     /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
+     * This is where we can add markers and add listeners or move the camera.
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
@@ -178,6 +183,9 @@ public class UserProfileActivity extends AppCompatActivity
         //Log.i("stuff", "" + mMap.isMyLocationEnabled());
 
     }
+    /**
+     * Resets the map so that new marker is created and the camera is focused to that new object.
+     */
     private void ResetMap() {
 
         //mMap.setMyLocationEnabled(true);

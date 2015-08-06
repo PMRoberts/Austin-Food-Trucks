@@ -12,7 +12,7 @@ import com.amazonaws.services.s3.model.DeleteObjectRequest;
 
 
 /**
- * Class to delete objects
+ * Class to delete objects from online.
  */
 public class DeleteAnObject {
     /**

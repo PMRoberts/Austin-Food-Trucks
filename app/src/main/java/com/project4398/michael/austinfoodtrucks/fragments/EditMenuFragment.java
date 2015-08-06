@@ -27,8 +27,11 @@ import com.project4398.michael.austinfoodtrucks.menuItem;
 import java.io.FileNotFoundException;
 
 /**
- * Created by Michael on 8/2/2015.
- */
+ * Displays all views related and handles all logic relating to editing a menu item.
+ *
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
+ * */
 public class EditMenuFragment extends Fragment
 {
     private Context mContext;
@@ -41,6 +44,11 @@ public class EditMenuFragment extends Fragment
     private Button mSave;
     private Button mChooseNewImageButton;
 
+
+    /**
+     * standrad constructor
+     * @return a new EditMenuFragment
+     */
     public EditMenuFragment newFragment()
     {
         EditMenuFragment fragment = new EditMenuFragment();
@@ -143,6 +151,13 @@ public class EditMenuFragment extends Fragment
         return rootView;
     }
 
+    /**
+     * Allows the user to pick a picture from the gallary and then
+     * returns if the transaction was successful with a resutlt code.
+     * @param requestCode an Integer not used
+     * @param resultCode  an Integer is used to say if the request was successful or not.
+     * @param data  Intent stores the uri into the phone gallary.
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {

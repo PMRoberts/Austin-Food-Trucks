@@ -6,7 +6,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by PRoberts on 7/16/15.
+ * Data structure for trucks. This class is the one that will be uploaded and downloaded per each
+ * truck profile. TruckInfo can also hold MenuItems
+ *
+ * @see  menuItem
+ * @author Paul M. Roberts
+ * @author Luis M. Rocha
  */
 public class TruckInfo implements Serializable
 {    public String imageURL = "https://s3.amazonaws.com/aft.photos.500.500/Truck+(1).jpg";
@@ -26,10 +31,22 @@ public class TruckInfo implements Serializable
     private String Password;
 
 
+    /**
+     * A standard constructor and initialized the menu array so that it might receive and add items
+     * to it.
+     */
     public TruckInfo()
     {
         menu = new ArrayList<menuItem>();
     }
+
+    /**
+     * Checks to see if the UserID and Password received math the ones on the requested profile/
+     * TruckInfo data structure.
+     * @param UID the entered userdID to tbe checked.
+     * @param password the entered password to be matched.
+     * @return returns wheater or not the credentials match up.
+     */
     public boolean CheckCredentials(String UID, String password)
     {
         if (UserID.equals(UID) && Password.equals(password))
@@ -38,21 +55,45 @@ public class TruckInfo implements Serializable
         }
         return false;
     }
+
+    /**
+     * Sets the userID for the requested Truck info.
+     * @param id the new userId to be attached to the truck info.
+     */
     public void setUserID(String id)
     {
         UserID = id;
     }
+
+    /**
+     * Sets the new password to be attached to the truckInfo.
+     * @param password the password to be set for the truckInfo
+     */
     public void setPassword(String password)
     {
         Password = password;
     }
+
+    /**
+     * Gets to the userId to be returned to the invoking object.
+     * @return the userID
+     */
     public String getUserID(){
         return UserID;
     }
+
+    /**
+     * Gets the passwords from the attached profile
+     * @return the password
+     */
     public String getPassword(){
         return Password;
     }
 
+    /**
+     * Copy constructor that copies all of it's attributes.
+     * @param TI the TruckInfo to copy from.
+     */
     public TruckInfo(TruckInfo TI)
     {
         menu = new ArrayList<menuItem>();
