@@ -155,42 +155,43 @@ public class AWSInterface
     {
         /*
                Test Cases
+               commented out for final build.
          */
-        Log.d("Test","Test Case Commence\n\n\n");
-
-        String message;
-
-        //Test to see if an item can be added correctly
-        message  = new Test().testTruckInfo(mContext);
-        Log.d("TEST","testTruckInfo : " + message);
-
-        //Test to see if an item can be added correctly
-        message  = new Test().testUploadOneItem(mContext);
-        Log.d("TEST","TestUploadOneItem : " + message);
-
-        //Test to see if an item can be added correctly
-        message  = new Test().testUploadTenItem(mContext);
-        Log.d("TEST","TestUploadTenItem : " + message);
-
-        //Test to see if an item can be added correctly
-        message  = new Test().testUploadTenItem(mContext);
-        Log.d("TEST","TestUploadTenItem : " + message);
-
-        //Test to see if an item can be added correctly
-        message  = new Test().testToJsonAndBeyond(mContext);
-        Log.d("TEST","testToJsonAndBeyond : " + message);
-
-        //Test to see if an item can be added correctly
-        message  = new Test().testLoadImage(mContext);
-        Log.d("TEST","testLoadImage : " + message);
-
-        //Test to see if an item can be added correctly
-        message  = new Test().downloadItemsName(mContext);
-        Log.d("TEST","downloadItemsName : " + message);
-
-        //Test to see if an item can be added correctly
-        message  = new Test().jsonToObjectTest(mContext);
-        Log.d("TEST","jsonToObjectTest : " + message);
+//        Log.d("Test","Test Case Commence\n\n\n");
+//
+//        String message;
+//
+//        //Test to see if an item can be added correctly
+//        message  = new Test().testTruckInfo(mContext);
+//        Log.d("TEST","testTruckInfo : " + message);
+//
+//        //Test to see if an item can be added correctly
+//        message  = new Test().testUploadOneItem(mContext);
+//        Log.d("TEST","TestUploadOneItem : " + message);
+//
+//        //Test to see if an item can be added correctly
+//        message  = new Test().testUploadTenItem(mContext);
+//        Log.d("TEST","TestUploadTenItem : " + message);
+//
+//        //Test to see if an item can be added correctly
+//        message  = new Test().testUploadTenItem(mContext);
+//        Log.d("TEST","TestUploadTenItem : " + message);
+//
+//        //Test to see if an item can be added correctly
+//        message  = new Test().testToJsonAndBeyond(mContext);
+//        Log.d("TEST","testToJsonAndBeyond : " + message);
+//
+//        //Test to see if an item can be added correctly
+//        message  = new Test().testLoadImage(mContext);
+//        Log.d("TEST","testLoadImage : " + message);
+//
+//        //Test to see if an item can be added correctly
+//        message  = new Test().downloadItemsName(mContext);
+//        Log.d("TEST","downloadItemsName : " + message);
+//
+//        //Test to see if an item can be added correctly
+//        message  = new Test().jsonToObjectTest(mContext);
+//        Log.d("TEST","jsonToObjectTest : " + message);
 
 
         ArrayList <String> list_of_trucks_from_s3 = AllItemsInBucket();
