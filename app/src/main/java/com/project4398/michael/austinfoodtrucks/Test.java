@@ -1,5 +1,6 @@
 package com.project4398.michael.austinfoodtrucks;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.test.AndroidTestCase;
 import android.util.Log;
 
@@ -8,6 +9,9 @@ import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 
 import junit.framework.Assert;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -205,5 +209,86 @@ public class Test {
         }
     }
 
+    /**
+     * This test checks that a truck info object can successfully be converted to a JSON object
+     */
+    public String testToJsonAndBeyond(Context mContext){
+        AWSInterface aws = new AWSInterface(mContext);
+
+        TruckInfo TI = new TruckInfo();
+        TI.name = "TestName";
+        TI.id = 1234;
+        TI.about = "TestAbout";
+        TI.imageURL = "";
+        TI.phoneNumber = "44353452";
+        TI.foodType = "TestFood";
+        TI.distance = 1.0f;
+        TI.favorite = false;
+        TI.latitude = 0.0f;
+        TI.longitude = 0.0f;
+        TI.setUserID("TestUserID");
+        TI.setPassword("TestPassword");
+
+        JSONObject JO = aws.toJsonAndBeyond(TI);
+        try
+        {
+            if(!JO.getString("name").equals(TI.name))
+            {
+                return fail;
+            }
+            if(JO.getInt("id") != (TI.id))
+            {
+                return fail;
+            }
+            if(!JO.getString("foodtype").equals(TI.foodType))
+            {
+                return fail;
+            }
+            if(!JO.getString("imageUrl").equals(TI.imageURL))
+            {
+                return fail;
+            }
+            if(!JO.getString("about").equals(TI.about))
+            {
+                return fail;
+            }
+            if(!JO.getString("phoneNumber").equals(TI.phoneNumber))
+            {
+                return fail;
+            }
+            if(JO.getDouble("distance") != TI.distance)
+            {
+                return fail;
+            }
+            if(JO.getDouble("latitude") != TI.latitude)
+            {
+                return fail;
+            }
+            if(JO.getDouble("longitude") != TI.longitude)
+            {
+                return fail;
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        return pass;
+
+    }
+    /**
+     * This test checks that a iimage can be downloaded
+     */
+    public String testLoadImage(Context mContext)
+    {
+        AWSInterface aws = new AWSInterface(mContext);
+
+        Drawable D = aws.loadImage("https://s3.amazonaws.com/aft.photos.250.250/1.jpeg");
+        if(D == null)
+        {
+            return fail;
+        }
+        return pass;
+    }
 }
 

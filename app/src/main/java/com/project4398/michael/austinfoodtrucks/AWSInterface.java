@@ -172,6 +172,26 @@ public class AWSInterface
         message  = new Test().testUploadTenItem(mContext);
         Log.d("TEST","TestUploadTenItem : " + message);
 
+        //Test to see if an item can be added correctly
+        message  = new Test().testUploadTenItem(mContext);
+        Log.d("TEST","TestUploadTenItem : " + message);
+
+        //Test to see if an item can be added correctly
+        message  = new Test().testToJsonAndBeyond(mContext);
+        Log.d("TEST","testToJsonAndBeyond : " + message);
+
+        //Test to see if an item can be added correctly
+        message  = new Test().testLoadImage(mContext);
+        Log.d("TEST","testLoadImage : " + message);
+
+        //Test to see if an item can be added correctly
+        message  = new Test().downloadItemsName(mContext);
+        Log.d("TEST","downloadItemsName : " + message);
+
+        //Test to see if an item can be added correctly
+        message  = new Test().jsonToObjectTest(mContext);
+        Log.d("TEST","jsonToObjectTest : " + message);
+
 
         ArrayList <String> list_of_trucks_from_s3 = AllItemsInBucket();
         for(int current_key = 0; current_key < list_of_trucks_from_s3.size(); current_key++) {
