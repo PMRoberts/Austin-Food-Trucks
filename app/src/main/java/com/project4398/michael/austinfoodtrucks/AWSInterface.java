@@ -158,8 +158,14 @@ public class AWSInterface
          */
         Log.d("Test","Test Case Commence\n\n\n");
 
+        String message;
+
         //Test to see if an item can be added correctly
-        String message  = new Test().testUploadOneItem(mContext);
+        message  = new Test().testTruckInfo(mContext);
+        Log.d("TEST","testTruckInfo : " + message);
+
+        //Test to see if an item can be added correctly
+        message  = new Test().testUploadOneItem(mContext);
         Log.d("TEST","TestUploadOneItem : " + message);
 
         //Test to see if an item can be added correctly
