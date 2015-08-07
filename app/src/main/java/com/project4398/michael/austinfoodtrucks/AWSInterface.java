@@ -156,10 +156,15 @@ public class AWSInterface
         /*
                Test Cases
          */
-        Log.d("Test","TestCaseCommence\n\n\n");
+        Log.d("Test","Test Case Commence\n\n\n");
+
         //Test to see if an item can be added correctly
         String message  = new Test().testUploadOneItem(mContext);
         Log.d("TEST","TestUploadOneItem : " + message);
+
+        //Test to see if an item can be added correctly
+        message  = new Test().testUploadTenItem(mContext);
+        Log.d("TEST","TestUploadTenItem : " + message);
 
 
         ArrayList <String> list_of_trucks_from_s3 = AllItemsInBucket();
