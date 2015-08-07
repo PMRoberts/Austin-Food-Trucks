@@ -92,4 +92,54 @@ public class Test {
         return pass;
 
     }
+
+    /**
+     * This test checks that the methods in the TruckInfo object work correctly.
+     */
+    public String testTruckInfo(Context mContext){
+
+        TruckInfo TI = new TruckInfo();
+// test that menu was initilized
+        if(TI.menu == null)
+        {
+            return fail;
+        }
+//test set/get password
+        String S1 = "Test";
+        TI.setPassword(S1);
+        if(!S1.equals(TI.getPassword()))
+        {
+            return fail;
+        }
+//test set/get userID
+        String S2 = "TestID";
+        TI.setUserID(S2);
+        if(!S2.equals(TI.getUserID()))
+        {
+            return fail;
+        }
+//test check credentials
+        if(!TI.CheckCredentials(S2,S1))
+        {
+            return fail;
+        }
+
+//test copy constructor
+        TI.name = "testing";
+        TruckInfo TI2 = new TruckInfo(TI);
+
+        if (!TI2.name.equals(TI.name))
+        {
+            return fail;
+        }
+        TI.name = "New Name";
+
+        if (TI2.name.equals(TI.name))
+        {
+            return fail;
+        }
+
+        return pass;
+    }
 }
+
