@@ -153,6 +153,15 @@ public class AWSInterface
 
     public void DownloadList()
     {
+        /*
+               Test Cases
+         */
+        Log.d("Test","TestCaseCommence\n\n\n");
+        //Test to see if an item can be added correctly
+        String message  = new Test().testUploadOneItem(mContext);
+        Log.d("TEST","TestUploadOneItem : " + message);
+
+
         ArrayList <String> list_of_trucks_from_s3 = AllItemsInBucket();
         for(int current_key = 0; current_key < list_of_trucks_from_s3.size(); current_key++) {
             TruckInfo truckInfo = new TruckInfo();
