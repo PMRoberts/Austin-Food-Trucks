@@ -141,7 +141,7 @@ public class AWSInterface
      * @param input we input the file. to read it and make sure that it will done.
      * @throws IOException
      */
-    private String displayTextInputStream(InputStream input)
+    public String displayTextInputStream(InputStream input)
             throws IOException {
         // Read one text line at a time and display.
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
@@ -170,14 +170,6 @@ public class AWSInterface
 
         //Test to see if an item can be added correctly
         message  = new Test().testUploadTenItem(mContext);
-        Log.d("TEST","TestUploadTenItem : " + message);
-
-        //Test to see if an item can be added correctly
-        message  = new Test().testToJsonAndBeyond(mContext);
-        Log.d("TEST","TestUploadTenItem : " + message);
-
-        //Test to see if an item can be added correctly
-        message  = new Test().testLoadImage(mContext);
         Log.d("TEST","TestUploadTenItem : " + message);
 
 
