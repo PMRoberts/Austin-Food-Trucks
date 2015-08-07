@@ -72,7 +72,7 @@ public class AWSInterface
     private CognitoCachingCredentialsProvider credentialsProvider;
     private AmazonS3Client s3Client;
     private TransferUtility transferUtility;
-    private Context mContext;
+    public Context mContext;
     public static ArrayList<TruckInfo> mTruckList;
     public int ownersTruckID = -1;
 
